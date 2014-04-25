@@ -1,78 +1,170 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style>
+            div{
+                word-wrap:break-word;
+            }
+        </style>
         <title class="name"></title>
         <link rel="shortcut icon" href="images/logo-Owl-Color_cropped.ico">
-        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen, print">
-        <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body class="container" id="main">
+    <body class="container" id="main" style = "padding-top:10px;">
+         <h1><img style="width: 48px; height: 40px; margin-top:2px" src="images/logo-Owl-Color_cropped.png"><small> Automatically build Datasheets</small></h1>
         <!--summary-->
         <div class="well" id ="basicInformation">
-            
-            <h1 class="name"></h1>
-            <h3>Part Description</h3>                 
-            <h4>Summary</h4>
-            <div class="row-fluid span6"><p id="summary"></p></div>
-            
-            <h4>Image</h4>
-            <div class="row-fluid span6" id="deviceImage"><img src="" class="img-polaroid"/></div>
-            
-            <h4>Sequence</h4>
-            <div class="row-fluid span6"><p id="sequence"></p></div>          
 
-            <h4>Designer Information</h4>
-            <div class="row-fluid">                                          
-                <table><col width="250"><col width="250">
-                    <tbody>                        
-                        <tr><th align="left">Author(s)</th><td id="authors"></td><th align="left">Data Collection</th><td id="dataCollection"></td></tr>
-                        <tr><th align="left">Date</th><td id="date"></td><th align="left">Affiliation</th><td id="affiliation"></td></tr>
-                        <tr><th align="left">Team</th><td id="team"></td><th align="left">Contact</th><td id="contact"></td></tr>                       
-                    </tbody>    
-                </table>
-            </div>
+            <h1 class="name"></h1>
+            <h3>Part Description</h3> 
+     <div class ="container">
+       <div class ="row">
+           <div class ="col-md-6">
+            
+     
+            <h4>Summary</h4>
+                    <p id="summary"></p>
+           </div>
+    <div class="col-md-6">
+  
+            <h4>Sequence</h4>
+                    <p id="sequence" style = "width:80%;word-wrap: break-word;"></p>
+                    </div>
+                    </div>
+         <div class="row">
+  
+           <div class ="col-md-6">
+                  
+            <h4>Pigeon Image</h4>
+            <div class="row-fluid span6" id="deviceImage"><img src="" class="img-polaroid" style = "width:80%;"/></div>
+                </div>
+         
+               <div class ="col-md-6">
+             <h4>Plasmid Map</h4>
+             
+            <div class="row-fluid span6" id="plasmidMap"><img src="" class="img-polaroid" style = "width:80%;"/></div>                  
+                   
+               </div>
+           </div>
+         <div class="row">
+             <div class="col-md-6">
+                 <h4> Part Type </h4>
+                 
+                 <div id = "partType"></div>
+                 
+                 
+             </div>
+             <div class ="col-md-6">
+                 <h4> Related Parts </h4>
+                 
+                 <div id ="relatedParts" style = "width:80%"></div>
+                 
+             </div>
+             
+             
+         </div>
+         
         </div>
-        <hr/>
-        
+        </div>
+     
+        <div class ="well" id ="designerInfo">
+            <h3>Designer Information</h3>
+            <div class ="container">
+                <div class="row">
+                    <div class="col-md-4"><h4>Author(s)</h4><div id = "authors"></div></div>
+                    <div class="col-md-4"><h4>Data Collection</h4><div id = "dataCollection"></div></div>
+                    <div class="col-md-4"><h4>Date</h4><div id = "date" style = "width:80%"></div></div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-4"><h4>Affiliation</h4><div id = "affiliation"></div></div>
+                    <div class="col-md-4"><h4>Team</h4><div id = "team"></div></div>
+                    <div class="col-md-4"><h4>Contact</h4><div id = "contact" style = "width:80%"></div></div>
+                </div>
+                               
+            </div>
+
+        </div>
+    
+   
         <div class="well" id ="designDetails">
             
-            <h4>Design Details</h4>
-            <div class="row-fluid">   
-                    <table><col width="250"><col width="250">
-                        <tbody>
-                            <tr><th align="left">Type</th><td id="type"></td><th align="left">Vector</th><td id="vector"></td></tr>
-                            <tr><th align="left">Design Components</th><td id="designComponents"></td><th align="left">Additional Comments</th><td id="designComments"></td></tr>
-                        </tbody>
-                    </table>
-            </div>  
+          <h3>Designer Details</h3>
+            <div class ="container">
+                <div class="row">
+                    <div class="col-md-3"><h4>Type</h4><div id = "type"></div></div>
+                    <div class="col-md-3"><h4>Vector</h4><div id = "vector"></div></div>
+                    <div class="col-md-3"><h4>Design Components</h4><div id = "designComponents"></div></div>
+                    <div class="col-md-3"><h4>Additional Comments</h4><div id = "additionalComments" style = "width:80%"></div></div>
+                </div>
+                               
+            </div>
+            
         </div>
-        <hr/>
+   
         
         <div class="well" id ="assemblyInformation">
-            <h4>Assembly Information</h4>
-            <div class="row-fluid">
-                    <table><col width="250"><col width="250">
-                        <tbody>                           
-                            <tr><th align="left">Assembly Method(s)</th><td id="assemblyMethod"></td><th align="left">Chassis</th><td id="chassis"></td></tr>
-                            <tr><th align="left">Assembly RFC</th><td id="assemblyRFC"></td><th align="left">Strain</th><td id="strain"></td></tr>
-                            <tr><th align="left">Scars (y/n)</th><td id="assemblyScars"></td><th align="left">Additional Comments </th><td id="assemblyComments"></td></tr>
-                            <tr><th align="left">Assembly Components</th><td id="assemblyComponents"></td><th align="left">Assembly Graph</th><td id="assemblyImage"></td></tr>
-                        </tbody>
-                    </table>
+           <h3>Assembly Information</h3>
+            <div class ="container">
+                <div class="row">
+                    <div class="col-md-3"><h4>Assembly Method(s)</h4><div id = "assemblyMethod"></div></div>
+                    <div class="col-md-3"><h4>Chassis</h4><div id = "chassis"></div></div>
+                    <div class="col-md-3"><h4>Assembly RFC</h4><div id = "assemblyRFC"></div></div>
+                    <div class="col-md-3"><h4>Strain</h4><div id = "strain" style = "width:80%"></div></div>
+                </div>
+                 <div class="row">
+                  
+                    <div class="col-md-3"><h4>Scars (y/n)</h4><div id = "scars"></div></div>
+                    <div class="col-md-3"><h4>Additional Comments</h4><div id = "assemblyComments"></div></div>
+                    <div class="col-md-3"><h4>Assembly Components</h4><div id = "assemblyComponents" style = "width:80%"></div></div>
+                    
+                </div>
+                <div class ="row">
+                    
+                    <div class="col-md-6"><h4>Assembly Graph</h4><div id = "assemblyImage"><img src="" class="img-polaroid" style = "width:80%;"/></div></div>
+                </div>
+                               
             </div>
-            <hr/>
+      
         </div>
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script>
             $.get("DataServlet", function(data) {
+                
+                // a function to check is an entire field is empty
+                var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+                function isEmpty(obj) {
+
+                // null and undefined are "empty"
+                if (obj == null) return true;
+
+                // Assume if it has a length property with a non-zero value
+                // that that property is correct.
+                //if (obj.length > 0)    return false;
+                if (obj.length === 0)  return true;
+
+                // Otherwise, does it have any properties of its own?
+                // Note that this doesn't handle
+                // toString and valueOf enumeration bugs in IE < 9
+                for (var key in obj) {
+                    if (hasOwnProperty.call(obj, key)) return false;
+                }
+
+                return true;
+                }
+                
+                console.log(data);
                 $(".name").text(data.name);
                 $("#summary").text(data.summary);
                 $("#sequence").text(data.sequence);
+                $("#partType").text(data.partType);
+                $("#relatedParts").text(data.relatedParts);
                 $("#deviceImage img").attr('src', data.deviceImage);
+                $("#plasmidMap img").attr('src', data.plasmidMap);
                 
                 //Contact Info
                 $("#authors").text(data.contactInformation.authors);
@@ -96,65 +188,71 @@
                 $("#chasis").text(data.assemblyInformation.chasis);
                 $("#strain").text(data.assemblyInformation.strain);
                 $("#assemblyComments").text(data.assemblyInformation.assemblyComments);
-                $("#assemblyImage img").attr('src', data.assemblyInformation.assemblyImage);
+                $("#assemblyImage img").attr('src', data.assemblyImage);
                 
                 //Assay Table   
  
 //                var rmap = data.restrictionMap;
-                if (data.restrictionMap !== null) {
-                    $('#main').append('<div class="well"><h3>Restriction Map</h3><div class="row-fluid"> <table><col width="250"><col width="250"><tbody>'+
-                    '<tr><th align="left">Gel Buffer</th><td>' + data.restrictionMap.GelBuffer + '</td> <th align="left">DNA Quantity</th><td>' + data.restrictionMap.DNAQuantity + '</td></tr>' +
-                    '<tr><th align="left">Percent Agar</th><td>' + data.restrictionMap.Agar + '</td> <th align="left">Enzymes</th><td>' + data.restrictionMap.Enzymes + '</td></tr>' +
-                    '<tr><th align="left">Ladder</th><td>' + data.restrictionMap.Ladder + '</td> <th align="left">Digest Buffer</th><td>' + data.restrictionMap.DigestBuffer + '</td></tr>' +
-                    '<tr><th align="left">Staining Dye</th><td>' + data.restrictionMap.StainingDye + '</td> <th align="left">Digest Time</th><td>' + data.restrictionMap.DigestTime + '</td></tr>' +
-                    '<tr><th align="left">Voltage</th><td>' + data.restrictionMap.Voltage + '</td> <th align="left">Link to Gel Image</th><td>' + data.restrictionMap.Image + '</td></tr>' +
-                    '<tr><th align="left">Time</th><td>' + data.restrictionMap.Time + '</td> <th align="left">Caption for Gel Image</th><td>' + data.restrictionMap.Caption + '</td></tr>' +
-                    '</tbody></table></div></div>');
+
+                if (!isEmpty(data.restrictionMap)) {
+                    $('#main').append('<div class="well"><h3>Restriction Map</h3><div class = "container"><div class = "row"><div class = "col-md-3"><h4>Gel Buffer</h4><div>'+ data.restrictionMap.GelBuffer +'</div></div><div class = "col-md-3"><h4>DNA Quality</h4><div>'+data.restrictionMap.DNAQuantity +'</div></div><div class = "col-md-3"><h4>Percent Agar</h4><div>'+data.restrictionMap.Agar +'</div></div><div class = "col-md-3"><h4>Enzymes</h4><div style = "width:80%">'+data.restrictionMap.Enzymes 
+                            +'</div></div></div><div class = "row"><div class = "col-md-3"><h4>Ladder</h4><div>'+ data.restrictionMap.Ladder +'</div></div><div class = "col-md-3"><h4>Digest Buffer</h4><div>'+data.restrictionMap.DigestBuffer +'</div></div><div class = "col-md-3"><h4>Staining Dye</h4><div>'+data.restrictionMap.StainingDye +'</div></div><div class = "col-md-3"><h4>Digest Time</h4><div style = "width:80%">'+data.restrictionMap.DigestTime
+                            + '</div></div></div><div class = "row"><div class = "col-md-3"><h4>Voltage</h4><div>'+ data.restrictionMap.Voltage +'</div></div><div class = "col-md-3"><h4>Link to Gel Image</h4><div>'+data.restrictionMap.Image +'</div></div><div class = "col-md-3"><h4>Time</h4><div>'+data.restrictionMap.Time +'</div></div><div class = "col-md-3"><h4>Caption for Image</h4><div style = "width:80%">'+data.restrictionMap.Caption
+                            + '</div></div></div>'
+         );
                 }
                 
-                if (data.functionalityAssays !== null) {
-                    $('#main').append('<div class="well"><h3>Flow Cytometry Experiment</h3><div class="row-fluid"> <table><tbody>'+
-                    '<tr><th align="left">Purpose</th><td>' + data.functionalityAssays.Purpose + '</td></tr>' +
-                    '<tr><th align="left">Type</th><td>' + data.functionalityAssays.ExperimentType + '</td></tr>' +
-                    '<tr><th align="left">Location</th><td>' + data.functionalityAssays.Location + '</td></tr>' +
-                    '<tr><th align="left">FCS Format</th><td>' + data.functionalityAssays.FCSFormat + '</td></tr>' +
-                    '<tr><th align="left">Machine Name</th><td>' + data.functionalityAssays.MachineName + '</td></tr>' +
-                    '<tr><th align="left">Protocol Details</th><td>' + data.functionalityAssays.FlowProtocolDetails + '</td></tr>' +
-                    '<tr><th align="left">Link to Protocol</th><td>' + data.functionalityAssays.FlowProtocolLink + '</td></tr>' +
-                    '<tr><th align="left">Lasers(Fliters)</th><td>' + data.functionalityAssays.LasersFilters + '</td></tr>' +
-                    '<tr><th align="left">Link to Transfer Curve Image</th><td>' + data.functionalityAssays.TranserCurve + '</td></tr>' +
-                    '<tr><th align="left">Transfer Curve Caption</th><td>' + data.functionalityAssays.TranserCurveCaption + '</td></tr>' +
-                    '<tr><th align="left">Link to Time Series Graph</th><td>' + data.functionalityAssays.TimeSeriesGraph + '</td></tr>' +
-                    '<tr><th align="left">Caption for Time Series Graph</th><td>' + data.functionalityAssays.TimeSeriesGraphCaption + '</td></tr>' +
-                    '</tbody></table><h5>Pre-Induction Growth Conditions</h5><table><tbody>'+
-                    '<tr><th align="left">Media Type</th><td>' + data.functionalityAssays.preInductionGrowthConditions.PreMedia + '</td></tr>' +
-                    '<tr><th align="left">Vessel</th><td>' + data.functionalityAssays.preInductionGrowthConditions.PreVessel + '</td></tr>' +
-                    '<tr><th align="left">Volume</th><td>' + data.functionalityAssays.preInductionGrowthConditions.PreVolume + '</td></tr>' +
-                    '<tr><th align="left">Incubation Time (min)</th><td>' + data.functionalityAssays.preInductionGrowthConditions.PreIncubationTime + '</td></tr>' +
-                    '<tr><th align="left">Growth Phase</th><td>' + data.functionalityAssays.preInductionGrowthConditions.PreGrowthPhase + '</td></tr>' +
-                    '</tbody></table><h5>Pre-Induction Growth Conditions</h5><table><tbody>'+
-                    '<tr><th align="left">Media Type</th><td>' + data.functionalityAssays.inductionGrowthConditions.IndMedia + '</td></tr>' +
-                    '<tr><th align="left">Vessel</th><td>' + data.functionalityAssays.inductionGrowthConditions.IndVessel + '</td></tr>' +
-                    '<tr><th align="left">Volume</th><td>' + data.functionalityAssays.inductionGrowthConditions.IndVolume + '</td></tr>' +
-                    '<tr><th align="left">Incubation Time (min)</th><td>' + data.functionalityAssays.inductionGrowthConditions.IndIncubationTime + '</td></tr>' +
-                    '<tr><th align="left">Growth Phase</th><td>' + data.functionalityAssays.inductionGrowthConditions.IndGrowthPhase + '</td></tr>' +
-                    '<tr><th align="left">Inducer</th><td>' + data.functionalityAssays.inductionGrowthConditions.Inducer + '</td></tr>' +
-                    '<tr><th align="left">Inducer Concentrations</th><td>' + data.functionalityAssays.inductionGrowthConditions.InducerConcentration + '</td></tr>' +
-                    '</div></div>');
-                }
+                if (!isEmpty(data.functionalityAssays)) {
+                    $('#main').append('<div class="well"><h3>Flow Cytometry Experiment</h3><div class = "container"><div class = "row"><div class = "col-md-3"><h4>Purpose</h4><div>'+ data.functionalityAssays.Purpose +'</div></div><div class = "col-md-3"><h4>Type</h4><div>'+data.functionalityAssays.ExperimentType +'</div></div><div class = "col-md-3"><h4>Location</h4><div>'+data.functionalityAssays.Location +'</div></div><div class = "col-md-3"><h4>FCS Format</h4><div style = "width:80%">'+data.functionalityAssays.FCSFormat 
+                            +'</div></div></div><div class = "row"><div class = "col-md-3"><h4>Machine Name</h4><div>'+ data.functionalityAssays.MachineName +'</div></div><div class = "col-md-3"><h4>Protocol Details</h4><div>'+ data.functionalityAssays.FlowProtocolDetails +'</div></div><div class = "col-md-3"><h4>Link to Protocol</h4><div>'+ data.functionalityAssays.FlowProtocolLink +'</div></div><div class = "col-md-3"><h4>Laser (filters)</h4><div style = "width:80%">'+data.functionalityAssays.LasersFilters
+                            + '</div></div></div><div class = "row"><div class = "col-md-3"><h4>Link to Transfer Curve Graph</h4><div>' + data.functionalityAssays.TranserCurve+'</div></div><div class = "col-md-3"><h4>Transfer Curve Captions</h4><div>'+ data.functionalityAssays.TranserCurveCaption +'</div></div><div class = "col-md-3"><h4>Link to Time Series Graph</h4><div>'+ data.functionalityAssays.TimeSeriesGraph +'</div></div><div class = "col-md-3"><h4>Time Series Graph Caption</h4><div style = "width:80%">'+data.functionalityAssays.TimeSeriesGraphCaption
+                            + '</div></div></div></div><h4 style = "margin-top:25px;">Pre-Induction Growth Conditions</h4><div class = "container"><div class = "row"><div class = "col-md-4"><h4>Media Type</h4><div>'+ data.pre.PreMedia +'</div></div><div class = "col-md-4"><h4>Vessel</h4><div>'+data.pre.PreVessel +'</div></div><div class = "col-md-4"><h4>Volume</h4><div>'+data.pre.PreVolume 
+                            +'</div></div></div><div class = "row"><div class = "col-md-4"><h4>Incubation Time (min)</h4><div>' + data.pre.PreIncubationTime+'</div></div><div class = "col-md-4"><h4>Growth Phase</h4><div>'+ data.pre.PreGrowthPhase
+                            +'</div></div></div></div><h4 style = "margin-top:25px;">Post-Induction Growth Conditions</h4><div class = "container"><div class = "row"><div class = "col-md-4"><h4>Media Type</h4><div>'+ data.post.IndMedia +'</div></div><div class = "col-md-4"><h4>Vessel</h4><div>'+data.post.IndVessel +'</div></div><div class = "col-md-4"><h4>Volume</h4><div>'+data.post.IndVolume 
+                            +'</div></div></div><div class = "row"><div class = "col-md-4"><h4>Incubation Time (min)</h4><div>' + data.post.IndIncubationTime+'</div></div><div class = "col-md-4"><h4>Growth Phase</h4><div>'+ data.post.IndGrowthPhase+'</div></div><div class = "col-md-4"><h4>Inducer</h4><div>'+data.post.Inducer
+                            +'</div></div></div><div class = "row"><div class = "col-md-4"><h4>Inducer Concentration</h4><div>' + data.post.InducerConcentration+'</div></div></div>')
+                            
                 
-                if (data.extraAssay !== null) {
-                    $('#main').append('<div class="well"><h3>Restriction Map</h3><div class="row-fluid"> <table><col width="250"><col width="250"><tbody>'+
-                    '<tr><th align="left">Assay Name</th><td>' + data.extraAssay.AssayName + '</td> <th align="left">Protocol Details</th><td>' + data.extraAssay.ProtocolDetails + '</td></tr>' +
-                    '<tr><th align="left">Assay Type</th><td>' + data.extraAssay.AssayType + '</td> <th align="left">Link to Protocol</th><td>' + data.extraAssay.ProtocolLink + '</td></tr>' +
-                    '<tr><th align="left">Link to Image</th><td>' + data.extraAssay.AssayImage + '</td> <th align="left">Image Caption</th><td>' + data.extraAssay.AssayImageCaption + '</td></tr>' +
-                    '<tr><th align="left">Link to Additional Data</th><td>' + data.extraAssay.AssayDataLink + '</td> <th align="left">Additional Data Details</th><td>' + data.extraAssay.AssayDataDetails + '</td></tr>' +
-                    '<tr><th align="left">Parameter 1</th><td>' + data.extraAssay.Parameter1 + '</td> <th align="left">Value 1</th><td>' + data.extraAssay.Value1 + '</td></tr>' +
-                    '<tr><th align="left">Parameter 2</th><td>' + data.extraAssay.Parameter2 + '</td> <th align="left">Value 2</th><td>' + data.extraAssay.Value2 + '</td></tr>' +
-                    '<tr><th align="left">Parameter 3</th><td>' + data.extraAssay.Parameter3 + '</td> <th align="left">Value 3</th><td>' + data.extraAssay.Value3 + '</td></tr>' +
-                    '</tbody></table></div></div>');
+                
+                /*
+                    '</tbody></table><h5>Pre-Induction Growth Conditions</h5><table><tbody>'+
+                    '<tr><th align="left">Media Type</th><td>' + data.pre.PreMedia + '</td></tr>' +
+                    '<tr><th align="left">Vessel</th><td>' + data.pre.PreVessel + '</td></tr>' +
+                    '<tr><th align="left">Volume</th><td>' + data.pre.PreVolume + '</td></tr>' +
+                    '<tr><th align="left">Incubation Time (min)</th><td>' + data.pre.PreIncubationTime + '</td></tr>' +
+                    '<tr><th align="left">Growth Phase</th><td>' + data.pre.PreGrowthPhase + '</td></tr>' +
+                    '</tbody></table><h5>Pre-Induction Growth Conditions</h5><table><tbody>'+
+                    '<tr><th align="left">Media Type</th><td>' + data.post.IndMedia + '</td></tr>' +
+                    '<tr><th align="left">Vessel</th><td>' + data.post.IndVessel + '</td></tr>' +
+                    '<tr><th align="left">Volume</th><td>' + data.post.IndVolume + '</td></tr>' +
+                    '<tr><th align="left">Incubation Time (min)</th><td>' + data.post.IndIncubationTime + '</td></tr>' +
+                    '<tr><th align="left">Growth Phase</th><td>' + data.post.IndGrowthPhase + '</td></tr>' +
+                    '<tr><th align="left">Inducer</th><td>' + data.post.Inducer + '</td></tr>' +
+                    '<tr><th align="left">Inducer Concentrations</th><td>' + data.post.InducerConcentration + '</td></tr>' +
+                    '</div></div>');*/
+        
+                }
+     
+                if (!isEmpty(data.otherAssay)) {
+                    $('#main').append('<div class="well"><h3>Custom Assay</h3><div class = "container"><div class = "row"><div class = "col-md-3"><h4>Assay Name</h4><div>'+ data.otherAssay.AssayName +'</div></div><div class = "col-md-3"><h4>Protocol Details</h4><div>'+data.otherAssay.ProtocolDetails +'</div></div><div class = "col-md-3"><h4>Assay Type</h4><div>'+data.otherAssay.AssayPurpose +'</div></div><div class = "col-md-3"><h4>Link to Protocol</h4><div style = "width:80%">'+data.otherAssay.ProtocolLink 
+                            +'</div></div></div><div class = "row"><div class = "col-md-3"><h4>Link to Image</h4><div>'+ data.otherAssay.AssayImage +'</div></div><div class = "col-md-3"><h4>Image Caption</h4><div>'+ data.otherAssay.AssayImageCaption +'</div></div><div class = "col-md-3"><h4>Link to Additional Data</h4><div>'+ data.otherAssay.AssayDataLink +'</div></div><div class = "col-md-3"><h4>Additional Data Details</h4><div style = "width:80%">'+ data.otherAssay.AssayDataDetails
+                            + '</div></div></div><div class = "row"><div class = "col-md-3"><h4>Parameter 1</h4><div>' + data.otherAssay.Parameter1+'</div></div><div class = "col-md-3"><h4>Value 1</h4><div>'+ data.otherAssay.Value1 +'</div></div><div class = "col-md-3"><h4>Parameter 2</h4><div>'+ data.otherAssay.Parameter2 +'</div></div><div class = "col-md-3"><h4>Value 2</h4><div style = "width:80%">'+data.otherAssay.Value2
+                            + '</div></div></div><div class = "row"><div class = "col-md-3"><h4>Parameter 3</h4><div>' + data.otherAssay.Parameter3+'</div></div><div class = "col-md-3"><h4>Value 3</h4><div>'+ data.otherAssay.Value3 +'</div></div><div class = "col-md-3"><h4>Additional Comments</h4><div>'+ data.otherAssay.comments +'</div></div>'
+                            
+                
+                
+                
+                /*'<div class="well"><h3>Custom Assay</h3><div class="row-fluid"> <table><col width="250"><col width="250"><tbody>'+
+                    '<tr><th align="left">Assay Name</th><td>' + data.otherAssay.AssayName + '</td> <th align="left">Protocol Details</th><td>' + data.otherAssay.ProtocolDetails + '</td></tr>' +
+                    '<tr><th align="left">Assay Type</th><td>' + data.otherAssay.AssayPurpose + '</td> <th align="left">Link to Protocol</th><td>' + data.otherAssay.ProtocolLink + '</td></tr>' +
+                    '<tr><th align="left">Link to Image</th><td>' + data.otherAssay.AssayImage + '</td> <th align="left">Image Caption</th><td>' + data.otherAssay.AssayImageCaption + '</td></tr>' +
+                    '<tr><th align="left">Link to Additional Data</th><td>' + data.otherAssay.AssayDataLink + '</td> <th align="left">Additional Data Details</th><td>' + data.otherAssay.AssayDataDetails + '</td></tr>' +
+                    '<tr><th align="left">Parameter 1</th><td>' + data.otherAssay.Parameter1 + '</td> <th align="left">Value 1</th><td>' + data.otherAssay.Value1 + '</td></tr>' +
+                    '<tr><th align="left">Parameter 2</th><td>' + data.otherAssay.Parameter2 + '</td> <th align="left">Value 2</th><td>' + data.otherAssay.Value2 + '</td></tr>' +
+                    '<tr><th align="left">Parameter 3</th><td>' + data.otherAssay.Parameter3 + '</td> <th align="left">Value 3</th><td>' + data.otherAssay.Value3 + '</td></tr>' +
+                    '</tbody></table></div></div>'*/);
                 }              
-            });
+            }); 
         </script>
         
         <!--<script>$('div.well:empty').hide(); </script>-->

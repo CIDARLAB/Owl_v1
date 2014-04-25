@@ -4,9 +4,6 @@ $(document).ready(function() {
     
     $.get("ParserServlet",function(data) {
        //use data to fill out parts of the form.
-       data = $.parseJSON(data);
-//       $('#name').val(data['name']);
-//        $("#summary").text(data.summary);
         $("#name").text(data.name);
     });
     
@@ -24,19 +21,54 @@ $(document).ready(function() {
     });
 
     //handlers for assays
-    $('button#addAssayButton').click(function() {
+   /* $('button#addAssayButton').click(function() {
+
+
+    });*/
+    
+    $('#selectAssay').change(function(){
+        
         var selected = $('#selectAssay :selected').text();
+        
         if (selected === "Other") {
             //append new assay code
             $('#otherAssay').removeClass("hidden");
+             if (!$('#restrictionMap').hasClass("hidden"))
+             {
+                 $('#restrictionMap').addClass("hidden")
+             }
+               if (!$('#functionalityAssays').hasClass("hidden"))
+             {
+                 $('#functionalityAssays').addClass("hidden")
+             }
+             
         } else if (selected === "Restriction Map") {
             $('#restrictionMap').removeClass("hidden");
+              if (!$('#otherAssay').hasClass("hidden"))
+             {
+                 $('#otherAssay').addClass("hidden")
+             }
+               if (!$('#functionalityAssays').hasClass("hidden"))
+             {
+                 $('#functionalityAssays').addClass("hidden")
+             }
         } else if (selected === "Flow Cytometry") {
             $('#functionalityAssays').removeClass("hidden");
+               if (!$('#otherAssay').hasClass("hidden"))
+             {
+                 $('#otherAssay').addClass("hidden")
+             }
+               if (!$('#restrictionMap').hasClass("hidden"))
+             {
+                 $('#restrictionMap').addClass("hidden")
+             }
         }
-
+        
     });
+    
+    
     $('button#removeRDButton').click(function() {
+
         $('#restrictionMap').addClass("hidden");
         $('#restrictionMap input').each(function() {
             //clear the values
@@ -61,12 +93,21 @@ $(document).ready(function() {
     //JSON object 
     $('#designButton').click(function() {
         //collect information here
+       
         var data = {};
         data["name"] = $('#name').val();
         data["summary"] = $('#summary').val();
         data["sequence"] = $('#sequence').val();
         data["deviceImage"] = $('#deviceImage').val();
+        data["plasmidMap"] = $('#plasmidMap').val();
+        data["assemblyImage"] = $('#assemblyImage').val();
+        data["partType"] = $('#partType :selected').text();
+        data["relatedParts"] = $('#relatedParts').val();
         
+        
+        console.log(data);
+        
+
         //gather contact information
         var contactInformation = {};
         $('div#contactInformation input').each(function() {
@@ -123,41 +164,81 @@ $(document).ready(function() {
         });
         data["assemblyInformation"] = assemblyInformation;
 
+        
+        if (!$('#restrictionMap').hasClass('hidden'))
+        {
         var restrictionMap = {}       
         //DEVINA POPULATE THIS ARRAY
+        var flag = 0;
         $('div#restrictionMap input').each(function() {
             var key = $(this).attr("id");
             var value = $(this).val();
+            
             if (value.length > 0) {
                 restrictionMap[key] = value;
-            }                     
+                flag = 1;
+                console.log(value);
+            }
+            else{
+             restrictionMap[key] = "";   
+            }
         });
         
+        if (flag === 1)
+        {
+         
         for (var key in restrictionMap) {
             if (restrictionMap[key] !== 'undefined') {
                 data["restrictionMap"]=restrictionMap;
             }
         }
         
-        var extraAssay = {};
+      }
+    }
+        if (!$('#otherAssay').hasClass('hidden'))
+        {
+        var otherAssay = {};
+        console.log('other');
+        var flag = 0;
         $('div#otherAssay input').each(function() {
             var key = $(this).attr("id");
             var value = $(this).val(); 
-            extraAssay[key] = value; 
+            if (value.length > 1)
+            {
+                flag = 1;
+            }
+            otherAssay[key] = value; 
         });
-        data["extraAssay"] = extraAssay;
-        
+        if (flag)
+        {
+        otherAssay['comments'] = $('#comments').val();
+        data["otherAssay"] = otherAssay;
+    }
+
+    }
+    if (!$('#functionalityAssays').hasClass('hidden'))
+    {
         var functionalityAssays ={};
+        var flag = 0;
+        console.log('abc');
         //DEVINA POPULATE THIS ARRAY
         $('div#functionalityAssays div.experiment input').each(function() {
             var key = $(this).attr("id");
             var value = $(this).val(); 
+            if (value.length > 1)
+            {
+                flag = 1;
+            }
             functionalityAssays[key] = value; 
         });
         var pre ={};
         $('div#functionalityAssays div.setup div#preInductionGrowthConditions input').each(function() {
             var key = $(this).attr("id");
             var value = $(this).val(); 
+             if (value.length > 1)
+            {
+                flag = 1;
+            }          
             pre[key] = value; 
         });
 
@@ -165,16 +246,22 @@ $(document).ready(function() {
         $('div#functionalityAssays div.setup div#inductionGrowthConditions input').each(function() {
             var key = $(this).attr("id");
             var value = $(this).val(); 
+                  if (value.length > 1)
+            {
+                flag = 1;
+            }
             post[key] = value; 
         });
-        functionalityAssays["preInductionGrowthConditions"] = pre;
-        functionalityAssays["inductionGrowthConditions"] = post;
-        
-        
-
-        data["functionalityAssays"] =functionalityAssays;
+        if (flag)
+        {
+        data["functionalityAssays"] = functionalityAssays;
+        data["pre"] =pre;
+        data["post"] = post;
+    }
+    }
         $.get("DataServlet",{"sending":JSON.stringify(data)},function(){
-            window.location.replace("output.html")
+            var win = window.open("output.html",'_blank');
+            win.focus();
         });
 
     });
