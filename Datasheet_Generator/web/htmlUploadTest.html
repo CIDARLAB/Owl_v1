@@ -83,6 +83,7 @@ and open the template in the editor.
                 $('#uploadButton1').click(function() {
                     var uploadPath = $(this).parent().find('form.upload.active input').val();
 //                    alert(uploadPath)
+                    console.log(uploadPath);
                     if (uploadPath.length > 0) {
                         //submit the form
                         var fileName = $(this).parent().find('form.upload.active input').val()
@@ -91,6 +92,7 @@ and open the template in the editor.
                             var parent = $(this).parent()
                             parent.html("UPLOADING");
                             //assume upload will take just 5 seconds
+                            console.log(filename);
                             setTimeout(function() {
                                 parent.html('<img src="' + fileName + '">');
 

@@ -4,7 +4,19 @@ $(document).ready(function() {
     
     $.get("ParserServlet",function(data) {
        //use data to fill out parts of the form.
+       console.log('called');
         $("#name").text(data.name);
+    });
+    
+     $('#uploadFileButton').click(function() {
+        console.log('trying to upload');
+        var newFileName = $('#file').val();
+        if (newFileName !== "") {
+            $('#uploadForm').submit();
+        } else if ($('a.dynatree-title:contains("' + newFileName + '")').length === 0) {
+            editor.setValue("");
+            saveFile(newFileName);
+        }
     });
     
     
@@ -89,23 +101,151 @@ $(document).ready(function() {
             $(this).val("");
         });
     });
+    
+    $('#displayImage').change(function(){
+        
+                var formData = new FormData($('#pigeonImage')[0]);
+                console.log(formData);
+                $.ajax({
+                            url: 'http://owlimageserver.herokuapp.com/pigeon',  //Server script to process data
+                            type: 'POST',
+                            //Ajax events
+                            //beforeSend: beforeSendHandler,
+                            //success: completeHandler,
+                            //error: errorHandler,
+                            // Form data
+                            data: formData,
+                            //Options to tell jQuery not to process data or worry about content-type.
+                            cache: false,
+                            contentType: false,
+                            processData: false
+                        });
+                      
+        
+        
+    });
+      $('#plasmidMap').change(function(){
+        
+                var formData = new FormData($('#plasmidImage')[0]);
+                console.log('plasmid');
+                $.ajax({
+                            url: 'http://owlimageserver.herokuapp.com/plasmid',  //Server script to process data
+                            type: 'POST',
+                            //Ajax events
+                            //beforeSend: beforeSendHandler,
+                            //success: completeHandler,
+                            //error: errorHandler,
+                            // Form data
+                            data: formData,
+                            //Options to tell jQuery not to process data or worry about content-type.
+                            cache: false,
+                            contentType: false,
+                            processData: false
+                        });
+                      
+        
+        
+    });  
+  
+    $('#assemblyImage').change(function(){
+        
+        console.log('assembly');        
+        var formData = new FormData($('#assemblyForm')[0]);
+                console.log(formData);
+                $.ajax({
+                            url: 'http://owlimageserver.herokuapp.com/assembly',  //Server script to process data
+                            type: 'POST',
+                            //Ajax events
+                            //beforeSend: beforeSendHandler,
+                            //success: completeHandler,
+                            //error: errorHandler,
+                            // Form data
+                            data: formData,
+                            //Options to tell jQuery not to process data or worry about content-type.
+                            cache: false,
+                            contentType: false,
+                            processData: false
+                        });
+                      
+        
+        
+    });
+    
+   /* document.getElementById('displayImage').addEventListener('change', function(e) {
+    var file = this.files[0];
+    var xhr = new XMLHttpRequest();
+    xhr.file = file; // not necessary if you create scopes like this
+    xhr.addEventListener('progress', function(e) {
+        var done = e.position || e.loaded, total = e.totalSize || e.total;
+        console.log('xhr progress: ' + (Math.floor(done/total*1000)/10) + '%');
+    }, false);
+    if ( xhr.upload ) {
+        xhr.upload.onprogress = function(e) {
+            var done = e.position || e.loaded, total = e.totalSize || e.total;
+            console.log('xhr.upload progress: ' + done + ' / ' + total + ' = ' + (Math.floor(done/total*1000)/10) + '%');
+        };
+    }
+    xhr.onreadystatechange = function(e) {
+        if ( 4 == this.readyState ) {
+            console.log(['xhr upload complete', e]);
+        }
+    };
+    xhr.open('post', 'http://localhost:7070/pigeon', true);
+    xhr.send(file);
+}, false);*/
 
     //JSON object 
     $('#designButton').click(function() {
         //collect information here
+      
+        
+        var pigeonPath;
+        var plasmidPath;
+        var assemblyPath;
+        
+        if ($('#displayImage').val())
+        {
+            var pigeonName = $('#displayImage').val().replace(/C:\\fakepath\\/i, '');
+            pigeonPath = 'http://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/pigeonImage/' + pigeonName;
+        }
+        else
+        {
+            pigeonPath = "";
+        }
+         if ($('#plasmidMap').val())
+        {
+            var plasmidName = $('#plasmidMap').val().replace(/C:\\fakepath\\/i, '');
+            plasmidPath = 'http://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/plasmidMap/' + plasmidName;
+        }
+        else
+        {
+            plasmidPath = "";
+        }
+        
+         
+        if ($('#assemblyImage').val())
+        {
+            var assemblyname = $('#assemblyImage').val().replace(/C:\\fakepath\\/i, '');
+            assemblyPath = 'http://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/assemblyMaps/' + assemblyname;
+        }
+        else
+        {
+            assemblyPath = "";
+        }
+        
        
         var data = {};
         data["name"] = $('#name').val();
         data["summary"] = $('#summary').val();
         data["sequence"] = $('#sequence').val();
-        data["deviceImage"] = $('#deviceImage').val();
-        data["plasmidMap"] = $('#plasmidMap').val();
-        data["assemblyImage"] = $('#assemblyImage').val();
+        data["deviceImage"] = pigeonPath;
+        data["plasmidMap"] = plasmidPath;
+        data["assemblyImage"] = assemblyPath;
         data["partType"] = $('#partType :selected').text();
         data["relatedParts"] = $('#relatedParts').val();
         
         
-        console.log(data);
+        //console.log(pigeonName);
         
 
         //gather contact information
@@ -259,9 +399,10 @@ $(document).ready(function() {
         data["post"] = post;
     }
     }
-        $.get("DataServlet",{"sending":JSON.stringify(data)},function(){
-            var win = window.open("output.html",'_blank');
-            win.focus();
+      $.get("DataServlet",{"sending":JSON.stringify(data)},function(){
+             window.location.assign("output.html");
+            //window.open("output.html");
+            //win.focus();
         });
 
     });

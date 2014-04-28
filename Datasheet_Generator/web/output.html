@@ -9,7 +9,7 @@
         <title class="name"></title>
         <link rel="shortcut icon" href="images/logo-Owl-Color_cropped.ico">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-
+        <link rel="stylesheet" type="text/css" media="print" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body class="container" id="main" style = "padding-top:10px;">
@@ -21,13 +21,13 @@
             <h3>Part Description</h3> 
      <div class ="container">
        <div class ="row">
-           <div class ="col-md-6">
+           <div class ="col-xs-6">
             
      
             <h4>Summary</h4>
                     <p id="summary"></p>
            </div>
-    <div class="col-md-6">
+    <div class="col-xs-6">
   
             <h4>Sequence</h4>
                     <p id="sequence" style = "width:80%;word-wrap: break-word;"></p>
@@ -35,13 +35,13 @@
                     </div>
          <div class="row">
   
-           <div class ="col-md-6">
+           <div class ="col-xs-6">
                   
             <h4>Pigeon Image</h4>
             <div class="row-fluid span6" id="deviceImage"><img src="" class="img-polaroid" style = "width:80%;"/></div>
                 </div>
          
-               <div class ="col-md-6">
+               <div class ="col-xs-6">
              <h4>Plasmid Map</h4>
              
             <div class="row-fluid span6" id="plasmidMap"><img src="" class="img-polaroid" style = "width:80%;"/></div>                  
@@ -49,14 +49,14 @@
                </div>
            </div>
          <div class="row">
-             <div class="col-md-6">
+             <div class="col-xs-6">
                  <h4> Part Type </h4>
                  
                  <div id = "partType"></div>
                  
                  
              </div>
-             <div class ="col-md-6">
+             <div class ="col-xs-6">
                  <h4> Related Parts </h4>
                  
                  <div id ="relatedParts" style = "width:80%"></div>
@@ -73,14 +73,14 @@
             <h3>Designer Information</h3>
             <div class ="container">
                 <div class="row">
-                    <div class="col-md-4"><h4>Author(s)</h4><div id = "authors"></div></div>
-                    <div class="col-md-4"><h4>Data Collection</h4><div id = "dataCollection"></div></div>
-                    <div class="col-md-4"><h4>Date</h4><div id = "date" style = "width:80%"></div></div>
+                    <div class="col-xs-4"><h4>Author(s)</h4><div id = "authors"></div></div>
+                    <div class="col-xs-4"><h4>Data Collectors</h4><div id = "dataCollection"></div></div>
+                    <div class="col-xs-4"><h4>Date</h4><div id = "date" style = "width:80%"></div></div>
                 </div>
                  <div class="row">
-                    <div class="col-md-4"><h4>Affiliation</h4><div id = "affiliation"></div></div>
-                    <div class="col-md-4"><h4>Team</h4><div id = "team"></div></div>
-                    <div class="col-md-4"><h4>Contact</h4><div id = "contact" style = "width:80%"></div></div>
+                    <div class="col-xs-4"><h4>Affiliation</h4><div id = "affiliation"></div></div>
+                    <div class="col-xs-4"><h4>Team</h4><div id = "team"></div></div>
+                    <div class="col-xs-4"><h4>Contact</h4><div id = "contact" style = "width:80%"></div></div>
                 </div>
                                
             </div>
@@ -93,10 +93,10 @@
           <h3>Designer Details</h3>
             <div class ="container">
                 <div class="row">
-                    <div class="col-md-3"><h4>Type</h4><div id = "type"></div></div>
-                    <div class="col-md-3"><h4>Vector</h4><div id = "vector"></div></div>
-                    <div class="col-md-3"><h4>Design Components</h4><div id = "designComponents"></div></div>
-                    <div class="col-md-3"><h4>Additional Comments</h4><div id = "additionalComments" style = "width:80%"></div></div>
+                    <div class="col-xs-3"><h4>Type</h4><div id = "type"></div></div>
+                    <div class="col-xs-3"><h4>Vector</h4><div id = "vector"></div></div>
+                    <div class="col-xs-3"><h4>Design Components</h4><div id = "designComponents"></div></div>
+                    <div class="col-xs-3"><h4>Additional Comments</h4><div id = "designComments" style = "width:80%"></div></div>
                 </div>
                                
             </div>
@@ -108,21 +108,21 @@
            <h3>Assembly Information</h3>
             <div class ="container">
                 <div class="row">
-                    <div class="col-md-3"><h4>Assembly Method(s)</h4><div id = "assemblyMethod"></div></div>
-                    <div class="col-md-3"><h4>Chassis</h4><div id = "chassis"></div></div>
-                    <div class="col-md-3"><h4>Assembly RFC</h4><div id = "assemblyRFC"></div></div>
-                    <div class="col-md-3"><h4>Strain</h4><div id = "strain" style = "width:80%"></div></div>
+                    <div class="col-xs-3"><h4>Assembly Method(s)</h4><div id = "assemblyMethod"></div></div>
+                    <div class="col-xs-3"><h4>Chassis</h4><div id = "chassis"></div></div>
+                    <div class="col-xs-3"><h4>Assembly RFC</h4><div id = "assemblyRFC"></div></div>
+                    <div class="col-xs-3"><h4>Strain</h4><div id = "strain" style = "width:80%"></div></div>
                 </div>
                  <div class="row">
                   
-                    <div class="col-md-3"><h4>Scars (y/n)</h4><div id = "scars"></div></div>
-                    <div class="col-md-3"><h4>Additional Comments</h4><div id = "assemblyComments"></div></div>
-                    <div class="col-md-3"><h4>Assembly Components</h4><div id = "assemblyComponents" style = "width:80%"></div></div>
+                    <div class="col-xs-3"><h4>Scars (y/n)</h4><div id = "assemblyScars"></div></div>
+                    <div class="col-xs-3"><h4>Additional Comments</h4><div id = "assemblyComments"></div></div>
+                    <div class="col-xs-3"><h4>Assembly Components</h4><div id = "assemblyComponents" style = "width:80%"></div></div>
                     
                 </div>
                 <div class ="row">
                     
-                    <div class="col-md-6"><h4>Assembly Graph</h4><div id = "assemblyImage"><img src="" class="img-polaroid" style = "width:80%;"/></div></div>
+                    <div class="col-xs-6"><h4>Assembly Graph</h4><div id = "assemblyImage"><img src="" class="img-polaroid" style = "width:80%;"/></div></div>
                 </div>
                                
             </div>
@@ -134,6 +134,8 @@
         <script>
             $.get("DataServlet", function(data) {
                 
+                
+                console.log(data);
                 // a function to check is an entire field is empty
                 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -157,7 +159,7 @@
                 return true;
                 }
                 
-                console.log(data);
+                //console.log(data);
                 $(".name").text(data.name);
                 $("#summary").text(data.summary);
                 $("#sequence").text(data.sequence);
@@ -174,7 +176,8 @@
                 $("#date").text(data.contactInformation.date);
                 $("#contact").text(data.contactInformation.contact);
                 
-                //Design Detail          
+                //Design Detail  
+                //console.log(data.designDetails);
                 $("#type").text(data.designDetails.type);
                 $("#vector").text(data.designDetails.vector);
                 $("#designComponents").text(data.designDetails.designComponents);
@@ -182,6 +185,7 @@
                 
                 //Assembly
                 $("#assemblyMethod").text(data.assemblyInformation.assemblyMethod);
+                $("#chassis").text(data.assemblyInformation.chassis);
                 $("#assemblyRFC").text(data.assemblyInformation.assemblyRFC);
                 $("#assemblyScars").text(data.assemblyInformation.assemblyScars);
                 $("#assemblyComponents").text(data.assemblyInformation.assemblyComponents);
@@ -195,22 +199,22 @@
 //                var rmap = data.restrictionMap;
 
                 if (!isEmpty(data.restrictionMap)) {
-                    $('#main').append('<div class="well"><h3>Restriction Map</h3><div class = "container"><div class = "row"><div class = "col-md-3"><h4>Gel Buffer</h4><div>'+ data.restrictionMap.GelBuffer +'</div></div><div class = "col-md-3"><h4>DNA Quality</h4><div>'+data.restrictionMap.DNAQuantity +'</div></div><div class = "col-md-3"><h4>Percent Agar</h4><div>'+data.restrictionMap.Agar +'</div></div><div class = "col-md-3"><h4>Enzymes</h4><div style = "width:80%">'+data.restrictionMap.Enzymes 
-                            +'</div></div></div><div class = "row"><div class = "col-md-3"><h4>Ladder</h4><div>'+ data.restrictionMap.Ladder +'</div></div><div class = "col-md-3"><h4>Digest Buffer</h4><div>'+data.restrictionMap.DigestBuffer +'</div></div><div class = "col-md-3"><h4>Staining Dye</h4><div>'+data.restrictionMap.StainingDye +'</div></div><div class = "col-md-3"><h4>Digest Time</h4><div style = "width:80%">'+data.restrictionMap.DigestTime
-                            + '</div></div></div><div class = "row"><div class = "col-md-3"><h4>Voltage</h4><div>'+ data.restrictionMap.Voltage +'</div></div><div class = "col-md-3"><h4>Link to Gel Image</h4><div>'+data.restrictionMap.Image +'</div></div><div class = "col-md-3"><h4>Time</h4><div>'+data.restrictionMap.Time +'</div></div><div class = "col-md-3"><h4>Caption for Image</h4><div style = "width:80%">'+data.restrictionMap.Caption
+                    $('#main').append('<div class="well"><h3>Restriction Map</h3><div class = "container"><div class = "row"><div class = "col-xs-3"><h4>Gel Buffer</h4><div>'+ data.restrictionMap.GelBuffer +'</div></div><div class = "col-xs-3"><h4>DNA Quality</h4><div>'+data.restrictionMap.DNAQuantity +'</div></div><div class = "col-xs-3"><h4>Percent Agar</h4><div>'+data.restrictionMap.Agar +'</div></div><div class = "col-xs-3"><h4>Enzymes</h4><div style = "width:80%">'+data.restrictionMap.Enzymes 
+                            +'</div></div></div><div class = "row"><div class = "col-xs-3"><h4>Ladder</h4><div>'+ data.restrictionMap.Ladder +'</div></div><div class = "col-xs-3"><h4>Digest Buffer</h4><div>'+data.restrictionMap.DigestBuffer +'</div></div><div class = "col-xs-3"><h4>Staining Dye</h4><div>'+data.restrictionMap.StainingDye +'</div></div><div class = "col-xs-3"><h4>Digest Time</h4><div style = "width:80%">'+data.restrictionMap.DigestTime
+                            + '</div></div></div><div class = "row"><div class = "col-xs-3"><h4>Voltage</h4><div>'+ data.restrictionMap.Voltage +'</div></div><div class = "col-xs-3"><h4>Link to Gel Image</h4><div>'+data.restrictionMap.Image +'</div></div><div class = "col-xs-3"><h4>Time</h4><div>'+data.restrictionMap.Time +'</div></div><div class = "col-xs-3"><h4>Caption for Image</h4><div style = "width:80%">'+data.restrictionMap.Caption
                             + '</div></div></div>'
          );
                 }
                 
                 if (!isEmpty(data.functionalityAssays)) {
-                    $('#main').append('<div class="well"><h3>Flow Cytometry Experiment</h3><div class = "container"><div class = "row"><div class = "col-md-3"><h4>Purpose</h4><div>'+ data.functionalityAssays.Purpose +'</div></div><div class = "col-md-3"><h4>Type</h4><div>'+data.functionalityAssays.ExperimentType +'</div></div><div class = "col-md-3"><h4>Location</h4><div>'+data.functionalityAssays.Location +'</div></div><div class = "col-md-3"><h4>FCS Format</h4><div style = "width:80%">'+data.functionalityAssays.FCSFormat 
-                            +'</div></div></div><div class = "row"><div class = "col-md-3"><h4>Machine Name</h4><div>'+ data.functionalityAssays.MachineName +'</div></div><div class = "col-md-3"><h4>Protocol Details</h4><div>'+ data.functionalityAssays.FlowProtocolDetails +'</div></div><div class = "col-md-3"><h4>Link to Protocol</h4><div>'+ data.functionalityAssays.FlowProtocolLink +'</div></div><div class = "col-md-3"><h4>Laser (filters)</h4><div style = "width:80%">'+data.functionalityAssays.LasersFilters
-                            + '</div></div></div><div class = "row"><div class = "col-md-3"><h4>Link to Transfer Curve Graph</h4><div>' + data.functionalityAssays.TranserCurve+'</div></div><div class = "col-md-3"><h4>Transfer Curve Captions</h4><div>'+ data.functionalityAssays.TranserCurveCaption +'</div></div><div class = "col-md-3"><h4>Link to Time Series Graph</h4><div>'+ data.functionalityAssays.TimeSeriesGraph +'</div></div><div class = "col-md-3"><h4>Time Series Graph Caption</h4><div style = "width:80%">'+data.functionalityAssays.TimeSeriesGraphCaption
-                            + '</div></div></div></div><h4 style = "margin-top:25px;">Pre-Induction Growth Conditions</h4><div class = "container"><div class = "row"><div class = "col-md-4"><h4>Media Type</h4><div>'+ data.pre.PreMedia +'</div></div><div class = "col-md-4"><h4>Vessel</h4><div>'+data.pre.PreVessel +'</div></div><div class = "col-md-4"><h4>Volume</h4><div>'+data.pre.PreVolume 
-                            +'</div></div></div><div class = "row"><div class = "col-md-4"><h4>Incubation Time (min)</h4><div>' + data.pre.PreIncubationTime+'</div></div><div class = "col-md-4"><h4>Growth Phase</h4><div>'+ data.pre.PreGrowthPhase
-                            +'</div></div></div></div><h4 style = "margin-top:25px;">Post-Induction Growth Conditions</h4><div class = "container"><div class = "row"><div class = "col-md-4"><h4>Media Type</h4><div>'+ data.post.IndMedia +'</div></div><div class = "col-md-4"><h4>Vessel</h4><div>'+data.post.IndVessel +'</div></div><div class = "col-md-4"><h4>Volume</h4><div>'+data.post.IndVolume 
-                            +'</div></div></div><div class = "row"><div class = "col-md-4"><h4>Incubation Time (min)</h4><div>' + data.post.IndIncubationTime+'</div></div><div class = "col-md-4"><h4>Growth Phase</h4><div>'+ data.post.IndGrowthPhase+'</div></div><div class = "col-md-4"><h4>Inducer</h4><div>'+data.post.Inducer
-                            +'</div></div></div><div class = "row"><div class = "col-md-4"><h4>Inducer Concentration</h4><div>' + data.post.InducerConcentration+'</div></div></div>')
+                    $('#main').append('<div class="well"><h3>Flow Cytometry Experiment</h3><div class = "container"><div class = "row"><div class = "col-xs-3"><h4>Purpose</h4><div>'+ data.functionalityAssays.Purpose +'</div></div><div class = "col-xs-3"><h4>Type</h4><div>'+data.functionalityAssays.ExperimentType +'</div></div><div class = "col-xs-3"><h4>Location</h4><div>'+data.functionalityAssays.Location +'</div></div><div class = "col-xs-3"><h4>FCS Format</h4><div style = "width:80%">'+data.functionalityAssays.FCSFormat 
+                            +'</div></div></div><div class = "row"><div class = "col-xs-3"><h4>Machine Name</h4><div>'+ data.functionalityAssays.MachineName +'</div></div><div class = "col-xs-3"><h4>Protocol Details</h4><div>'+ data.functionalityAssays.FlowProtocolDetails +'</div></div><div class = "col-xs-3"><h4>Link to Protocol</h4><div>'+ data.functionalityAssays.FlowProtocolLink +'</div></div><div class = "col-xs-3"><h4>Laser (filters)</h4><div style = "width:80%">'+data.functionalityAssays.LasersFilters
+                            + '</div></div></div><div class = "row"><div class = "col-xs-3"><h4>Link to Transfer Curve Graph</h4><div>' + data.functionalityAssays.TranserCurve+'</div></div><div class = "col-xs-3"><h4>Transfer Curve Captions</h4><div>'+ data.functionalityAssays.TranserCurveCaption +'</div></div><div class = "col-xs-3"><h4>Link to Time Series Graph</h4><div>'+ data.functionalityAssays.TimeSeriesGraph +'</div></div><div class = "col-xs-3"><h4>Time Series Graph Caption</h4><div style = "width:80%">'+data.functionalityAssays.TimeSeriesGraphCaption
+                            + '</div></div></div></div><h4 style = "margin-top:25px;">Pre-Induction Growth Conditions</h4><div class = "container"><div class = "row"><div class = "col-xs-4"><h4>Media Type</h4><div>'+ data.pre.PreMedia +'</div></div><div class = "col-xs-4"><h4>Vessel</h4><div>'+data.pre.PreVessel +'</div></div><div class = "col-xs-4"><h4>Volume</h4><div>'+data.pre.PreVolume 
+                            +'</div></div></div><div class = "row"><div class = "col-xs-4"><h4>Incubation Time (min)</h4><div>' + data.pre.PreIncubationTime+'</div></div><div class = "col-xs-4"><h4>Growth Phase</h4><div>'+ data.pre.PreGrowthPhase
+                            +'</div></div></div></div><h4 style = "margin-top:25px;">Post-Induction Growth Conditions</h4><div class = "container"><div class = "row"><div class = "col-xs-4"><h4>Media Type</h4><div>'+ data.post.IndMedia +'</div></div><div class = "col-xs-4"><h4>Vessel</h4><div>'+data.post.IndVessel +'</div></div><div class = "col-xs-4"><h4>Volume</h4><div>'+data.post.IndVolume 
+                            +'</div></div></div><div class = "row"><div class = "col-xs-4"><h4>Incubation Time (min)</h4><div>' + data.post.IndIncubationTime+'</div></div><div class = "col-xs-4"><h4>Growth Phase</h4><div>'+ data.post.IndGrowthPhase+'</div></div><div class = "col-xs-4"><h4>Inducer</h4><div>'+data.post.Inducer
+                            +'</div></div></div><div class = "row"><div class = "col-xs-4"><h4>Inducer Concentration</h4><div>' + data.post.InducerConcentration+'</div></div></div>')
                             
                 
                 
@@ -234,10 +238,10 @@
                 }
      
                 if (!isEmpty(data.otherAssay)) {
-                    $('#main').append('<div class="well"><h3>Custom Assay</h3><div class = "container"><div class = "row"><div class = "col-md-3"><h4>Assay Name</h4><div>'+ data.otherAssay.AssayName +'</div></div><div class = "col-md-3"><h4>Protocol Details</h4><div>'+data.otherAssay.ProtocolDetails +'</div></div><div class = "col-md-3"><h4>Assay Type</h4><div>'+data.otherAssay.AssayPurpose +'</div></div><div class = "col-md-3"><h4>Link to Protocol</h4><div style = "width:80%">'+data.otherAssay.ProtocolLink 
-                            +'</div></div></div><div class = "row"><div class = "col-md-3"><h4>Link to Image</h4><div>'+ data.otherAssay.AssayImage +'</div></div><div class = "col-md-3"><h4>Image Caption</h4><div>'+ data.otherAssay.AssayImageCaption +'</div></div><div class = "col-md-3"><h4>Link to Additional Data</h4><div>'+ data.otherAssay.AssayDataLink +'</div></div><div class = "col-md-3"><h4>Additional Data Details</h4><div style = "width:80%">'+ data.otherAssay.AssayDataDetails
-                            + '</div></div></div><div class = "row"><div class = "col-md-3"><h4>Parameter 1</h4><div>' + data.otherAssay.Parameter1+'</div></div><div class = "col-md-3"><h4>Value 1</h4><div>'+ data.otherAssay.Value1 +'</div></div><div class = "col-md-3"><h4>Parameter 2</h4><div>'+ data.otherAssay.Parameter2 +'</div></div><div class = "col-md-3"><h4>Value 2</h4><div style = "width:80%">'+data.otherAssay.Value2
-                            + '</div></div></div><div class = "row"><div class = "col-md-3"><h4>Parameter 3</h4><div>' + data.otherAssay.Parameter3+'</div></div><div class = "col-md-3"><h4>Value 3</h4><div>'+ data.otherAssay.Value3 +'</div></div><div class = "col-md-3"><h4>Additional Comments</h4><div>'+ data.otherAssay.comments +'</div></div>'
+                    $('#main').append('<div class="well"><h3>Custom Assay</h3><div class = "container"><div class = "row"><div class = "col-xs-3"><h4>Assay Name</h4><div>'+ data.otherAssay.AssayName +'</div></div><div class = "col-xs-3"><h4>Protocol Details</h4><div>'+data.otherAssay.ProtocolDetails +'</div></div><div class = "col-xs-3"><h4>Assay Type</h4><div>'+data.otherAssay.AssayPurpose +'</div></div><div class = "col-xs-3"><h4>Link to Protocol</h4><div style = "width:80%">'+data.otherAssay.ProtocolLink 
+                            +'</div></div></div><div class = "row"><div class = "col-xs-3"><h4>Link to Image</h4><div>'+ data.otherAssay.AssayImage +'</div></div><div class = "col-xs-3"><h4>Image Caption</h4><div>'+ data.otherAssay.AssayImageCaption +'</div></div><div class = "col-xs-3"><h4>Link to Additional Data</h4><div>'+ data.otherAssay.AssayDataLink +'</div></div><div class = "col-xs-3"><h4>Additional Data Details</h4><div style = "width:80%">'+ data.otherAssay.AssayDataDetails
+                            + '</div></div></div><div class = "row"><div class = "col-xs-3"><h4>Parameter 1</h4><div>' + data.otherAssay.Parameter1+'</div></div><div class = "col-xs-3"><h4>Value 1</h4><div>'+ data.otherAssay.Value1 +'</div></div><div class = "col-xs-3"><h4>Parameter 2</h4><div>'+ data.otherAssay.Parameter2 +'</div></div><div class = "col-xs-3"><h4>Value 2</h4><div style = "width:80%">'+data.otherAssay.Value2
+                            + '</div></div></div><div class = "row"><div class = "col-xs-3"><h4>Parameter 3</h4><div>' + data.otherAssay.Parameter3+'</div></div><div class = "col-xs-3"><h4>Value 3</h4><div>'+ data.otherAssay.Value3 +'</div></div><div class = "col-xs-3"><h4>Additional Comments</h4><div>'+ data.otherAssay.comments +'</div></div>'
                             
                 
                 

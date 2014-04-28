@@ -7,6 +7,7 @@
         <link rel="shortcut icon" href="images/logo-Owl-Color_cropped.ico">
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+       
     </head>
     
     <body class="container">
@@ -68,8 +69,38 @@
                             </div> 
                             
                             <div class="span6"> 
-                                <div><h5>Link to Pigeon image of device</h5><input class="data" id="deviceImage"></div>
-                                <div><h5>Link to Plasmid Map image of device</h5><input class="data" id="plasmidMap"></div>
+  
+              
+              <!-- FILE UPLOAD MODAL -->
+
+
+ 
+                   <!--   <h4 id="uploadFileModalLabel">Upload File</h4> 
+         
+                      <form id="uploadForm" method="POST" action="OwlServlet" enctype="multipart/form-data">
+                          <input type="file" name="file" id="file" multiple/>
+                          <!--   <input type="submit" value="Upload File" name="upload" id="uploadFileButton" class="btn" style="width:150px" /> -->
+  <!--                    </form>
+  
+   
+                      <button id="uploadFileButton" class="btn btn-primary">Upload File</button>
+                      <button class="btn" data-dismiss="modal">Cancel</button> -->
+               
+                <form enctype="multipart/form-data" id = "pigeonImage">
+                    <h5> Pigeon Image </h5>
+                        <input type="file"  id="displayImage" name = "displayImage" accept="image/*">
+   
+                       
+                </form>
+                  <form enctype="multipart/form-data" id = "plasmidImage">
+                    <h5> Plasmid Map Image </h5>
+                        <input type="file"  id="plasmidMap" name = "plasmidMap" accept="image/*">
+   
+                       
+                </form>
+
+                             <!-- <h5>Link to Pigeon image of device</h5><input class="data" id="deviceImage">-->
+                    
                             </div>
                         </div>
                         
@@ -137,8 +168,12 @@
                                 <div><h5>Scars (y/n)</h5><input class="data" id="assemblyScars"></div>                                
                                 <div><h5>Assembly Components</h5><textarea rows="5" id="assemblyComponents"></textarea></div>
                             </div>
-                            <div class="span6">                 
-                                <div><h5>Link to Assembly Graph Image</h5><input class="data" id="assemblyImage"></div>
+                            <div class="span6">
+                                                  <form enctype="multipart/form-data" id = "assemblyForm">
+                            <h5> Assembly Graph Image </h5>
+                                    <input type="file"  id="assemblyImage" name = "assemblyImage" accept="image/*">
+                            </form>
+                 
                                 <div><h5>Chassis</h5><input class="data" id="chassis"></div>                                
                                 <div><h5>Strain</h5><input class="data" id="strain"></div>
                                 <div><h5>Additional Comments</h5><textarea rows="5" class="data" id="assemblyComments"></textarea></div>
@@ -280,13 +315,32 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script>
             $.get("ParserServlet", function(data) {
-                $("#name").val(data.name);
-                $("#summary").val(data.summary);
-                $("#authors").val(data.contactInformation.authors);
-                $("#sequence").val(data.sequence);
-                $("#date").val(data.designInformation.date);
-                $("#deviceName").val(data.name);
-                $("#deviceType").val(data.designInformation.deviceType);
+                //console.log(data);
+                if (data.name)
+                {
+                    $("#name").val(data.name);
+                    $("#deviceName").val(data.name);
+                }
+                if (data.summary)
+                {
+                    $("#summary").val(data.summary);
+                }
+                if (data.contactInformation.authors)
+                {
+                    $("#authors").val(data.contactInformation.authors);
+                }
+                if (data.sequence)
+                {
+                    $("#sequence").val(data.sequence);
+                }
+                if (data.designInformation.date)
+                {
+                    $("#date").val(data.designInformation.date);
+                }
+                if (data.designInformation.deviceType)
+                {
+                    $("#deviceType").val(data.designInformation.deviceType);
+                }
             });
         </script>
         
