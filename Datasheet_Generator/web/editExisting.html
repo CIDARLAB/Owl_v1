@@ -37,11 +37,13 @@
         
         <div><input id="searchName" placeholder="K1114000" style="margin-top:-25px"/></div>
         <button class="btn btn-primary" id="editButton" style="margin-top:7px">Search</button>
+        <img id = "loading" style = "position:relative; top:2px;padding-left:10px;" src ="images/ajax-loader.gif" hidden>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         
         <script>
             $("#editButton").click(function(){
+                $('#loading').show();
                 var searchTerm = $('#searchName').attr("placeholder");
                 if($('#searchName').val() !== "") {
                     searchTerm = $('#searchName').val();
