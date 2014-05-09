@@ -37,43 +37,39 @@ $(document).ready(function() {
 
 
     });*/
-    
-    $('#selectAssay').change(function(){
-        
-        var selected = $('#selectAssay :selected').text();
-        
-        if (selected === "Other") {
+    $('#otherSel').change(function(){
+        if ($('#otherSel:checked').val() === "ON") {
             //append new assay code
-            $('#otherAssay').removeClass("hidden");
-             if (!$('#restrictionMap').hasClass("hidden"))
-             {
-                 $('#restrictionMap').addClass("hidden")
-             }
-               if (!$('#functionalityAssays').hasClass("hidden"))
-             {
-                 $('#functionalityAssays').addClass("hidden")
-             }
-             
-        } else if (selected === "Restriction Map") {
+            $('#otherAssay').removeClass("hidden");       
+        }
+        else
+        {
+            $('#otherAssay').addClass("hidden");
+            console.log('trying to hide');
+        }      
+        
+    });
+    
+    $('#restSel').change(function(){
+        if ($('#restSel:checked').val() === "ON") {
             $('#restrictionMap').removeClass("hidden");
-              if (!$('#otherAssay').hasClass("hidden"))
-             {
-                 $('#otherAssay').addClass("hidden")
-             }
-               if (!$('#functionalityAssays').hasClass("hidden"))
-             {
-                 $('#functionalityAssays').addClass("hidden")
-             }
-        } else if (selected === "Flow Cytometry") {
+
+        }
+        else
+        {
+            $('#restrictionMap').addClass("hidden");
+        }
+        
+    });
+    
+    $('#flowSel').change(function(){
+        if ($('#flowSel:checked').val() === "ON") {
             $('#functionalityAssays').removeClass("hidden");
-               if (!$('#otherAssay').hasClass("hidden"))
-             {
-                 $('#otherAssay').addClass("hidden")
-             }
-               if (!$('#restrictionMap').hasClass("hidden"))
-             {
-                 $('#restrictionMap').addClass("hidden")
-             }
+
+        }
+        else
+        {
+            $('#functionalityAssays').addClass("hidden");
         }
         
     });
@@ -102,6 +98,11 @@ $(document).ready(function() {
         });
     });
     
+    
+    // the following three sections will fire when an image has been uploaded by
+    // the user. the code then submits an ajax post request behind the scenes to
+    // a node server that I setup to handle the storing of the photos. the node server
+    // stores the images using a service called cloudinary
     $('#displayImage').change(function(){
         
                 var formData = new FormData($('#pigeonImage')[0]);
@@ -109,10 +110,6 @@ $(document).ready(function() {
                 $.ajax({
                             url: 'http://owlimageserver.herokuapp.com/pigeon',  //Server script to process data
                             type: 'POST',
-                            //Ajax events
-                            //beforeSend: beforeSendHandler,
-                            //success: completeHandler,
-                            //error: errorHandler,
                             // Form data
                             data: formData,
                             //Options to tell jQuery not to process data or worry about content-type.
@@ -131,10 +128,6 @@ $(document).ready(function() {
                 $.ajax({
                             url: 'http://owlimageserver.herokuapp.com/plasmid',  //Server script to process data
                             type: 'POST',
-                            //Ajax events
-                            //beforeSend: beforeSendHandler,
-                            //success: completeHandler,
-                            //error: errorHandler,
                             // Form data
                             data: formData,
                             //Options to tell jQuery not to process data or worry about content-type.
@@ -155,10 +148,6 @@ $(document).ready(function() {
                 $.ajax({
                             url: 'http://owlimageserver.herokuapp.com/assembly',  //Server script to process data
                             type: 'POST',
-                            //Ajax events
-                            //beforeSend: beforeSendHandler,
-                            //success: completeHandler,
-                            //error: errorHandler,
                             // Form data
                             data: formData,
                             //Options to tell jQuery not to process data or worry about content-type.
@@ -171,38 +160,22 @@ $(document).ready(function() {
         
     });
     
-   /* document.getElementById('displayImage').addEventListener('change', function(e) {
-    var file = this.files[0];
-    var xhr = new XMLHttpRequest();
-    xhr.file = file; // not necessary if you create scopes like this
-    xhr.addEventListener('progress', function(e) {
-        var done = e.position || e.loaded, total = e.totalSize || e.total;
-        console.log('xhr progress: ' + (Math.floor(done/total*1000)/10) + '%');
-    }, false);
-    if ( xhr.upload ) {
-        xhr.upload.onprogress = function(e) {
-            var done = e.position || e.loaded, total = e.totalSize || e.total;
-            console.log('xhr.upload progress: ' + done + ' / ' + total + ' = ' + (Math.floor(done/total*1000)/10) + '%');
-        };
-    }
-    xhr.onreadystatechange = function(e) {
-        if ( 4 == this.readyState ) {
-            console.log(['xhr upload complete', e]);
-        }
-    };
-    xhr.open('post', 'http://localhost:7070/pigeon', true);
-    xhr.send(file);
-}, false);*/
 
     //JSON object 
     $('#designButton').click(function() {
         //collect information here
       
+
+        
         
         var pigeonPath;
         var plasmidPath;
         var assemblyPath;
         
+        
+        // for the following three sections: path names are the paths to the
+        // cloudinary servers that the node server stored the images on
+        // if an image is not uploaded but a link is used, that is taken instead
         if ($('#displayImage').val())
         {
             var pigeonName = $('#displayImage').val().replace(/C:\\fakepath\\/i, '');
@@ -210,7 +183,14 @@ $(document).ready(function() {
         }
         else
         {
-            pigeonPath = "";
+            if ($('#pigeonAlt').val())
+            {
+                pigeonPath = $('#pigeonAlt').val();
+            }
+            else
+            {
+                pigeonPath = "";
+            }
         }
          if ($('#plasmidMap').val())
         {
@@ -219,7 +199,14 @@ $(document).ready(function() {
         }
         else
         {
-            plasmidPath = "";
+            if ($('#plasmidAlt').val())
+            {
+                plasmidPath = $('#plasmidAlt').val();
+            }
+            else
+            {
+                plasmidPath = "";
+            }
         }
         
          
@@ -230,10 +217,20 @@ $(document).ready(function() {
         }
         else
         {
-            assemblyPath = "";
+            if ($('#assemblyAlt').val())
+            {
+                assemblyPath = $('#assemblyAlt').val();
+            }
+            else
+            {
+                assemblyPath = "";       
+            }
         }
         
+        console.log(pigeonPath);
+        
        
+        
         var data = {};
         data["name"] = $('#name').val();
         data["summary"] = $('#summary').val();
@@ -243,9 +240,6 @@ $(document).ready(function() {
         data["assemblyImage"] = assemblyPath;
         data["partType"] = $('#partType :selected').text();
         data["relatedParts"] = $('#relatedParts').val();
-        
-        
-        //console.log(pigeonName);
         
 
         //gather contact information
@@ -399,11 +393,99 @@ $(document).ready(function() {
         data["post"] = post;
     }
     }
-      $.get("DataServlet",{"sending":JSON.stringify(data)},function(){
+    console.log(data);
+    // these are the required fields that must have information for the data to be submitted 
+    if (data["name"].length > 0 && data["summary"].length > 0 && data["sequence"].length > 0 && data["contactInformation"]["authors"].length > 0 && data["contactInformation"]["date"].length > 0)
+       {
+        // hide the alert if it is not already hidden
+        $('#required_1').hide();
+        $('#required_2').hide();
+        
+        // change the css for the different fields back to normal
+        // partAs, sumAs, seqAs,authAs,dateAs
+        $('#partAs').css("color", "black");
+        $('#sumAs').css("color", "black");
+        $('#seqAs').css("color", "black");
+        $('#authAs').css("color", "black");
+        $('#dateAs').css("color", "black");
+        
+        // submit the info to the server
+        $.get("DataServlet",{"sending":JSON.stringify(data)},function(){
              window.location.assign("output.html");
-            //window.open("output.html");
-            //win.focus();
         });
+        }
+    
+    // handle the case if not all the required fields were filled out    
+    else
+    {
+        // if it was the first tab that didn't have everything in it
+        if (data["name"].length <= 0 || data["summary"].length <= 0 || data["sequence"].length <= 0)
+        {
+            // change the tab to the appropriate one here
+            $('ul li').removeClass('active');
+            $('#basicInfoTab').addClass('active');
+            $('#tabs .active').removeClass('active');
+            $('#basicInfo').addClass('active');
+            $('#required_1').show();
+            $('#required_2').hide();
+            
+            // set the colors to black
+            $('#partAs').css("color", "black");
+            $('#sumAs').css("color", "black");
+            $('#seqAs').css("color", "black");
+            $('#authAs').css("color", "black");
+            $('#dateAs').css("color", "black");
+
+            
+            // now emphasize the appropriate fields
+            if (data["name"].length <=0)
+            {
+                // change the css for the partAs id
+                $('#partAs').css("color", "rgb(233, 47, 47)");
+            }
+            if (data["summary"].length <= 0)
+            {
+                // change the css for the sumAs id
+                $('#sumAs').css("color", "rgb(233, 47, 47)");
+            }
+            if (data["sequence"].length <= 0)
+            {
+                // change the css for the seqAs id
+                $('#seqAs').css("color", "rgb(233, 47, 47)");
+            }
+        }
+        // it must have been the second tab that didn't have everything filled in
+        else
+        {
+            // change to the second tab
+            $('ul li').removeClass('active');
+            $('#contactInformationTab').addClass('active');
+            $('#tabs .active').removeClass('active');
+            $('#contactInformation').addClass('active');
+            $('#required_1').hide();
+            $('#required_2').show();
+            
+            // set the initial colors to black
+            // set the colors to black
+            $('#partAs').css("color", "black");
+            $('#sumAs').css("color", "black");
+            $('#seqAs').css("color", "black");
+            $('#authAs').css("color", "black");
+            $('#dateAs').css("color", "black");
+            
+            if (data["contactInformation"]["authors"].length <= 0)
+            {
+                // change the css for the authAs id
+                $('#authAs').css("color", "rgb(233, 47, 47)");
+            }
+            if (data["contactInformation"]["date"].length <= 0)
+            {
+                // change the css for the dateAs id
+                $('#dateAs').css("color", "rgb(233, 47, 47)");
+            }
+        }
+      
+    }
 
     });
 

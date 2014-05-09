@@ -39,8 +39,8 @@
         <div class="tabbable tabs-left">
             
             <ul class="nav nav-tabs nav-pills well">
-                <li class="active"><a data-toggle="tab" href="#basicInfo">Basic Information</a></li>
-                <li><a data-toggle="tab" href="#contactInformation">Designer Information</a></li>
+                <li id ="basicInfoTab" class="active"><a data-toggle="tab" href="#basicInfo">Basic Information</a></li>
+                <li id = "contactInformationTab"><a data-toggle="tab" href="#contactInformation">Designer Information</a></li>
                 <li><a data-toggle="tab" href="#designDetails">Design Details</a></li>
                 <li><a data-toggle="tab" href="#assemblyInformation">Assembly Information</a></li>
                 <li><a data-toggle="tab" href="#assayOptions">Assay</a></li>
@@ -52,10 +52,11 @@
                 <div id="basicInfo" class="active tab-pane" style="margin-top:-15px">
                     <h2>Basic Information</h2>
                     <div class="well">
+                        <div id ='required_1' style = "font-weight:bold;font-size:18px;padding-bottom:10px;" hidden>Please fill out the<div style ='display:inline;color:rgb(233, 47, 47);margin-left: 5px;margin-right:5px;'>required&#42</div>fields</div>
                         <div class="row-fluid">
                             <div class="span4">
-                                <div><h5>Part Name</h5><input id="name"/></div>
-                                <div><h5>Sequence</h5><input class="data" id="sequence"></div>  
+                                <div id = 'partAs'><h5>Part Name&#42</h5><input id="name"/></div>
+                                <div id = 'seqAs'><h5>Sequence&#42</h5><input class="data" id="sequence"></div>  
                                 <div id="partType"><h5>Part Type</h5>
                                     <select>
                                         <option>
@@ -68,7 +69,7 @@
                                 </div>
                             </div> 
                             
-                            <div class="span6"> 
+                            <div class="span8"> 
   
               
               <!-- FILE UPLOAD MODAL -->
@@ -87,13 +88,15 @@
                       <button class="btn" data-dismiss="modal">Cancel</button> -->
                
                 <form enctype="multipart/form-data" id = "pigeonImage">
-                    <h5> Pigeon Image </h5>
-                        <input type="file"  id="displayImage" name = "displayImage" accept="image/*">
+                    <h5> Pigeon Image Link </h5>
+                    <input class="pigeonAlt" id="pigeonAlt" style = "display:inline;"><div style = "font-weight:bold;font-size:15px;display:inline;padding-left:6px;padding-right:6px;"> or </div> 
+                        <input type="file"  id="displayImage" name = "displayImage" accept="image/*" style = "display:inline;">
    
                        
                 </form>
                   <form enctype="multipart/form-data" id = "plasmidImage">
-                    <h5> Plasmid Map Image </h5>
+                    <h5> Plasmid Map Image Link </h5>
+    <input class="plasmidAlt" id="plasmidAlt" style = "display:inline;"><div style = "font-weight:bold;font-size:15px;display:inline;padding-left:6px;padding-right:6px;"> or </div> 
                         <input type="file"  id="plasmidMap" name = "plasmidMap" accept="image/*">
    
                        
@@ -105,12 +108,13 @@
                         </div>
                         
                         <div class="row-fluid">                            
-                            <div><h5>Part Summary</h5><textarea  class="data" id="summary" rows="5" style="width:98%"></textarea></div>
+                            <div id = "sumAs"><h5>Part Summary&#42</h5><textarea  class="data" id="summary" rows="5" style="width:98%"></textarea></div>
                             <div><h5>Related Parts</h5><textarea rows="5" class ="data" id="relatedParts" style="width:98%"></textarea></div>
                         </div>
 
                         <button class="btn back"><strong>Back</strong></button>
                         <button class="btn next"><strong>Next</strong></button>
+                        <div style = "font-size:15px;font-weight:bold;padding-top:10px;"> Required&#42 field </div>
 
                     </div>
                 </div>
@@ -118,11 +122,13 @@
                 <!--Contact Info-->
                 <div id="contactInformation" class="tab-pane" style="margin-top:-15px">
                     <h2>Designer Information</h2>
-                    <div class="well">     
+                    <div class="well">
+                        <div id ='required_2' style = "font-weight:bold;font-size:18px;padding-bottom:10px;" hidden>Please fill out the<div style ='display:inline;color:rgb(233, 47, 47);margin-left: 5px;margin-right:5px;'>required&#42</div>fields</div>
+                        
                         <div class="row-fluid">
                             <div class="span4">
-                                <div><h5>Author(s)</h5><input class="data" id="authors"/></div>
-                                <div><h5>Date</h5><input class="data" id="date"/></div>
+                                <div id = "authAs"><h5>Author(s)&#42</h5><input class="data" id="authors"/></div>
+                                <div id = "dateAs"><h5>Date&#42</h5><input class="data" id="date"/></div>
                                 <div><h5>Team</h5><input class="data" id="team"/></div>                                          
                             </div>   
                             <div class="span6">
@@ -133,7 +139,7 @@
                         </div>
                         <button class="btn back" style ='margin-top: 10px'><strong>Back</strong></button>
                         <button class="btn next" style ='margin-top: 10px'><strong>Next</strong></button>
-
+                      <div  style = "font-size:15px;font-weight:bold;padding-top:10px;"> Required field&#42 </div>
                     </div>
                 </div>
                 
@@ -168,9 +174,10 @@
                                 <div><h5>Scars (y/n)</h5><input class="data" id="assemblyScars"></div>                                
                                 <div><h5>Assembly Components</h5><textarea rows="5" id="assemblyComponents"></textarea></div>
                             </div>
-                            <div class="span6">
+                            <div class="span8">
                                                   <form enctype="multipart/form-data" id = "assemblyForm">
-                            <h5> Assembly Graph Image </h5>
+                            <h5> Assembly Graph Image Link </h5>
+                             <input class="assemblyAlt" id="assemblyAlt" style = "display:inline;"><div style = "font-weight:bold;font-size:15px;display:inline;padding-left:6px;padding-right:6px;"> or </div> 
                                     <input type="file"  id="assemblyImage" name = "assemblyImage" accept="image/*">
                             </form>
                  
@@ -187,15 +194,13 @@
 
                 <!--Assays-->
                 <div id="assayOptions" class="tab-pane" style="margin-top:-15px">  
-                    <h2>Assay</h2>   
+                    <h2>Assay</h2> 
                     <div class="well" style="margin-left: 10px">
-                        <select id="selectAssay"> 
-                            <option>Choose Assay</option>
-                            <option>Restriction Map</option>
-                            <option>Flow Cytometry</option>
-                            <option>Other</option>
-                        </select>
-                        
+                    <div id ="selectAssay">
+                    <input type="checkbox" name="restSel" id ="restSel" value="ON" /><div style = "position:relative;top:3px;display:inline;font-size:15px;font-weight:bold;padding-left:5px;padding-right:15px;">Restriction Map</div>
+                    <input type="checkbox" name="flowSel" id ="flowSel" value="ON" /><div style = "position:relative;top:3px;display:inline;font-size:15px;font-weight:bold;padding-left:5px;padding-right:15px;">Flow Cytometry</div>
+                    <input type="checkbox" name="otherSel" id ="otherSel" value="ON" /><div style = "position:relative;top:3px;display:inline;font-size:15px;font-weight:bold;padding-left:5px;padding-right:15px;">Other Assay</div>
+                    </div>  
                         <!--<button class="btn btn-primary" id="addAssayButton" style="margin-left:10px; margin-top: -10px">Add Assay</button>-->
                         
                         <br/>
@@ -274,7 +279,7 @@
                             </div>
                         </div>    
                         <div id="otherAssay" class="hidden">   
-                            <h3>Add New Assay</h3>
+                            <h3>Other Assay</h3>
                             <div class="well">    
                                 <div class="row-fluid">
                                     <div class="span4">   
@@ -305,7 +310,7 @@
                                 <button class="btn" id="removeOtherButton"><strong>Remove</strong></button>
                             </div>          
                         </div>
-                        <button class="btn back"><strong>Back</strong></button>
+                        <button style = "margin-top:0px;" class="btn back"><strong>Back</strong></button>
                     </div>
                 </div>
             </div>
@@ -348,6 +353,17 @@
         <script type="text/javascript" src="libraries/jquery-1.9.1.min.js"></script> 
         <script src="libraries/bootstrap.min.js"></script>         
         <script>
+           if ($('#restSel:checked').val() === "ON") {
+            $('#restrictionMap').removeClass("hidden");
+                }
+         if ($('#flowSel:checked').val() === "ON") {
+            $('#functionalityAssays').removeClass("hidden");
+
+        }
+          if ($('#otherSel:checked').val() === "ON") {
+            //append new assay code
+            $('#otherAssay').removeClass("hidden");       
+        }
             function getCookie(c_name) {
                 var c_value = document.cookie;
                 var c_start = c_value.indexOf(" " + c_name + "=");

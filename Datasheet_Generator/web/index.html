@@ -1,20 +1,26 @@
+<!DOCTYPE html>
+<!contains form and login code>
 <html>
+    
     <head>
         <title>Owl</title>
         <link rel="shortcut icon" href="images/logo-Owl-Color_cropped.ico">
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+       
     </head>
-    <body>
+    
+    <body class="container">
+        
         <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
+            <div class="navbar-inner"> 
                 <div class="container">
                     <a class="brand" href="index.html">Owl</a>
                     <ul class="nav">
                         <li><a href="editExisting.html">Search Existing Parts</a></li>
                         <li><a href="dynamicForm.html">Create Datasheet</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                    </ul>     
+                    </ul> 
                     <div id="loginArea">
                         <form id="loginForm" class="navbar-form pull-right" action="AuthenticationServlet" method="POST">
                             <input name="user" type="text" class="span2" placeholder="Login">
@@ -25,10 +31,10 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="page-header" style="margin-top:60px">                
-                <h1><img style="width: 48px; height: 40px; margin-top:2px" src="images/logo-Owl-Color_cropped.png"><small> Automatically build Datasheets</small></h1>
-            </div>
+        
+        <div class="page-header" style="margin-top:60px">
+            <h1><img style="width: 48px; height: 40px; margin-bottom:5px" src="images/logo-Owl-Color_cropped.png"> <small> Build your Datasheet here</small></h1>
+        </div>
             <div class="hero-unit" align="center">
                 <h2>Welcome to</h2>
                 <h1><strong>Owl Datasheet Generator </strong></h1>
@@ -61,8 +67,6 @@
                 </div>
             </div>
             <hr/>
-
-        </div>
 
         <!--modal dialogs-->
 <!--        <div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="loginLabel" aria-hidden="true">
