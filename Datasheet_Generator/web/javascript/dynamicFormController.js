@@ -7,23 +7,12 @@ $(document).ready(function() {
        console.log('called');
         $("#name").text(data.name);
     });
-    
-     $('#uploadFileButton').click(function() {
-        console.log('trying to upload');
-        var newFileName = $('#file').val();
-        if (newFileName !== "") {
-            $('#uploadForm').submit();
-        } else if ($('a.dynatree-title:contains("' + newFileName + '")').length === 0) {
-            editor.setValue("");
-            saveFile(newFileName);
-        }
-    });
-    
-    
-    var data = {};
-
+       
+    //allows "next" and "back" buttons to work properly
     var $tabs = $('.tabbable li');
-
+    
+    //these two functions allow forward and backward navigation while in the
+    //datasheet form
     $('.back').on('click', function() {
         $tabs.filter('.active').prev('li').find('a[data-toggle="tab"]').tab('show');
     });
@@ -31,12 +20,8 @@ $(document).ready(function() {
     $('.next').on('click', function() {
         $tabs.filter('.active').next('li').find('a[data-toggle="tab"]').tab('show');
     });
-
-    //handlers for assays
-   /* $('button#addAssayButton').click(function() {
-
-
-    });*/
+    
+    //checkbox for "other assay" in assay tab    
     $('#otherSel').change(function(){
         if ($('#otherSel:checked').val() === "ON") {
             //append new assay code
@@ -49,7 +34,8 @@ $(document).ready(function() {
         }      
         
     });
-    
+
+    //checkbox for "restriction map" in assay tab       
     $('#restSel').change(function(){
         if ($('#restSel:checked').val() === "ON") {
             $('#restrictionMap').removeClass("hidden");
@@ -62,6 +48,7 @@ $(document).ready(function() {
         
     });
     
+    //checkbox for "flow cytometry" in assay tab       
     $('#flowSel').change(function(){
         if ($('#flowSel:checked').val() === "ON") {
             $('#functionalityAssays').removeClass("hidden");
@@ -70,13 +57,12 @@ $(document).ready(function() {
         else
         {
             $('#functionalityAssays').addClass("hidden");
-        }
-        
+        }        
     });
-    
-    
+      
+    //the following three methods only do what unchecking the checkboxes in the 
+    //"assay" tab do   
     $('button#removeRDButton').click(function() {
-
         $('#restrictionMap').addClass("hidden");
         $('#restrictionMap input').each(function() {
             //clear the values
@@ -98,11 +84,11 @@ $(document).ready(function() {
         });
     });
     
-    
     // the following three sections will fire when an image has been uploaded by
     // the user. the code then submits an ajax post request behind the scenes to
     // a node server that I setup to handle the storing of the photos. the node server
     // stores the images using a service called cloudinary
+     
     $('#displayImage').change(function(){
         
                 var formData = new FormData($('#pigeonImage')[0]);
@@ -116,10 +102,7 @@ $(document).ready(function() {
                             cache: false,
                             contentType: false,
                             processData: false
-                        });
-                      
-        
-        
+                        });  
     });
       $('#plasmidMap').change(function(){
         
@@ -134,10 +117,7 @@ $(document).ready(function() {
                             cache: false,
                             contentType: false,
                             processData: false
-                        });
-                      
-        
-        
+                        });     
     });  
   
     $('#assemblyImage').change(function(){
@@ -155,18 +135,11 @@ $(document).ready(function() {
                             contentType: false,
                             processData: false
                         });
-                      
-        
-        
     });
-    
 
     //JSON object 
     $('#designButton').click(function() {
         //collect information here
-      
-
-        
         
         var pigeonPath;
         var plasmidPath;
@@ -226,11 +199,7 @@ $(document).ready(function() {
                 assemblyPath = "";       
             }
         }
-        
-        console.log(pigeonPath);
-        
-       
-        
+      
         var data = {};
         data["name"] = $('#name').val();
         data["summary"] = $('#summary').val();
@@ -263,12 +232,6 @@ $(document).ready(function() {
             var value = $(this).val();
             basicInfo[key] = value;
         });
-        $('div#basicInfo textarea').each(function() {
-            var key = $(this).attr("id");
-            var value = $(this).val();
-            basicInfo[key] = value;
-        });
-        data["basicInfo"] = basicInfo;
         
         //gather design information
         var designDetails = {};
@@ -301,8 +264,7 @@ $(document).ready(function() {
         
         if (!$('#restrictionMap').hasClass('hidden'))
         {
-        var restrictionMap = {}       
-        //DEVINA POPULATE THIS ARRAY
+        var restrictionMap = {};      
         var flag = 0;
         $('div#restrictionMap input').each(function() {
             var key = $(this).attr("id");
@@ -354,8 +316,7 @@ $(document).ready(function() {
     {
         var functionalityAssays ={};
         var flag = 0;
-        console.log('abc');
-        //DEVINA POPULATE THIS ARRAY
+
         $('div#functionalityAssays div.experiment input').each(function() {
             var key = $(this).attr("id");
             var value = $(this).val(); 
@@ -393,22 +354,10 @@ $(document).ready(function() {
         data["post"] = post;
     }
     }
-    console.log(data);
+    
     // these are the required fields that must have information for the data to be submitted 
     if (data["name"].length > 0 && data["summary"].length > 0 && data["sequence"].length > 0 && data["contactInformation"]["authors"].length > 0 && data["contactInformation"]["date"].length > 0)
        {
-        // hide the alert if it is not already hidden
-        $('#required_1').hide();
-        $('#required_2').hide();
-        
-        // change the css for the different fields back to normal
-        // partAs, sumAs, seqAs,authAs,dateAs
-        $('#partAs').css("color", "black");
-        $('#sumAs').css("color", "black");
-        $('#seqAs').css("color", "black");
-        $('#authAs').css("color", "black");
-        $('#dateAs').css("color", "black");
-        
         // submit the info to the server
         $.get("DataServlet",{"sending":JSON.stringify(data)},function(){
              window.location.assign("output.html");
@@ -484,19 +433,7 @@ $(document).ready(function() {
                 $('#dateAs').css("color", "rgb(233, 47, 47)");
             }
         }
-      
     }
 
     });
-
-
-
-
-
-
-
-
-
-
-
 });
