@@ -358,6 +358,17 @@ $(document).ready(function() {
     // these are the required fields that must have information for the data to be submitted 
     if (data["name"].length > 0 && data["summary"].length > 0 && data["sequence"].length > 0 && data["contactInformation"]["authors"].length > 0 && data["contactInformation"]["date"].length > 0)
        {
+        //hide error messages
+        $('#required_1').hide();
+        $('#required_2').hide();    
+            
+        //change colors to black    
+        $('#partAs').css("color", "black");
+        $('#sumAs').css("color", "black");
+        $('#seqAs').css("color", "black");
+        $('#authAs').css("color", "black");
+        $('#dateAs').css("color", "black");
+        
         // submit the info to the server
         $.get("DataServlet",{"sending":JSON.stringify(data)},function(){
              window.location.assign("output.html");
