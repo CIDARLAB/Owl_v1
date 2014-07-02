@@ -4,6 +4,12 @@
  */
 package datasheet;
 
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,7 +26,7 @@ public class XMLParser {
 /*Parses iGEM Parts Registry XML pages for a given part
  Returns JSON object of relevant information*/
     
-    public static void main(String[] args) throws JSONException {
+    public static void main(String[] args) throws JSONException, IOException {
         
         //There will be an arraylist of actual part names
         ArrayList<String> partNames = new ArrayList<String>();
@@ -35,6 +41,8 @@ public class XMLParser {
         //Write relevant info to JSON Object for client
         JSONObject partInfo = writeJSONObject(parsedString);
 
+        appendLatex(parsedString); ///////////////////////////////////
+        
         //Test print statements for writeJSONObject
         System.out.println(partInfo.toString());
     
@@ -122,7 +130,10 @@ public class XMLParser {
         //put all variables into a String array
         String[] partInfoStrArr = {partNameString, partSummaryString, 
             partTypeString, partDateString, partAuthorString, seqDataString};
-
+        
+        System.out.println(partInfoStrArr[0] + "\n" + partInfoStrArr[1] + "\n" + partInfoStrArr[2] + "\n" + partInfoStrArr[3] + "\n" + partInfoStrArr[4] + "\n" + partInfoStrArr[5] + "\n");
+        
+        
         return partInfoStrArr;    //return String array of relevant info
     }
 
@@ -149,4 +160,53 @@ public class XMLParser {
         return partsInfoJSON; //return partsInfoJSON JSON object
     }
     
+    public static void appendLatex(String[] partInfoStrArr) throws IOException{
+    
+        Path p1 = Paths.get("/Users/Zach/Documents/Owl/Test/Test.tex");
+        Path p2 = Paths.get("/Users/Zach/Documents/Owl/Test/Blank.tex");
+        Charset charset = StandardCharsets.UTF_8;
+
+        try{
+        String content = new String(Files.readAllBytes(p1), charset);
+        
+        content = content.replace("BBa\\_",partInfoStrArr[0]);
+        content = content.replace("{Summary}\t\t&","{Summary}\t\t&" + " " + partInfoStrArr[1]);
+        content = content.replace("{Part Type}\t\t&","{Part Type}\t\t&" + " " + partInfoStrArr[2]);
+        content = content.replace("{Sequence}\t\t&","{Sequence}\t\t&" + " " + partInfoStrArr[5]);
+        content = content.replace("{Author(s)}\t\t\t\t&","{Author(s)}\t\t\t\t&" + " " + partInfoStrArr[4]);
+        content = content.replace("{Date}\t\t\t\t\t&","{Date}\t\t\t\t\t&" + " " + partInfoStrArr[3]);
+        content = content.replace("_","\\_");
+        
+        Files.write(p2, content.getBytes(charset));
+        }catch (IOException e) {
+            System.err.println(e);
+        }
+       
+        
+//        String docpath = "/Users/Zach/Documents/Owl/Test/Test.tex";
+//        String line;
+//        BufferedReader br;
+//        BufferedWriter out = null;
+//        try{
+//            br = new BufferedReader(new FileReader(docpath));
+//            out = new BufferedWriter(new FileWriter(docpath, true));
+//            while((line = br.readLine()) != null){
+//                if(line.contains("BBa\\_")){
+//                    int start = line.indexOf("BBa\\_");
+//                    int end = line.indexOf("BBa\\_") + 5;
+//                    line = line.substring(0,start) + line.substring(start,end).replace("BBa\\_",partInfoStrArr[0]) + line.substring(end,line.indexOf("Name") + 4);
+//                    line = line.replace("_","\\_");
+//                    System.out.println("This is the line: " + line + "\n");
+//                    out.write(line);
+//                }    
+//            }
+//            out.flush();
+//        }catch (IOException e) {
+//            System.err.println(e);
+//        }finally{
+//            if(out != null){
+//            out.close();
+//            }
+    }      
+        
 }

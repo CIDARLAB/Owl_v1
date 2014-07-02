@@ -8,6 +8,7 @@ package datasheet;
 import static datasheet.XMLParser.getXML;
 import static datasheet.XMLParser.parseXML;
 import static datasheet.XMLParser.writeJSONObject;
+import static datasheet.XMLParser.appendLatex;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -54,6 +55,9 @@ public class ParserServlet extends HttpServlet {
         //Write relevant info to JSON Object for client
         JSONObject partInfo = writeJSONObject(parsedString);
         //save the data for use after redirect
+        
+        appendLatex(parsedString); /////////////////////////////////////////
+        
         data = partInfo;
         
         System.out.println("partInfo" + partInfo);
