@@ -9,11 +9,8 @@ import static datasheet.XMLParser.getXML;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -55,179 +52,27 @@ public class ParserServlet extends HttpServlet {
         
         if(mode.equals(modes.makeLatex.toString()))
         {
-            System.out.println("Make Latex Button was clicked");
             String latexJSON = request.getParameter("latex");
             
             Map<String,String> map = new LinkedHashMap<String,String>();
             ObjectMapper mapper = new ObjectMapper();
             
             try {
-                System.out.println("Latex String : "+ latexJSON);
+                //System.out.println("Latex String : "+ latexJSON);
 		//convert JSON string to Map
 		map = mapper.readValue(latexJSON, 
-		    new TypeReference<LinkedHashMap<String,String>>(){});
-                System.out.println("Map Size is : " + map.size());
-                for(Map.Entry<String, String> entry : map.entrySet())
-                {
-                    //System.out.println("Printing an entry");
-                    System.out.println(entry.getKey() + ":" +entry.getValue());
-                }
-		//System.out.println(map);
+		    new TypeReference<LinkedHashMap<String,String>>(){});               
  
             } catch (IOException e) {
 		e.printStackTrace();
             }
             
+            String latexString = LatexCreator.makeLatex(map);
+                
+            String filePath = LatexCreator.writeLatex(latexString);
             
-            /*
-            System.out.println("If converted to map, you will see it ABOVE this message!");
-            
-            if(latexJSON!= null)
-            {
-                System.out.println("Latex code: ");
-                System.out.println(latexJSON);
-            }
-            else
-                System.out.println("Null value passed"); 
-            
-            JSONObject jsonObj = new JSONObject(latexJSON);
-            //HashMap<String,Object> result = new ObjectMapper().readValue(jsonObj, HashMap.class);
-            if (jsonObj instanceof JSONObject) {
-                System.out.println("\n\nITS A JSONObject!!\n\n");
-            }
-            else
-            {
-                System.out.println("\n\nNot a JSONObject :(\n\n");
-            }
-            
-            if(true)
-            {
-            
-                String[] dataKeys = new String[100];
-                String[] dataValues = new String[100];
-                
-                /*List<String> dataKeys = new ArrayList<String>();
-                List<String> dataValues = new ArrayList<String>();
-                dataKeys.add("Hello Zach");
-                dataKeys.add("Nice day,eh?");
-                
-                System.out.println(dataKeys.get(0));
-                
-                for(int i=0;i<dataKeys.size();i++)
-                {
-                    //dataKeys.get(i);
-                }
-                for(String xString:dataKeys)
-                {
-                    //xString
-                }
-                
-                
-                int count = 0;
-                
-                Iterator keys = jsonObj.keys();
-            
-                while(keys.hasNext()) {
-                    
-                    String currentDynamicKey = keys.next().toString();
-                    
-                    Object xVal = jsonObj.get(currentDynamicKey);
-                    
-                    if(xVal == null)
-                        System.out.println("JSON obj is null for key " + currentDynamicKey);
-                    else
-                    {
-                        try
-                        {
-                            System.out.println(xVal.toString());
-                        }
-                        catch(Exception e)
-                        {
-                            System.out.println("Something wrong with that thing");
-                        }
-                    }
-                    
- 
-                    
-                    
-                    /*
-                    String currentDynamicValue = jsonObj.getJSONObject(currentDynamicKey).toString();
-                    
-                    dataKeys[count] = currentDynamicKey;
-                    dataValues[count] = currentDynamicValue;
-                    
-                    System.out.println(dataValues[count] + "\n\n");
-                    
-                    count++;
-                    
-                }
-                //for(jsonObj.)
-                for(int i=0;i<jsonObj.length();i++)
-                {
-                }
-                
-                /*System.out.println("If it made it here, thats good!!\n\n");
-                System.out.println(dataValues[0] + "\n\n");
-                
-                
-                String latexString = "";
-                
-                String header = "%This is a test file to determine the layout of the Owl Datasheet\n"
-                        + "\\documentclass{article}\n"
-                        + "\\usepackage{ccaption} %Formatting table titles\n"
-                        + "\\usepackage[margin=1in]{geometry} %Setting document margins\n"
-                        + "\\usepackage{graphicx} %Using images\n"
-                        + "\\usepackage{array} %Formatting table size and behavior\n"
-                        + "\\begin{document}\n"
-                        + "\\renewcommand{\\topfraction}{0.85} %Helps with keeping whitespace to a minimum\n"
-                        + "\\renewcommand{\\textfraction}{0.1}\n"
-                        + "\\renewcommand{\\floatpagefraction}{0.85}\n";
-                
-                String tableSetup = "\\begin{table}[h]\n"
-                        + "\\setlength{\\belowcaptionskip}{4pt}\n"
-                        + "\\setlength{\\extrarowheight}{8pt}\n"
-                        + "\\legend{\\LARGE ";
-                
-                String tableStart = "\\begin{tabular}{m{1.2in}m{4.98in}}\n";
-                
-                String setup = "\\large \\textbf{";
-                
-                String tableEnd = "\\end{tabular}\n"
-                        + "\\end{table}\n";
-                
-                for(int i = 0; i < count; i++)
-                {
-                    if(i == 0)
-                        latexString += header;
-                    
-                    if(dataKeys[i].contains("title"))
-                    {
-                        if(i != 0)
-                        {
-                            latexString += "\b\b\b";
-                            latexString += "\n" + tableEnd;
-                        }
-                        
-                        latexString += tableSetup;
-                        latexString += dataValues[i] + "}\n";
-                        latexString += tableStart;
-                    }
-                    else
-                    {
-                        latexString += setup + dataKeys[i] + "} & " + dataValues[i] + "\\\\" + "\n";
-                    }
-                    
-                }
-                
-                latexString += "\b\b\b";
-                latexString += "\n" + tableEnd;
-                latexString += "\\end{document}";
-                
-                System.out.println("STRING BELOW!!:\n\n");
-                System.out.println(latexString);
-            
-            }*/
-            
+            Runtime.getRuntime().exec("/usr/texbin/pdflatex -output-directory=/Users/Zach/Documents/Owl/Test/PDF_Docs " + filePath);
+                      
         }
         else if(mode.equals(modes.search.toString()))
         {
