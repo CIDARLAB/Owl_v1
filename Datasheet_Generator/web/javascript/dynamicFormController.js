@@ -1,450 +1,450 @@
-// Javascript for dynamicForm
-// Function to hide sections 
-$(document).ready(function() {
+// // Javascript for dynamicForm
+// // Function to hide sections 
+// $(document).ready(function() {
     
-    $.get("ParserServlet",function(data) {
-       //use data to fill out parts of the form.
-       console.log('called');
-        $("#name").text(data.name);
-    });
+//     $.get("ParserServlet",function(data) {
+//        //use data to fill out parts of the form.
+//        console.log('called');
+//         $("#name").text(data.name);
+//     });
        
-    //allows "next" and "back" buttons to work properly
-    var $tabs = $('.tabbable li');
+//     //allows "next" and "back" buttons to work properly
+//     var $tabs = $('.tabbable li');
     
-    //these two functions allow forward and backward navigation while in the
-    //datasheet form
-    $('.back').on('click', function() {
-        $tabs.filter('.active').prev('li').find('a[data-toggle="tab"]').tab('show');
-    });
+//     //these two functions allow forward and backward navigation while in the
+//     //datasheet form
+//     $('.back').on('click', function() {
+//         $tabs.filter('.active').prev('li').find('a[data-toggle="tab"]').tab('show');
+//     });
 
-    $('.next').on('click', function() {
-        $tabs.filter('.active').next('li').find('a[data-toggle="tab"]').tab('show');
-    });
+//     $('.next').on('click', function() {
+//         $tabs.filter('.active').next('li').find('a[data-toggle="tab"]').tab('show');
+//     });
     
-    //checkbox for "other assay" in assay tab    
-    $('#otherSel').change(function(){
-        if ($('#otherSel:checked').val() === "ON") {
-            //append new assay code
-            $('#otherAssay').removeClass("hidden");       
-        }
-        else
-        {
-            $('#otherAssay').addClass("hidden");
-            console.log('trying to hide');
-        }      
+//     //checkbox for "other assay" in assay tab    
+//     $('#otherSel').change(function(){
+//         if ($('#otherSel:checked').val() === "ON") {
+//             //append new assay code
+//             $('#otherAssay').removeClass("hidden");       
+//         }
+//         else
+//         {
+//             $('#otherAssay').addClass("hidden");
+//             console.log('trying to hide');
+//         }      
         
-    });
+//     });
 
-    //checkbox for "restriction map" in assay tab       
-    $('#restSel').change(function(){
-        if ($('#restSel:checked').val() === "ON") {
-            $('#restrictionMap').removeClass("hidden");
+//     //checkbox for "restriction map" in assay tab       
+//     $('#restSel').change(function(){
+//         if ($('#restSel:checked').val() === "ON") {
+//             $('#restrictionMap').removeClass("hidden");
 
-        }
-        else
-        {
-            $('#restrictionMap').addClass("hidden");
-        }
+//         }
+//         else
+//         {
+//             $('#restrictionMap').addClass("hidden");
+//         }
         
-    });
+//     });
     
-    //checkbox for "flow cytometry" in assay tab       
-    $('#flowSel').change(function(){
-        if ($('#flowSel:checked').val() === "ON") {
-            $('#functionalityAssays').removeClass("hidden");
+//     //checkbox for "flow cytometry" in assay tab       
+//     $('#flowSel').change(function(){
+//         if ($('#flowSel:checked').val() === "ON") {
+//             $('#functionalityAssays').removeClass("hidden");
 
-        }
-        else
-        {
-            $('#functionalityAssays').addClass("hidden");
-        }        
-    });
+//         }
+//         else
+//         {
+//             $('#functionalityAssays').addClass("hidden");
+//         }        
+//     });
       
-    //the following three methods only do what unchecking the checkboxes in the 
-    //"assay" tab do   
-    $('button#removeRDButton').click(function() {
-        $('#restrictionMap').addClass("hidden");
-        $('#restrictionMap input').each(function() {
-            //clear the values
-            $(this).val("");
-        });
-    });
-    $('button#removeFlowCytometryButton').click(function() {
-        $('#functionalityAssays').addClass("hidden");
-        $('#flowCytometry input').each(function() {
-            //clear the values
-            $(this).val("");
-        });
-    });
-    $('button#removeOtherButton').click(function() {
-        $('#otherAssay').addClass("hidden");
-        $('#otherAssay input').each(function() {
-            //clear the values
-            $(this).val("");
-        });
-    });
+//     //the following three methods only do what unchecking the checkboxes in the 
+//     //"assay" tab do   
+//     $('button#removeRDButton').click(function() {
+//         $('#restrictionMap').addClass("hidden");
+//         $('#restrictionMap input').each(function() {
+//             //clear the values
+//             $(this).val("");
+//         });
+//     });
+//     $('button#removeFlowCytometryButton').click(function() {
+//         $('#functionalityAssays').addClass("hidden");
+//         $('#flowCytometry input').each(function() {
+//             //clear the values
+//             $(this).val("");
+//         });
+//     });
+//     $('button#removeOtherButton').click(function() {
+//         $('#otherAssay').addClass("hidden");
+//         $('#otherAssay input').each(function() {
+//             //clear the values
+//             $(this).val("");
+//         });
+//     });
     
-    // the following three sections will fire when an image has been uploaded by
-    // the user. the code then submits an ajax post request behind the scenes to
-    // a node server that I setup to handle the storing of the photos. the node server
-    // stores the images using a service called cloudinary
+//     // the following three sections will fire when an image has been uploaded by
+//     // the user. the code then submits an ajax post request behind the scenes to
+//     // a node server that I setup to handle the storing of the photos. the node server
+//     // stores the images using a service called cloudinary
      
-    $('#displayImage').change(function(){
+//     $('#displayImage').change(function(){
         
-                var formData = new FormData($('#pigeonImage')[0]);
-                console.log(formData);
-                $.ajax({
-                            url: 'http://owlimageserver.herokuapp.com/pigeon',  //Server script to process data
-                            type: 'POST',
-                            // Form data
-                            data: formData,
-                            //Options to tell jQuery not to process data or worry about content-type.
-                            cache: false,
-                            contentType: false,
-                            processData: false
-                        });  
-    });
-      $('#plasmidMap').change(function(){
+//                 var formData = new FormData($('#pigeonImage')[0]);
+//                 console.log(formData);
+//                 $.ajax({
+//                             url: 'http://owlimageserver.herokuapp.com/pigeon',  //Server script to process data
+//                             type: 'POST',
+//                             // Form data
+//                             data: formData,
+//                             //Options to tell jQuery not to process data or worry about content-type.
+//                             cache: false,
+//                             contentType: false,
+//                             processData: false
+//                         });  
+//     });
+//       $('#plasmidMap').change(function(){
         
-                var formData = new FormData($('#plasmidImage')[0]);
-                console.log('plasmid');
-                $.ajax({
-                            url: 'http://owlimageserver.herokuapp.com/plasmid',  //Server script to process data
-                            type: 'POST',
-                            // Form data
-                            data: formData,
-                            //Options to tell jQuery not to process data or worry about content-type.
-                            cache: false,
-                            contentType: false,
-                            processData: false
-                        });     
-    });  
+//                 var formData = new FormData($('#plasmidImage')[0]);
+//                 console.log('plasmid');
+//                 $.ajax({
+//                             url: 'http://owlimageserver.herokuapp.com/plasmid',  //Server script to process data
+//                             type: 'POST',
+//                             // Form data
+//                             data: formData,
+//                             //Options to tell jQuery not to process data or worry about content-type.
+//                             cache: false,
+//                             contentType: false,
+//                             processData: false
+//                         });     
+//     });  
   
-    $('#assemblyImage').change(function(){
+//     $('#assemblyImage').change(function(){
         
-        console.log('assembly');        
-        var formData = new FormData($('#assemblyForm')[0]);
-                console.log(formData);
-                $.ajax({
-                            url: 'http://owlimageserver.herokuapp.com/assembly',  //Server script to process data
-                            type: 'POST',
-                            // Form data
-                            data: formData,
-                            //Options to tell jQuery not to process data or worry about content-type.
-                            cache: false,
-                            contentType: false,
-                            processData: false
-                        });
-    });
+//         console.log('assembly');        
+//         var formData = new FormData($('#assemblyForm')[0]);
+//                 console.log(formData);
+//                 $.ajax({
+//                             url: 'http://owlimageserver.herokuapp.com/assembly',  //Server script to process data
+//                             type: 'POST',
+//                             // Form data
+//                             data: formData,
+//                             //Options to tell jQuery not to process data or worry about content-type.
+//                             cache: false,
+//                             contentType: false,
+//                             processData: false
+//                         });
+//     });
 
-    //JSON object 
-    $('#designButton').click(function() {
-        //collect information here
+//     //JSON object 
+//     $('#designButton').click(function() {
+//         //collect information here
         
-        var pigeonPath;
-        var plasmidPath;
-        var assemblyPath;
+//         var pigeonPath;
+//         var plasmidPath;
+//         var assemblyPath;
         
         
-        // for the following three sections: path names are the paths to the
-        // cloudinary servers that the node server stored the images on
-        // if an image is not uploaded but a link is used, that is taken instead
-        if ($('#displayImage').val())
-        {
-            var pigeonName = $('#displayImage').val().replace(/C:\\fakepath\\/i, '');
-            pigeonPath = 'http://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/pigeonImage/' + pigeonName;
-        }
-        else
-        {
-            if ($('#pigeonAlt').val())
-            {
-                pigeonPath = $('#pigeonAlt').val();
-            }
-            else
-            {
-                pigeonPath = "";
-            }
-        }
-         if ($('#plasmidMap').val())
-        {
-            var plasmidName = $('#plasmidMap').val().replace(/C:\\fakepath\\/i, '');
-            plasmidPath = 'http://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/plasmidMap/' + plasmidName;
-        }
-        else
-        {
-            if ($('#plasmidAlt').val())
-            {
-                plasmidPath = $('#plasmidAlt').val();
-            }
-            else
-            {
-                plasmidPath = "";
-            }
-        }
+//         // for the following three sections: path names are the paths to the
+//         // cloudinary servers that the node server stored the images on
+//         // if an image is not uploaded but a link is used, that is taken instead
+//         if ($('#displayImage').val())
+//         {
+//             var pigeonName = $('#displayImage').val().replace(/C:\\fakepath\\/i, '');
+//             pigeonPath = 'http://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/pigeonImage/' + pigeonName;
+//         }
+//         else
+//         {
+//             if ($('#pigeonAlt').val())
+//             {
+//                 pigeonPath = $('#pigeonAlt').val();
+//             }
+//             else
+//             {
+//                 pigeonPath = "";
+//             }
+//         }
+//          if ($('#plasmidMap').val())
+//         {
+//             var plasmidName = $('#plasmidMap').val().replace(/C:\\fakepath\\/i, '');
+//             plasmidPath = 'http://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/plasmidMap/' + plasmidName;
+//         }
+//         else
+//         {
+//             if ($('#plasmidAlt').val())
+//             {
+//                 plasmidPath = $('#plasmidAlt').val();
+//             }
+//             else
+//             {
+//                 plasmidPath = "";
+//             }
+//         }
         
          
-        if ($('#assemblyImage').val())
-        {
-            var assemblyname = $('#assemblyImage').val().replace(/C:\\fakepath\\/i, '');
-            assemblyPath = 'http://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/assemblyMaps/' + assemblyname;
-        }
-        else
-        {
-            if ($('#assemblyAlt').val())
-            {
-                assemblyPath = $('#assemblyAlt').val();
-            }
-            else
-            {
-                assemblyPath = "";       
-            }
-        }
+//         if ($('#assemblyImage').val())
+//         {
+//             var assemblyname = $('#assemblyImage').val().replace(/C:\\fakepath\\/i, '');
+//             assemblyPath = 'http://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/assemblyMaps/' + assemblyname;
+//         }
+//         else
+//         {
+//             if ($('#assemblyAlt').val())
+//             {
+//                 assemblyPath = $('#assemblyAlt').val();
+//             }
+//             else
+//             {
+//                 assemblyPath = "";       
+//             }
+//         }
       
-        var data = {};
-        data["name"] = $('#name').val();
-        data["summary"] = $('#summary').val();
-        data["sequence"] = $('#sequence').val();
-        data["deviceImage"] = pigeonPath;
-        data["plasmidMap"] = plasmidPath;
-        data["assemblyImage"] = assemblyPath;
-        data["partType"] = $('#partType :selected').text();
-        data["relatedParts"] = $('#relatedParts').val();
+//         var data = {};
+//         data["name"] = $('#name').val();
+//         data["summary"] = $('#summary').val();
+//         data["sequence"] = $('#sequence').val();
+//         data["deviceImage"] = pigeonPath;
+//         data["plasmidMap"] = plasmidPath;
+//         data["assemblyImage"] = assemblyPath;
+//         data["partType"] = $('#partType :selected').text();
+//         data["relatedParts"] = $('#relatedParts').val();
         
 
-        //gather contact information
-        var contactInformation = {};
-        $('div#contactInformation input').each(function() {
-            var key = $(this).attr("id");
-            var value = $(this).val();
-            contactInformation[key] = value;
-        });
-        $('div#contactInformation textarea').each(function() {
-            var key = $(this).attr("id");
-            var value = $(this).val();
-            contactInformation[key] = value;
-        });
-        data["contactInformation"] = contactInformation;
+//         //gather contact information
+//         var contactInformation = {};
+//         $('div#contactInformation input').each(function() {
+//             var key = $(this).attr("id");
+//             var value = $(this).val();
+//             contactInformation[key] = value;
+//         });
+//         $('div#contactInformation textarea').each(function() {
+//             var key = $(this).attr("id");
+//             var value = $(this).val();
+//             contactInformation[key] = value;
+//         });
+//         data["contactInformation"] = contactInformation;
         
-        //gather contact information
-        var basicInfo = {};
-        $('div#basicInfo input').each(function() {
-            var key = $(this).attr("id");
-            var value = $(this).val();
-            basicInfo[key] = value;
-        });
+//         //gather contact information
+//         var basicInfo = {};
+//         $('div#basicInfo input').each(function() {
+//             var key = $(this).attr("id");
+//             var value = $(this).val();
+//             basicInfo[key] = value;
+//         });
         
-        //gather design information
-        var designDetails = {};
-        $('div#designDetails input').each(function() {
-            var key = $(this).attr("id");
-            var value = $(this).val();
-            designDetails[key] = value;
-        });
-        $('div#designDetails textarea').each(function() {
-            var key = $(this).attr("id");
-            var value = $(this).val();
-            designDetails[key] = value;
-        });
-        data["designDetails"] = designDetails;
+//         //gather design information
+//         var designDetails = {};
+//         $('div#designDetails input').each(function() {
+//             var key = $(this).attr("id");
+//             var value = $(this).val();
+//             designDetails[key] = value;
+//         });
+//         $('div#designDetails textarea').each(function() {
+//             var key = $(this).attr("id");
+//             var value = $(this).val();
+//             designDetails[key] = value;
+//         });
+//         data["designDetails"] = designDetails;
 
-        //gather contact information
-        var assemblyInformation = {};
-        $('div#assemblyInformation input').each(function() {
-            var key = $(this).attr("id");
-            var value = $(this).val();
-            assemblyInformation[key] = value;
-        });
-        $('div#assemblyInformation textarea').each(function() {
-            var key = $(this).attr("id");
-            var value = $(this).val();
-            assemblyInformation[key] = value;
-        });
-        data["assemblyInformation"] = assemblyInformation;
+//         //gather contact information
+//         var assemblyInformation = {};
+//         $('div#assemblyInformation input').each(function() {
+//             var key = $(this).attr("id");
+//             var value = $(this).val();
+//             assemblyInformation[key] = value;
+//         });
+//         $('div#assemblyInformation textarea').each(function() {
+//             var key = $(this).attr("id");
+//             var value = $(this).val();
+//             assemblyInformation[key] = value;
+//         });
+//         data["assemblyInformation"] = assemblyInformation;
 
         
-        if (!$('#restrictionMap').hasClass('hidden'))
-        {
-        var restrictionMap = {};      
-        var flag = 0;
-        $('div#restrictionMap input').each(function() {
-            var key = $(this).attr("id");
-            var value = $(this).val();
+//         if (!$('#restrictionMap').hasClass('hidden'))
+//         {
+//         var restrictionMap = {};      
+//         var flag = 0;
+//         $('div#restrictionMap input').each(function() {
+//             var key = $(this).attr("id");
+//             var value = $(this).val();
             
-            if (value.length > 0) {
-                restrictionMap[key] = value;
-                flag = 1;
-                console.log(value);
-            }
-            else{
-             restrictionMap[key] = "";   
-            }
-        });
+//             if (value.length > 0) {
+//                 restrictionMap[key] = value;
+//                 flag = 1;
+//                 console.log(value);
+//             }
+//             else{
+//              restrictionMap[key] = "";   
+//             }
+//         });
         
-        if (flag === 1)
-        {
+//         if (flag === 1)
+//         {
          
-        for (var key in restrictionMap) {
-            if (restrictionMap[key] !== 'undefined') {
-                data["restrictionMap"]=restrictionMap;
-            }
-        }
+//         for (var key in restrictionMap) {
+//             if (restrictionMap[key] !== 'undefined') {
+//                 data["restrictionMap"]=restrictionMap;
+//             }
+//         }
         
-      }
-    }
-        if (!$('#otherAssay').hasClass('hidden'))
-        {
-        var otherAssay = {};
-        console.log('other');
-        var flag = 0;
-        $('div#otherAssay input').each(function() {
-            var key = $(this).attr("id");
-            var value = $(this).val(); 
-            if (value.length > 1)
-            {
-                flag = 1;
-            }
-            otherAssay[key] = value; 
-        });
-        if (flag)
-        {
-        otherAssay['comments'] = $('#comments').val();
-        data["otherAssay"] = otherAssay;
-    }
+//       }
+//     }
+//         if (!$('#otherAssay').hasClass('hidden'))
+//         {
+//         var otherAssay = {};
+//         console.log('other');
+//         var flag = 0;
+//         $('div#otherAssay input').each(function() {
+//             var key = $(this).attr("id");
+//             var value = $(this).val(); 
+//             if (value.length > 1)
+//             {
+//                 flag = 1;
+//             }
+//             otherAssay[key] = value; 
+//         });
+//         if (flag)
+//         {
+//         otherAssay['comments'] = $('#comments').val();
+//         data["otherAssay"] = otherAssay;
+//     }
 
-    }
-    if (!$('#functionalityAssays').hasClass('hidden'))
-    {
-        var functionalityAssays ={};
-        var flag = 0;
+//     }
+//     if (!$('#functionalityAssays').hasClass('hidden'))
+//     {
+//         var functionalityAssays ={};
+//         var flag = 0;
 
-        $('div#functionalityAssays div.experiment input').each(function() {
-            var key = $(this).attr("id");
-            var value = $(this).val(); 
-            if (value.length > 1)
-            {
-                flag = 1;
-            }
-            functionalityAssays[key] = value; 
-        });
-        var pre ={};
-        $('div#functionalityAssays div.setup div#preInductionGrowthConditions input').each(function() {
-            var key = $(this).attr("id");
-            var value = $(this).val(); 
-             if (value.length > 1)
-            {
-                flag = 1;
-            }          
-            pre[key] = value; 
-        });
+//         $('div#functionalityAssays div.experiment input').each(function() {
+//             var key = $(this).attr("id");
+//             var value = $(this).val(); 
+//             if (value.length > 1)
+//             {
+//                 flag = 1;
+//             }
+//             functionalityAssays[key] = value; 
+//         });
+//         var pre ={};
+//         $('div#functionalityAssays div.setup div#preInductionGrowthConditions input').each(function() {
+//             var key = $(this).attr("id");
+//             var value = $(this).val(); 
+//              if (value.length > 1)
+//             {
+//                 flag = 1;
+//             }          
+//             pre[key] = value; 
+//         });
 
-        var post ={};
-        $('div#functionalityAssays div.setup div#inductionGrowthConditions input').each(function() {
-            var key = $(this).attr("id");
-            var value = $(this).val(); 
-                  if (value.length > 1)
-            {
-                flag = 1;
-            }
-            post[key] = value; 
-        });
-        if (flag)
-        {
-        data["functionalityAssays"] = functionalityAssays;
-        data["pre"] =pre;
-        data["post"] = post;
-    }
-    }
+//         var post ={};
+//         $('div#functionalityAssays div.setup div#inductionGrowthConditions input').each(function() {
+//             var key = $(this).attr("id");
+//             var value = $(this).val(); 
+//                   if (value.length > 1)
+//             {
+//                 flag = 1;
+//             }
+//             post[key] = value; 
+//         });
+//         if (flag)
+//         {
+//         data["functionalityAssays"] = functionalityAssays;
+//         data["pre"] =pre;
+//         data["post"] = post;
+//     }
+//     }
     
-    // these are the required fields that must have information for the data to be submitted 
-    if (data["name"].length > 0 && data["summary"].length > 0 && data["sequence"].length > 0 && data["contactInformation"]["authors"].length > 0 && data["contactInformation"]["date"].length > 0)
-       {
-        //hide error messages
-        $('#required_1').hide();
-        $('#required_2').hide();    
+//     // these are the required fields that must have information for the data to be submitted 
+//     if (data["name"].length > 0 && data["summary"].length > 0 && data["sequence"].length > 0 && data["contactInformation"]["authors"].length > 0 && data["contactInformation"]["date"].length > 0)
+//        {
+//         //hide error messages
+//         $('#required_1').hide();
+//         $('#required_2').hide();    
             
-        //change colors to black    
-        $('#partAs').css("color", "black");
-        $('#sumAs').css("color", "black");
-        $('#seqAs').css("color", "black");
-        $('#authAs').css("color", "black");
-        $('#dateAs').css("color", "black");
+//         //change colors to black    
+//         $('#partAs').css("color", "black");
+//         $('#sumAs').css("color", "black");
+//         $('#seqAs').css("color", "black");
+//         $('#authAs').css("color", "black");
+//         $('#dateAs').css("color", "black");
         
-        // submit the info to the server
-        $.get("DataServlet",{"sending":JSON.stringify(data)},function(){
-             window.location.assign("output.html");
-        });
-        }
+//         // submit the info to the server
+//         $.get("DataServlet",{"sending":JSON.stringify(data)},function(){
+//              window.location.assign("output.html");
+//         });
+//         }
     
-    // handle the case if not all the required fields were filled out    
-    else
-    {
-        // if it was the first tab that didn't have everything in it
-        if (data["name"].length <= 0 || data["summary"].length <= 0 || data["sequence"].length <= 0)
-        {
-            // change the tab to the appropriate one here
-            $('ul li').removeClass('active');
-            $('#basicInfoTab').addClass('active');
-            $('#tabs .active').removeClass('active');
-            $('#basicInfo').addClass('active');
-            $('#required_1').show();
-            $('#required_2').hide();
+//     // handle the case if not all the required fields were filled out    
+//     else
+//     {
+//         // if it was the first tab that didn't have everything in it
+//         if (data["name"].length <= 0 || data["summary"].length <= 0 || data["sequence"].length <= 0)
+//         {
+//             // change the tab to the appropriate one here
+//             $('ul li').removeClass('active');
+//             $('#basicInfoTab').addClass('active');
+//             $('#tabs .active').removeClass('active');
+//             $('#basicInfo').addClass('active');
+//             $('#required_1').show();
+//             $('#required_2').hide();
             
-            // set the colors to black
-            $('#partAs').css("color", "black");
-            $('#sumAs').css("color", "black");
-            $('#seqAs').css("color", "black");
-            $('#authAs').css("color", "black");
-            $('#dateAs').css("color", "black");
+//             // set the colors to black
+//             $('#partAs').css("color", "black");
+//             $('#sumAs').css("color", "black");
+//             $('#seqAs').css("color", "black");
+//             $('#authAs').css("color", "black");
+//             $('#dateAs').css("color", "black");
 
             
-            // now emphasize the appropriate fields
-            if (data["name"].length <=0)
-            {
-                // change the css for the partAs id
-                $('#partAs').css("color", "rgb(233, 47, 47)");
-            }
-            if (data["summary"].length <= 0)
-            {
-                // change the css for the sumAs id
-                $('#sumAs').css("color", "rgb(233, 47, 47)");
-            }
-            if (data["sequence"].length <= 0)
-            {
-                // change the css for the seqAs id
-                $('#seqAs').css("color", "rgb(233, 47, 47)");
-            }
-        }
-        // it must have been the second tab that didn't have everything filled in
-        else
-        {
-            // change to the second tab
-            $('ul li').removeClass('active');
-            $('#contactInformationTab').addClass('active');
-            $('#tabs .active').removeClass('active');
-            $('#contactInformation').addClass('active');
-            $('#required_1').hide();
-            $('#required_2').show();
+//             // now emphasize the appropriate fields
+//             if (data["name"].length <=0)
+//             {
+//                 // change the css for the partAs id
+//                 $('#partAs').css("color", "rgb(233, 47, 47)");
+//             }
+//             if (data["summary"].length <= 0)
+//             {
+//                 // change the css for the sumAs id
+//                 $('#sumAs').css("color", "rgb(233, 47, 47)");
+//             }
+//             if (data["sequence"].length <= 0)
+//             {
+//                 // change the css for the seqAs id
+//                 $('#seqAs').css("color", "rgb(233, 47, 47)");
+//             }
+//         }
+//         // it must have been the second tab that didn't have everything filled in
+//         else
+//         {
+//             // change to the second tab
+//             $('ul li').removeClass('active');
+//             $('#contactInformationTab').addClass('active');
+//             $('#tabs .active').removeClass('active');
+//             $('#contactInformation').addClass('active');
+//             $('#required_1').hide();
+//             $('#required_2').show();
             
-            // set the initial colors to black
-            // set the colors to black
-            $('#partAs').css("color", "black");
-            $('#sumAs').css("color", "black");
-            $('#seqAs').css("color", "black");
-            $('#authAs').css("color", "black");
-            $('#dateAs').css("color", "black");
+//             // set the initial colors to black
+//             // set the colors to black
+//             $('#partAs').css("color", "black");
+//             $('#sumAs').css("color", "black");
+//             $('#seqAs').css("color", "black");
+//             $('#authAs').css("color", "black");
+//             $('#dateAs').css("color", "black");
             
-            if (data["contactInformation"]["authors"].length <= 0)
-            {
-                // change the css for the authAs id
-                $('#authAs').css("color", "rgb(233, 47, 47)");
-            }
-            if (data["contactInformation"]["date"].length <= 0)
-            {
-                // change the css for the dateAs id
-                $('#dateAs').css("color", "rgb(233, 47, 47)");
-            }
-        }
-    }
+//             if (data["contactInformation"]["authors"].length <= 0)
+//             {
+//                 // change the css for the authAs id
+//                 $('#authAs').css("color", "rgb(233, 47, 47)");
+//             }
+//             if (data["contactInformation"]["date"].length <= 0)
+//             {
+//                 // change the css for the dateAs id
+//                 $('#dateAs').css("color", "rgb(233, 47, 47)");
+//             }
+//         }
+//     }
 
-    });
-});
+//     });
+// });

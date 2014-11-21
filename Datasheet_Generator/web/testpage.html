@@ -77,7 +77,7 @@
                     if (evt.target.readyState == FileReader.DONE) {
                         $('#config').addClass("hidden");
                         var info = evt.target.result.toLowerCase().trim();
-                        idString = info;
+
                         info = info.replace(new RegExp("<well>","g"),"");
                         var count = info.match(/\/well/g);
                         info = info.split("</well>");
@@ -117,6 +117,8 @@
                             var fieldCount = well.match(/\//g);
                             well = well.replace(new RegExp("\n","g"),"");
                             well = well.split("/");
+                            var m = 1;
+                            var o = 1;
                             for (var j = 0; j < fieldCount.length; j++){
                                 var field = well[j];
                                 var begin = field.indexOf("<");
@@ -132,24 +134,24 @@
                                 var tag = field.substring(field.indexOf("<") + 1,field.indexOf(">"));
                                 var heading = field.substring(field.indexOf(">") + 1,field.length);
                                 heading = heading.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);}).trim();
-                                var upperHeading = heading.replace(/ /g,"");
+                                var camelHeading = (heading.substr(0,1).toLowerCase() + heading.substr(1)).replace(/ /g,"");
                                 if (tag == "text"){
                                     document.getElementById(i.toString()).innerHTML = document.getElementById(i.toString()).innerHTML +
                                     "<div class=\"row-fluid\">" + 
-                                    "<div id=\"" + upperHeading + "\"><h5>" + heading + "</h5><input id=\"" + upperHeading.toLowerCase() +
+                                    "<div id=\"" + camelHeading + "\"><h5>" + heading + "</h5><input id=\"" + camelHeading.toLowerCase() +
                                     "\"></div></div>" + "\n";
                                 } else if (tag == "box"){
                                     document.getElementById(i.toString()).innerHTML = document.getElementById(i.toString()).innerHTML +
                                     "<div class=\"row-fluid\">" + 
-                                    "<div id=\"" + upperHeading + "\"><h5>" + heading + "</h5><textarea id=\"" + upperHeading.toLowerCase() +
+                                    "<div id=\"" + camelHeading + "\"><h5>" + heading + "</h5><textarea id=\"" + camelHeading.toLowerCase() +
                                     "\" rows=\"5\" style=\"width:98%\"></textarea></div></div>" + "\n";
                                 } else if (tag == "img"){
                                     document.getElementById(i.toString()).innerHTML = document.getElementById(i.toString()).innerHTML +
                                     "<div class=\"row-fluid\">" + 
-                                    "<div><form enctype=\"multipart/form-data\" id=\"" + upperHeading + "\"><h5>" + heading + "</h5>" +
-                                    "<input id=\"" + upperHeading.toLowerCase() + "\" style=\"display:inline;\" placeholder=\"Link\">" + 
+                                    "<div><form enctype=\"multipart/form-data\" id=\"" + camelHeading + "\"><h5>" + heading + "</h5>" +
+                                    "<input id=\"" + camelHeading.toLowerCase() + "Alt\" style=\"display:inline;\" placeholder=\"Link\">" + 
                                     "<div style=\"font-weight:bold; font-size:15px; display:inline; padding-left:6px; padding-right:6px;\"> or <br></div>" +
-                                    "<input type=\"file\" id=\"" + upperHeading.toLowerCase() + "Alt" + "\" name=\"" + upperHeading.toLowerCase() +
+                                    "<input type=\"file\" id=\"" + camelHeading.toLowerCase() + "\" name=\"" + camelHeading.toLowerCase() +
                                     "\" accept=\"image/*\" style = \"display:inline; padding-top:5px;\"></div></div>" + "\n";
                                 } else if (tag == "menu"){
                                     menuCount = field.match(/,/g);
@@ -157,13 +159,13 @@
                                     item = item[1].split(",");
                                     heading = field.substring(field.indexOf(">") + 1, field.indexOf(";"));
                                     heading = heading.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);}).trim();
-                                    upperHeading = heading.replace(/ /g,"");
+                                    camelHeading = (heading.substr(0,1).toLowerCase() + heading.substr(1)).replace(/ /g,"");
                                     document.getElementById(i.toString()).innerHTML += "<div class=\"row-fluid\">" + 
-                                    "<div id=\"" + upperHeading + "\"><h5>" + heading + "<br></h5>" + "<select id=\"" + upperHeading.toLowerCase() + "\"></select></div></div>";
+                                    "<div id=\"" + camelHeading + "\"><h5>" + heading + "<br></h5>" + "<select id=\"menu" + camelHeading.toLowerCase() + "\"></select></div></div>";
                                     
                                     for(var l = 0; l <= menuCount.length; l++){
                                         item[l] = item[l].replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);}).trim();
-                                        document.getElementById(upperHeading.toLowerCase()).innerHTML += "<option>" + item[l] + "</option>";
+                                        document.getElementById(camelHeading.toLowerCase()).innerHTML += "<option>" + item[l] + "</option>";
                                     }
 
                                 } else if (tag == "button"){
@@ -172,30 +174,32 @@
                                     item = item[1].split(",");
                                     heading = field.substring(field.indexOf(">") + 1, field.indexOf(";"));
                                     heading = heading.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);}).trim();
-                                    upperHeading = heading.replace(/ /g,"");
+                                    camelHeading = (heading.substr(0,1).toLowerCase() + heading.substr(1)).replace(/ /g,"");
                                     document.getElementById(i.toString()).innerHTML += "<div class=\"row-fluid\">" + 
-                                    "<div id=\"" + upperHeading + "\"><h5>" + heading + "<br></h5>" + "<form id=\"" + upperHeading.toLowerCase() + "\"></form></div></div>";
+                                    "<div id=\"" + camelHeading + "\"><h5>" + heading + "<br></h5>" + "<form id=\"button" + m.toString() + "\"></form></div></div>";
                                     
-                                    for(var m = 0; m <= buttonCount.length; m++){
-                                        item[m] = item[m].replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);}).trim();
-                                        document.getElementById(upperHeading.toLowerCase()).innerHTML += "<input type=\"radio\" id=\"" + item[m].replace(new RegExp(" ","g"),"").toLowerCase() + "\" value=\"" + item[m] + "\" name=\"" + heading + "\">" + item[m] + "<br>";
+                                    for(var n = 0; n <= buttonCount.length; n++){
+                                        item[n] = item[n].replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);}).trim();
+                                        document.getElementById(("button" + m.toString())).innerHTML += "<input type=\"radio\" value=\"" + item[n].replace(new RegExp(" ","g"),"") + "\">" + item[n] + "<br>";
                                     }
 
+                                    m++;
                                 } else if (tag == "check"){
                                     checkCount = field.match(/,/g);
                                     var item = field.split(";");
                                     item = item[1].split(",");
                                     heading = field.substring(field.indexOf(">") + 1, field.indexOf(";"));
                                     heading = heading.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);}).trim();
-                                    upperHeading = heading.replace(/ /g,"");
+                                    camelHeading = (heading.substr(0,1).toLowerCase() + heading.substr(1)).replace(/ /g,"");
                                     document.getElementById(i.toString()).innerHTML += "<div class=\"row-fluid\">" + 
-                                    "<div id=\"" + upperHeading + "\"><h5>" + heading + "<br></h5>" + "<form id=\"" + upperHeading.toLowerCase() + "\"></form></div></div>";
+                                    "<div id=\"" + camelHeading + "\"><h5>" + heading + "<br></h5>" + "<form id=\"check" + o.toString() + "\"></form></div></div>";
                                     
-                                    for(var n = 0; n <= checkCount.length; n++){
-                                        item[n] = item[n].replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);}).trim();
-                                        document.getElementById(upperHeading.toLowerCase()).innerHTML += "<input type=\"checkbox\" id=\"" + item[n].replace(new RegExp(" ","g"),"").toLowerCase() + "\" value=\"" + item[n] + "\" name=\"" + heading + "\">" + item[n] + "<br>";
+                                    for(var p = 0; p <= checkCount.length; p++){
+                                        item[p] = item[p].replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);}).trim();
+                                        document.getElementById(("check" + o.toString())).innerHTML += "<input type=\"checkbox\" value=\"" + item[p].replace(new RegExp(" ","g"),"") + "\">" + item[p] + "<br>";
                                     }
 
+                                    o++;
                                 }
                                 // else if (tag == "link"){
                                 //     document.getElementById(i.toString()).innerHTML = document.getElementById(i.toString()).innerHTML +
@@ -232,204 +236,15 @@
             };
         </script>
         <script>
-            function makeDatasheet(){
+            
 
-                    var line, start, end, title, k, v;
-                    var titleCount = 0;
-                    var dataPairs = "{";
-                    var idNames = idString.split("\n");
+        function makeDatasheet(){
+                document.getElementById('wellTabs').innerHTML = document.getElementById('wellTabs').innerHTML + 
+                "<li style=\"margin-top:10px\"><form method=\"link\" id=\"dataLink\" action=\"http://www.google.com\" style=\"margin-bottom:0px\">\n" +
+                "<input type=\"submit\" value =\"View Datasheet\" class =\"btn btn-success\" style=\"width:100%\"></form></li>"
 
-                    for (var i = 0; i < idNames.length; i++) {
-                        line = idNames[i];
-                        if(line.indexOf("<title>") != -1){
-
-                            start = line.indexOf("<title>") + 7;
-                            end = line.indexOf("</title>");
-                            title = line.substring(start, end).trim();
-
-                            dataPairs += "\"title" + ++titleCount + "\":\"" + title + "\",";
-                        
-                        }
-
-                        if(line.indexOf("<text>") != -1){
-
-                            start = line.indexOf("<text>") + 6;
-                            end = line.indexOf("</text>");
-                            k = line.substring(start, end).trim();
-
-                            idValue = k.replace(new RegExp(" ","g"),"").toLowerCase().trim();
-                            v = document.getElementById(idValue).value;
-
-                            if (v == undefined){v = " ";}
-
-                            if(line.indexOf("*") != -1){
-                                if(v == ""){
-                                    alert("Please fill in required fields!");
-                                    return;
-                                }
-                            }
-
-                            dataPairs += "\"" + k + "\":\"" + v + "\",";
-
-                        }
-
-                        if(line.indexOf("<box>") != -1){
-
-                            start = line.indexOf("<box>") + 5;
-                            end = line.indexOf("</box>");
-                            k = line.substring(start, end).trim();
-
-                            idValue = k.replace(new RegExp(" ","g"),"").toLowerCase().trim();
-                            v = document.getElementById(idValue).value;
-
-                            if (v == undefined){v = " ";}
-
-                            if(line.indexOf("*") != -1){
-                                if(v == ""){
-                                    alert("Please fill in required fields!");
-                                    return;
-                                }
-                            }
-
-                            dataPairs += "\"" + k + "\":\"" + v + "\",";
-
-                        }
-
-                        if(line.indexOf("<img>") != -1){
-
-                            start = line.indexOf("<img>") + 5;
-                            end = line.indexOf("</img>");
-                            k = line.substring(start, end).trim();
-
-                            
-
-                            idValue = k.replace(new RegExp(" ","g"),"").toLowerCase().trim();
-                            v = document.getElementById(idValue).value;
-
-                            // if (v == ""){
-                            //     continue;
-                            // }
-
-                            if (v == undefined){v = " ";}
-
-                            if(line.indexOf("*") != -1){
-                                if(v == ""){
-                                    alert("Please fill in required fields!");
-                                    return;
-                                }
-                            }
-
-                            dataPairs += "\"" + k + "\":\"" + v + "\",";
-
-                        }
-
-                        if(line.indexOf("<menu>") != -1){
-
-                            start = line.indexOf("<menu>") + 6;
-                            end = line.indexOf(";");
-                            k = line.substring(start, end).trim();
-
-                            idValue = k.replace(new RegExp(" ","g"),"").toLowerCase().trim();
-                            v = document.getElementById(idValue).value;
-
-                            if (v == undefined){v = " ";}
-
-                            if(line.indexOf("*") != -1){
-                                if(v == ""){
-                                    alert("Please fill in required fields!");
-                                    return;
-                                }
-                            }
-
-                            dataPairs += "\"" + k + "\":\"" + v + "\",";
-
-                        }
-
-                        if(line.indexOf("<check>") != -1){
-
-                            start = line.indexOf("<check>") + 7;
-                            end = line.indexOf(";");
-                            k = line.substring(start, end).trim();
-
-                            idValue = k.replace(new RegExp(" ","g"),"").toLowerCase().trim();
-                            v = document.getElementById(idValue).value;
-
-                            if (v == undefined){v = " ";}
-
-                            if(line.indexOf("*") != -1){
-                                if(v == ""){
-                                    alert("Please fill in required fields!");
-                                    return;
-                                }
-                            }
-
-                            dataPairs += "\"" + k + "\":\"" + v + "\",";
-
-                        }
-
-                        if(line.indexOf("<button>") != -1){
-
-                            start = line.indexOf("<button>") + 8;
-                            end = line.indexOf(";");
-                            k = line.substring(start, end).trim();
-
-                            // var count = line.match(/,/g);
-                            // idValue = line.split(",");
-
-                            // for (var j = 0; j <= count.length(); j++) {
-                                
-                            //     if(j == 0){
-
-                            //         start = idValue[0].indexOf(";") + 1;
-                            //         end = idValue[0].length();
-                            //         idValue[0] = idValue[0].substring(start,end).trim();
-                            //         alert(idValue[0]);
-
-                            //     } else {
-
-                            //         idValue[j] = idValue[j].substring(0, idValue[j].length()).trim();
-                            //         alert(idValue[j]);
-
-                            //     }
-                         
-                            //}
-
-                            idValue = k.replace(new RegExp(" ","g"),"").toLowerCase().trim();
-                            v = document.getElementById(idValue).value;
-
-
-                            if (v == undefined){v = " ";}
-
-                            if(line.indexOf("*") != -1){
-                                if(v == ""){
-                                    alert("Please fill in required fields!");
-                                    return;
-                                }
-                            }
-
-                            dataPairs += "\"" + k + "\":\"" + v + "\",";
-
-                        }
-
-
-                    }
-                    
-                    dataPairs = dataPairs.substring(0, (dataPairs.length -1));
-                    dataPairs += "}";
-
-                    $.post("ParserServlet", {"mode":"makeLatex","latex": dataPairs}, function(data) {
-
-                            //use data to populate dynamic form after posting it to server for safe keeping
-                            //window.location.replace("dynamicForm.html");
-                            //page will redirect from server
-                        });
-                    
-
-                    document.getElementById('wellTabs').innerHTML += "<li style=\"margin-top:10px\"><form method=\"link\" id=\"dataLink\" action=\"http://www.google.com\" style=\"margin-bottom:0px\">\n" +
-                    "<input type=\"submit\" value =\"View Datasheet\" class =\"btn btn-success\" style=\"width:100%\"></form></li>"
-
-                    document.getElementById('viewButton').innerHTML = "<button class=\"btn btn-success\" id=\"designButton\" onclick=\"changeDatasheet()\"" + 
-                    "style=\"width:100%\">Make Datasheet</button>";
+                document.getElementById('viewButton').innerHTML = "<button class=\"btn btn-success\" id=\"designButton\" onclick=\"changeDatasheet()\"" + 
+                "style=\"width:100%\">Make Datasheet</button>";
         }
         </script>
         <script>

@@ -1,0 +1,6 @@
+<well>
+<title>Basic Information</title>
+<text>Name</text>
+<text>Type</text>
+</well>
+</well>
