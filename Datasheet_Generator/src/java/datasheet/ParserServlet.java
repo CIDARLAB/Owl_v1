@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -57,14 +58,14 @@ public class ParserServlet extends HttpServlet {
             System.out.println("Make Latex Button was clicked");
             String latexJSON = request.getParameter("latex");
             
-            Map<String,String> map = new TreeMap<String,String>();
+            Map<String,String> map = new LinkedHashMap<String,String>();
             ObjectMapper mapper = new ObjectMapper();
             
             try {
- 
+                System.out.println("Latex String : "+ latexJSON);
 		//convert JSON string to Map
 		map = mapper.readValue(latexJSON, 
-		    new TypeReference<TreeMap<String,String>>(){});
+		    new TypeReference<LinkedHashMap<String,String>>(){});
                 System.out.println("Map Size is : " + map.size());
                 for(Map.Entry<String, String> entry : map.entrySet())
                 {
