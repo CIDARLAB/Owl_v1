@@ -70,7 +70,7 @@ public class GenBankParser {
         try {
             Path p1 = Paths.get(URI.create("file:///Users/Zach/Desktop/pAPCc-invF.txt"));
             Charset charset = Charset.forName("UTF-8");
-            partDoc = Files.readAllLines(p1);
+            partDoc = Files.readAllLines(p1,charset);
             return partDoc;
         } catch (Exception e) {
             e.printStackTrace();
