@@ -22,10 +22,11 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul> 
                     <div id="loginArea">
-                        <form id="loginForm" class="navbar-form pull-right" action="AuthenticationServlet" method="POST">
-                            <input name="user" type="text" class="span2" placeholder="Login">
-                            <input name="password" type="password" class="span2" placeholder="Password">
-                            <input type="submit" value="Login" class="btn"/>
+                        <form id="loginForm" class="navbar-form pull-right">
+                            <input id="login_username" name="user" type="text" class="span2" placeholder="Login">
+                            <input id="login_password" name="password" type="password" class="span2" placeholder="Password">
+                            <input id="btnLogin" type="submit" value="Login" class="btn"/>
+                            <div id="loginError"></div>
                         </form>
                     </div>
                 </div>
@@ -296,9 +297,14 @@
                 </div>
             </div>
         </div>
-              
+        
+        <script src="javascript/SessionController.js"></script>
+        <script src="javascript/dynamicFormController.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>      
+        <script type="text/javascript" src="libraries/jquery-1.9.1.min.js"></script> 
+        <script src="libraries/bootstrap.min.js"></script>   
+        
         <script>
             $.get("ParserServlet", function(data) {
                 //console.log(data);
@@ -330,8 +336,6 @@
             });
         </script>
         
-        <!--scripts placed at the end to enhance page loading speed-->
-        
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -341,86 +345,7 @@
   ga('create', 'UA-57223580-5', 'auto');
   ga('send', 'pageview');
  
-        </script>
-        
-        <script type="text/javascript" src="libraries/jquery-1.9.1.min.js"></script> 
-        <script src="libraries/bootstrap.min.js"></script>         
-        <script>
-           if ($('#restSel:checked').val() === "ON") {
-            $('#restrictionMap').removeClass("hidden");
-                }
-         if ($('#flowSel:checked').val() === "ON") {
-            $('#functionalityAssays').removeClass("hidden");
-
-        }
-          if ($('#otherSel:checked').val() === "ON") {
-            //append new assay code
-            $('#otherAssay').removeClass("hidden");       
-        }
-            function getCookie(c_name) {
-                var c_value = document.cookie;
-                var c_start = c_value.indexOf(" " + c_name + "=");
-                if (c_start === -1) {
-                    c_start = c_value.indexOf(c_name + "=");
-                }
-                if (c_start === -1) {
-                    c_value = null;
-                }
-                else {
-                    c_start = c_value.indexOf("=", c_start) + 1;
-                    var c_end = c_value.indexOf(";", c_start);
-                    if (c_end === -1) {
-                        c_end = c_value.length;
-                    }
-                    c_value = unescape(c_value.substring(c_start, c_end));
-                }
-                return c_value;
-            }
-
-            function deleteCookie(key) {
-                // Delete a cookie by setting the date of expiry to yesterday
-                date = new Date();
-                date.setDate(date.getDate() - 1);
-                document.cookie = escape(key) + '=;expires=' + date;
-            }
-
-            if (getCookie("authenticate") !== "authenticated") {
-                deleteCookie("user");
-            }
-
-            if (getCookie("authenticate") === "authenticated") {
-                $('#loginArea').html('<p class="pull-right" style="margin-top:10px">You are logged in as <strong>' + getCookie("user") + '</strong> <a id="logout">Log Out</a></p>');
-                $('#logout').click(function() {
-                    $.get("AuthenticationServlet", {"command": "logout"}, function() {
-                        deleteCookie("authenticate");
-                        deleteCookie("user");
-                        window.location.replace("index.html");
-                    });
-                });
-            }
-            $('#loginForm').submit(function(e) {
-                var self = this;
-                e.preventDefault();
-                if ($('#loginForm input[name="user"]').val() === "") {
-                    $('#loginModal').modal();
-                } else if ($('#loginForm input[name="password"]').val() === "") {
-                    $('#loginModal').modal();
-                } else {
-                    self.submit();
-                }
-            });
-            $('#loginForm').submit(function(e) {
-                var self = this;
-                e.preventDefault();
-                if ($('#loginFormMain input[name="user"]').val() === "") {
-                    $('#loginModal').modal();
-                } else if ($('#loginForm input[name="password"]').val() === "") {
-                    $('#loginModal').modal();
-                } else {
-                    self.submit();
-                }
-            });
-        </script>
+        </script> 
 
         <footer>
             <div class="container" align="center">
@@ -428,12 +353,6 @@
                 <p>Code licensed under <a href="license.html">LICENSE</a></p>
             </div>
         </footer>
-
-        <script src="javascript/redirect.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-        <script src="javascript/dynamicFormController.js"></script>
-
     </body>
 </html>
 

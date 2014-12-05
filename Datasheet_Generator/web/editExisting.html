@@ -21,10 +21,11 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul> 
                     <div id="loginArea">
-                        <form id="loginForm" class="navbar-form pull-right" action="AuthenticationServlet" method="POST">
-                            <input name="user" type="text" class="span2" placeholder="Login">
-                            <input name="password" type="password" class="span2" placeholder="Password">
-                            <input type="submit" value="Login" class="btn"/>
+                        <form id="loginForm" class="navbar-form pull-right">
+                            <input id="login_username" name="user" type="text" class="span2" placeholder="Login">
+                            <input id="login_password" name="password" type="password" class="span2" placeholder="Password">
+                            <input id="btnLogin" type="submit" value="Login" class="btn"/>
+                            <div id="loginError"></div>
                         </form>
                     </div>
                 </div>
@@ -38,28 +39,29 @@
         <div><input id="searchName" placeholder="K1114000" style="margin-top:-25px"/></div>
         <button class="btn btn-primary" id="editButton" style="margin-top:7px">Search</button>
         <img id = "loading" style = "position:relative; top:2px;padding-left:10px;" src ="images/ajax-loader.gif" hidden>
+        
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="javascript/SessionController.js"></script>        
+        <script type="text/javascript" src="libraries/jquery-1.9.1.min.js"></script> 
+        <script src="libraries/bootstrap.min.js"></script>      
         
         <script>
-            $("#editButton").click(function(){
-                $('#loading').show();
-                var searchTerm = $('#searchName').attr("placeholder");
-                if($('#searchName').val() !== "") {
-                    searchTerm = $('#searchName').val();
-                }
-                $.post("ParserServlet", {"name": searchTerm}, function(data) {
+        //This is how you get data from the registry
+        $("#editButton").click(function(){
+            $('#loading').show();
+            var searchTerm = $('#searchName').attr("placeholder");
+            if($('#searchName').val() !== "") {
+                searchTerm = $('#searchName').val();
+            }
+            $.post("ParserServlet", {"name": searchTerm}, function(data) {
 
-                    //use data to populate dynamic form after posting it to server for safe keeping
-                    window.location.replace("dynamicForm.html");
-                    //page will redirect from server
-                });
+                //use data to populate dynamic form after posting it to server for safe keeping
+                window.location.replace("dynamicForm.html");
+                //page will redirect from server
             });
-//            this is how you get data from the registry
-
+        });
         </script>
-
-        <!--scripts placed at the end to enhance page loading speed--> 
         
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -70,76 +72,7 @@
   ga('create', 'UA-57223580-5', 'auto');
   ga('send', 'pageview');
  
-        </script>
-        
-        <script src="javascript/redirect.js"></script>        
-        <script type="text/javascript" src="libraries/jquery-1.9.1.min.js"></script> 
-        <script src="libraries/bootstrap.min.js"></script> 
-        <script>
-            function getCookie(c_name) {
-                var c_value = document.cookie;
-                var c_start = c_value.indexOf(" " + c_name + "=");
-                if (c_start === -1) {
-                    c_start = c_value.indexOf(c_name + "=");
-                }
-                if (c_start === -1) {
-                    c_value = null;
-                }
-                else {
-                    c_start = c_value.indexOf("=", c_start) + 1;
-                    var c_end = c_value.indexOf(";", c_start);
-                    if (c_end === -1) {
-                        c_end = c_value.length;
-                    }
-                    c_value = unescape(c_value.substring(c_start, c_end));
-                }
-                return c_value;
-            }
-
-            function deleteCookie(key) {
-                // Delete a cookie by setting the date of expiry to yesterday
-                date = new Date();
-                date.setDate(date.getDate() - 1);
-                document.cookie = escape(key) + '=;expires=' + date;
-            }
-
-            if (getCookie("authenticate") !== "authenticated") {
-                deleteCookie("user");
-            }
-
-            if (getCookie("authenticate") === "authenticated") {
-                $('#loginArea').html('<p class="pull-right" style="margin-top:10px">You are logged in as <strong>' + getCookie("user") + '</strong> <a id="logout">Log Out</a></p>');
-                $('#logout').click(function() {
-                    $.get("AuthenticationServlet", {"command": "logout"}, function() {
-                        deleteCookie("authenticate");
-                        deleteCookie("user");
-                        window.location.replace("index.html");
-                    });
-                });
-            }
-            $('#loginForm').submit(function(e) {
-                var self = this;
-                e.preventDefault();
-                if ($('#loginForm input[name="user"]').val() === "") {
-                    $('#loginModal').modal();
-                } else if ($('#loginForm input[name="password"]').val() === "") {
-                    $('#loginModal').modal();
-                } else {
-                    self.submit();
-                }
-            });
-            $('#loginForm').submit(function(e) {
-                var self = this;
-                e.preventDefault();
-                if ($('#loginFormMain input[name="user"]').val() === "") {
-                    $('#loginModal').modal();
-                } else if ($('#loginForm input[name="password"]').val() === "") {
-                    $('#loginModal').modal();
-                } else {
-                    self.submit();
-                }
-            });
-        </script>
+        </script>   
         
         <footer>
             <div class="container" align="center">
