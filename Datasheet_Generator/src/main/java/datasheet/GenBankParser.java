@@ -4,7 +4,6 @@
  */
 package datasheet;
 
-import java.io.*;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.file.*;
@@ -12,9 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.parser.Parser;
 
 
 /**
