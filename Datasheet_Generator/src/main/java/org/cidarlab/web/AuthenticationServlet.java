@@ -103,7 +103,8 @@ public class AuthenticationServlet
                 if (bLogin) {
 
                     request.getSession().invalidate();
-                    request.changeSessionId();
+                    //Not sure what this next line does, but seems to work without it
+//                    request.changeSessionId();
 
                     // login the user including session management
                     this.login(request, response, username);
@@ -122,7 +123,7 @@ public class AuthenticationServlet
                     session.removeAttribute("user");
                     // and invalidate the session
                     session.invalidate();
-                    response.sendRedirect("index.html");
+//                    response.sendRedirect("index.html");
                 }
 
                 /*
@@ -142,7 +143,7 @@ public class AuthenticationServlet
                 jsonResponse.put("status", "exception");
                 jsonResponse.put("result", e.getLocalizedMessage());
 
-                //response.sendRedirect("index.html");
+//                response.sendRedirect("index.html");
             } catch (JSONException ex) {
                 Logger.getLogger(AuthenticationServlet.class.getName()).log(Level.SEVERE, null, ex);
             }

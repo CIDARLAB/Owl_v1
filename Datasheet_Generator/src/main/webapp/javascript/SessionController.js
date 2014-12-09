@@ -69,6 +69,8 @@ $(document).ready(function() {
                 // set the cookie
                 setCookie("user", username, 1);
                 setCookie("owl", "authenticated", 1);
+                
+                window.location.replace('dynamicForm.html');
             }
         });
     });
@@ -84,7 +86,8 @@ $(document).ready(function() {
 
             // if there was an error, then we display the error
             if (response['status'] === 'exception') {
-                $('#loginError').html('<div class="alert alert-danger">' + response['result'] + '</div>');
+                $('#loginError').html('<div class="alert alert-danger" style="margin-top:5px">' + response['result'] + '</div>');
+//                window.location.replace("login.html");
             } else {
                 $('#loginError').html('');
 

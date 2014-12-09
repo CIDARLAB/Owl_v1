@@ -18,12 +18,11 @@
                         <li><a href="dynamicForm.html">Create Datasheet</a></li>
                         <li class="active"><a href="contact.html">Contact</a></li>
                     </ul> 
-                    <div id="loginArea">
-                        <form id="loginForm" class="navbar-form pull-right" action="AuthenticationServlet" method="POST">
-                            <input name="user" type="text" class="span2" placeholder="Login">
-                            <input name="password" type="password" class="span2" placeholder="Password">
-                            <input type="submit" value="Login" class="btn"/>
-                        </form>
+                    <div id="loginArea" class="navbar-form pull-right">
+                        <input name="user" type="text" class="span2" placeholder="Login">
+                        <input name="password" type="password" class="span2" placeholder="Password">
+                        <input type="submit" value="Login" class="btn"/>
+                        <div id="loginError"></div>
                     </div>
                 </div>
             </div>
