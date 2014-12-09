@@ -5,8 +5,11 @@
  */
 package org.cidarlab.web;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,9 +20,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import static org.cidarlab.web.test.AuthenticationTester.initialize;
 import org.json.JSONException;
 
 import org.json.JSONObject;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  *
@@ -54,6 +59,29 @@ public class AuthenticationServlet
         System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "warn");
         
         LOGGER.warn("[AuthenticationServlet] loaded!");	    
+        
+//        initialize();
+//            Scanner sc = null;
+//            try {
+//                sc = new Scanner(new File("/Users/evanappleton/dfx_git/igem-datasheet/Datasheet_Generator/src/main/webapp/WEB-INF/restricted/password.txt"));
+//            } catch (FileNotFoundException ex) {
+//                Logger.getLogger(AuthenticationServlet.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            String s = null;
+//            while (sc.hasNext()) {
+//                s = sc.nextLine();
+//                String user = s.split(",")[0];
+//                String passwd = s.split(",")[1];
+//
+//                try {
+//                    auth.register(user, passwd);
+//                } catch (AuthenticationException ae) {
+//                    assertNotEquals(ae.getMessage(), "The user exists already!");
+//                }
+//
+//            }
+//            sc.close();
+        
 	}
 	
     /**
