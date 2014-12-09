@@ -298,12 +298,14 @@
             </div>
         </div>
         
-        <script src="javascript/SessionController.js"></script>
-        <script src="javascript/dynamicFormController.js"></script>
+        
+        
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>      
         <script type="text/javascript" src="libraries/jquery-1.9.1.min.js"></script> 
         <script src="libraries/bootstrap.min.js"></script>   
+        <script src="javascript/dynamicFormController.js"></script>
+        <script src="javascript/SessionController.js"></script>
         
         <script>
             $.get("ParserServlet", function(data) {
@@ -317,14 +319,19 @@
                 {
                     $("#summary").val(data.summary);
                 }
+                if (data.contactInformation)
+                    {
                 if (data.contactInformation.authors)
                 {
                     $("#authors").val(data.contactInformation.authors);
                 }
+                    }
                 if (data.sequence)
                 {
                     $("#sequence").val(data.sequence);
                 }
+                if (data.designInformation) 
+                {
                 if (data.designInformation.date)
                 {
                     $("#date").val(data.designInformation.date);
@@ -332,6 +339,7 @@
                 if (data.designInformation.deviceType)
                 {
                     $("#deviceType").val(data.designInformation.deviceType);
+                }
                 }
             });
         </script>
@@ -346,6 +354,31 @@
   ga('send', 'pageview');
  
         </script> 
+        
+        <script>
+        function getCookie(c_name) {
+            var c_value = document.cookie;
+            var c_start = c_value.indexOf(" " + c_name + "=");
+            if (c_start === -1) {
+                c_start = c_value.indexOf(c_name + "=");
+            }
+            if (c_start === -1) {
+                c_value = null;
+            } else {
+                c_start = c_value.indexOf("=", c_start) + 1;
+                var c_end = c_value.indexOf(";", c_start);
+                if (c_end === -1) {
+                    c_end = c_value.length;
+                }
+                c_value = unescape(c_value.substring(c_start, c_end));
+            }
+            return c_value;
+        }
+        
+        if(getCookie("owl") !== "authenticated") {
+            window.location.replace("login.html");
+        }
+        </script>
 
         <footer>
             <div class="container" align="center">

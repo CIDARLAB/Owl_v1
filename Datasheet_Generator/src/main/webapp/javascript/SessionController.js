@@ -44,7 +44,7 @@ $(document).ready(function() {
                 'You are logged in as <strong>' + getCookie("user") + '</strong>&nbsp;&nbsp;&nbsp;&nbsp;' +
                 '<button id="btnLogout" class="btn btn-primary btn-warning">Logout</button>');
     } else if (getCookie("authenticate") === "failed") {
-        window.location.replace("index.html");
+        window.location.replace("login.html");
     }
 
 //-----------------------------------------------

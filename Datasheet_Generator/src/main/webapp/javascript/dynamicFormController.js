@@ -94,7 +94,7 @@ $(document).ready(function() {
                 var formData = new FormData($('#pigeonImage')[0]);
                 console.log(formData);
                 $.ajax({
-                            url: 'http://owlimageserver.herokuapp.com/pigeon',  //Server script to process data
+                            url: 'https://owlimageserver.herokuapp.com/pigeon',  //Server script to process data
                             type: 'POST',
                             // Form data
                             data: formData,
@@ -109,7 +109,7 @@ $(document).ready(function() {
                 var formData = new FormData($('#plasmidImage')[0]);
                 console.log('plasmid');
                 $.ajax({
-                            url: 'http://owlimageserver.herokuapp.com/plasmid',  //Server script to process data
+                            url: 'https://owlimageserver.herokuapp.com/plasmid',  //Server script to process data
                             type: 'POST',
                             // Form data
                             data: formData,
@@ -126,7 +126,7 @@ $(document).ready(function() {
         var formData = new FormData($('#assemblyForm')[0]);
                 console.log(formData);
                 $.ajax({
-                            url: 'http://owlimageserver.herokuapp.com/assembly',  //Server script to process data
+                            url: 'https://owlimageserver.herokuapp.com/assembly',  //Server script to process data
                             type: 'POST',
                             // Form data
                             data: formData,
@@ -152,7 +152,7 @@ $(document).ready(function() {
         if ($('#displayImage').val())
         {
             var pigeonName = $('#displayImage').val().replace(/C:\\fakepath\\/i, '');
-            pigeonPath = 'http://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/pigeonImage/' + pigeonName;
+            pigeonPath = 'https://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/pigeonImage/' + pigeonName;
         }
         else
         {
@@ -168,7 +168,7 @@ $(document).ready(function() {
          if ($('#plasmidMap').val())
         {
             var plasmidName = $('#plasmidMap').val().replace(/C:\\fakepath\\/i, '');
-            plasmidPath = 'http://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/plasmidMap/' + plasmidName;
+            plasmidPath = 'https://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/plasmidMap/' + plasmidName;
         }
         else
         {
@@ -186,7 +186,7 @@ $(document).ready(function() {
         if ($('#assemblyImage').val())
         {
             var assemblyname = $('#assemblyImage').val().replace(/C:\\fakepath\\/i, '');
-            assemblyPath = 'http://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/assemblyMaps/' + assemblyname;
+            assemblyPath = 'https://res.cloudinary.com/dvncno7qp/image/upload/v1398725130/assemblyMaps/' + assemblyname;
         }
         else
         {

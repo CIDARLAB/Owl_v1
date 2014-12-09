@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datasheet;
+package org.cidarlab.datasheet;
 
-import static datasheet.XMLParser.getXML;
-import static datasheet.XMLParser.parseXML;
-import static datasheet.XMLParser.writeJSONObject;
-import static datasheet.XMLParser.appendLatex;
+import static org.cidarlab.datasheet.XMLParser.getXML;
+import static org.cidarlab.datasheet.XMLParser.parseXML;
+import static org.cidarlab.datasheet.XMLParser.writeJSONObject;
+import static org.cidarlab.datasheet.XMLParser.appendLatex;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
