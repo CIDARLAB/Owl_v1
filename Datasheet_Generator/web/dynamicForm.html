@@ -150,7 +150,7 @@
                                     "<input id=\"" + upperHeading.toLowerCase() + "\" style=\"display:inline;\" placeholder=\"Link\">" + 
                                     "<div style=\"font-weight:bold; font-size:15px; display:inline; padding-left:6px; padding-right:6px;\"> or <br></div>" +
                                     "<input type=\"file\" id=\"" + upperHeading.toLowerCase() + "Alt" + "\" name=\"" + upperHeading.toLowerCase() +
-                                    "\" accept=\"image/*\" style = \"display:inline; padding-top:5px;\"></div></div>" + "\n";
+                                    "\" accept=\"image/jpg, image/png, application/pdf\" style = \"display:inline; padding-top:12px;\"><p style = \"display:inline; padding-top:0px; padding-left:-70px;\">*Note: File must have extension .jpg, .png, or .pdf</p></div></div>" + "\n";
                                 } else if (tag == "menu"){
                                     menuCount = field.match(/,/g);
                                     var item = field.split(";");
@@ -232,6 +232,22 @@
             };
         </script>
         <script>
+        function placeLink(){
+            $.get("ParserServlet",function(data) {
+                console.log(data);
+                if(data.filename)
+                {
+                    alert("Success!!");
+                }
+            //use data to fill out parts of the form.
+            //console.log('called');
+                alert("Data is: " + data.filename);
+
+                $("#dataLink").action(data.filename);
+            }, "json" );
+        }
+        </script>
+        <script>
             function makeDatasheet(){
 
                     var line, start, end, title, k, v;
@@ -260,7 +276,7 @@
                             idValue = k.replace(new RegExp(" ","g"),"").toLowerCase().trim();
                             v = document.getElementById(idValue).value;
 
-                            if (v == undefined){v = " ";}
+                            if (v == undefined){v = "";}
 
                             if(line.indexOf("*") != -1){
                                 if(v == ""){
@@ -282,7 +298,7 @@
                             idValue = k.replace(new RegExp(" ","g"),"").toLowerCase().trim();
                             v = document.getElementById(idValue).value;
 
-                            if (v == undefined){v = " ";}
+                            if (v == undefined){v = "";}
 
                             if(line.indexOf("*") != -1){
                                 if(v == ""){
@@ -310,9 +326,17 @@
                             //     continue;
                             // }
 
-                            if (v == undefined){v = " ";}
+                            if ((v == undefined || v == "") && document.getElementById(idValue + "Alt").value != "")
+                            {
+                                v = "";
+                                k = "<imgupload>" + k;
+                            }
+                            else if (v != undefined && v != "")
+                            {
+                                k = "<imglink>" + k;
+                            }
 
-                            if(line.indexOf("*") != -1){
+                            if(line.indexOf("*") != -1 && document.getElementById(idValue + "Alt").value == ""){
                                 if(v == ""){
                                     alert("Please fill in required fields!");
                                     return;
@@ -332,7 +356,7 @@
                             idValue = k.replace(new RegExp(" ","g"),"").toLowerCase().trim();
                             v = document.getElementById(idValue).value;
 
-                            if (v == undefined){v = " ";}
+                            if (v == undefined){v = "";}
 
                             if(line.indexOf("*") != -1){
                                 if(v == ""){
@@ -351,17 +375,45 @@
                             end = line.indexOf(";");
                             k = line.substring(start, end).trim();
 
-                            idValue = k.replace(new RegExp(" ","g"),"").toLowerCase().trim();
-                            v = document.getElementById(idValue).value;
+                            // idValue = k.replace(new RegExp(" ","g"),"").toLowerCase().trim();
+                            // v = document.getElementById(idValue).value;
 
-                            if (v == undefined){v = " ";}
+                            // if (v == undefined){v = "";}
+
+                            // if(line.indexOf("*") != -1){
+                            //     if(v == ""){
+                            //         alert("Please fill in required fields!");
+                            //         return;
+                            //     }
+                            // }
+
+
+                            v = undefined;
+
+                            vals = line.substring(line.indexOf(";") + 1,line.indexOf("</check>")).trim();
+                            valArray = vals.split(",");
+
+                            for(var j = 0; j < valArray.length; j++)
+                            {
+
+                                if(document.getElementById(valArray[j].trim()).checked && v != undefined)
+                                {
+                                    v = v + ", " + document.getElementById(valArray[j].trim()).value;
+                                }
+                                else if(document.getElementById(valArray[j].trim()).checked)
+                                {
+                                    v = document.getElementById(valArray[j].trim()).value;
+                                } 
+                            }
 
                             if(line.indexOf("*") != -1){
-                                if(v == ""){
+                                if(v == undefined){
                                     alert("Please fill in required fields!");
                                     return;
                                 }
                             }
+
+                            if (v == undefined){v = "";}
 
                             dataPairs += "\"" + k + "\":\"" + v + "\",";
 
@@ -373,49 +425,37 @@
                             end = line.indexOf(";");
                             k = line.substring(start, end).trim();
 
-                            // var count = line.match(/,/g);
-                            // idValue = line.split(",");
+                            v = undefined;
 
-                            // for (var j = 0; j <= count.length(); j++) {
-                                
-                            //     if(j == 0){
+                            vals = line.substring(line.indexOf(";") + 1,line.indexOf("</button>")).trim();
+                            valArray = vals.split(",");
 
-                            //         start = idValue[0].indexOf(";") + 1;
-                            //         end = idValue[0].length();
-                            //         idValue[0] = idValue[0].substring(start,end).trim();
-                            //         alert(idValue[0]);
-
-                            //     } else {
-
-                            //         idValue[j] = idValue[j].substring(0, idValue[j].length()).trim();
-                            //         alert(idValue[j]);
-
-                            //     }
-                         
-                            //}
-
-                            idValue = k.replace(new RegExp(" ","g"),"").toLowerCase().trim();
-                            v = document.getElementById(idValue).value;
-
-
-                            if (v == undefined){v = " ";}
+                            for(var j = 0; j < valArray.length; j++)
+                            {
+                                if(document.getElementById(valArray[j].trim()).checked)
+                                {
+                                    v = document.getElementById(valArray[j].trim()).value;
+                                    break;
+                                }
+                            }
 
                             if(line.indexOf("*") != -1){
-                                if(v == ""){
+                                if(v == undefined){
                                     alert("Please fill in required fields!");
                                     return;
                                 }
                             }
 
+                            if (v == undefined){v = "";}
+
                             dataPairs += "\"" + k + "\":\"" + v + "\",";
-
                         }
-
-
                     }
                     
                     dataPairs = dataPairs.substring(0, (dataPairs.length -1));
                     dataPairs += "}";
+
+                    alert(dataPairs);
 
                     $.post("ParserServlet", {"mode":"makeLatex","latex": dataPairs}, function(data) {
 
@@ -423,13 +463,28 @@
                             //window.location.replace("dynamicForm.html");
                             //page will redirect from server
                         });
-                    
 
                     document.getElementById('wellTabs').innerHTML += "<li style=\"margin-top:10px\"><form method=\"link\" id=\"dataLink\" action=\"http://www.google.com\" style=\"margin-bottom:0px\">\n" +
                     "<input type=\"submit\" value =\"View Datasheet\" class =\"btn btn-success\" style=\"width:100%\"></form></li>"
-
                     document.getElementById('viewButton').innerHTML = "<button class=\"btn btn-success\" id=\"designButton\" onclick=\"changeDatasheet()\"" + 
                     "style=\"width:100%\">Make Datasheet</button>";
+
+                    placeLink();
+                    // if(document.getElementById('dataLink'))
+                    // {
+                    //     $.get("ParserServlet",function(data) {
+                    //         if(data["filename"])
+                    //         {
+                    //             alert("Success!!");
+                    //         }
+                    //     //use data to fill out parts of the form.
+                    //     //console.log('called');
+                    //         alert("Data is: " + data.filepath);
+
+                    //         $("#dataLink").action(data.filepath);
+                    //     });
+                    // }
+                    
         }
         </script>
         <script>

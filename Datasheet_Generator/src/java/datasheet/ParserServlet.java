@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,6 +55,8 @@ public class ParserServlet extends HttpServlet {
         {
             String latexJSON = request.getParameter("latex");
             
+            File image = request.getParameter("file")
+            
             Map<String,String> map = new LinkedHashMap<String,String>();
             ObjectMapper mapper = new ObjectMapper();
             
@@ -69,9 +72,29 @@ public class ParserServlet extends HttpServlet {
             
             String latexString = LatexCreator.makeLatex(map);
                 
-            String filePath = LatexCreator.writeLatex(latexString);
+            List<String> fileInfo = LatexCreator.writeLatex(latexString);
+            System.out.println("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/Test/PDF_Docs " + fileInfo.get(0));
+            Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/Test/PDF_Docs " + fileInfo.get(0));
             
-            Runtime.getRuntime().exec("/usr/texbin/pdflatex -output-directory=/Users/Zach/Documents/Owl/Test/PDF_Docs " + filePath);
+            String PDFpath = "/Users/Zach/Documents/Owl/Test/PDF_Docs/" + fileInfo.get(1);
+            
+            System.out.println("PDFpath is: " + PDFpath);
+            
+            JSONObject dataToSend = new JSONObject();
+            dataToSend.put("filename",PDFpath);
+            
+//            JSONObject partsInfoJSON = new JSONObject();
+//        JSONObject designInformation = new JSONObject();      
+//        JSONObject contactInformation = new JSONObject();
+//                
+//        //make JSONObject partsInfoJSON
+//        partsInfoJSON.put("name", partInfoStrArr[0]);        
+                    
+            data = dataToSend;
+            
+            holdingData = true;
+            PrintWriter out = response.getWriter();
+            out.write(data.toString());
                       
         }
         else if(mode.equals(modes.search.toString()))

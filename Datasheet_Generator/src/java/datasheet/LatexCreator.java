@@ -12,7 +12,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -53,18 +54,28 @@ public class LatexCreator {
         String tableEnd = "\\end{tabular}\n"
             + "\\end{table}\n";
         
-        int i = 0;
+        latexString += header;
+        
+        String[] nameArray;
+        String name;
+        
+        for(Map.Entry<String, String> entry : map.entrySet())
+        {
+            if(entry.getKey().contains("<imglink>"))
+            {
+                latexString += "\\immediate\\write18{curl -O " + entry.getValue().trim() + "}\n";
+            }
+        }
+        
+        boolean first = true;
         
         for(Map.Entry<String, String> entry : map.entrySet()){
 //            System.out.println("Printing an entry");
-//            System.out.println(entry.getKey() + ":" +entry.getValue());
-            
-            if(i == 0)
-                latexString += header;
+//            System.out.println(entry.getKey() + ":" +entry.getValue());                              
                     
             if(entry.getKey().contains("title"))
-                {
-                if(i != 0)
+            {
+                if(!first)
                 {
                     latexString = latexString.substring(0, latexString.length() - 3);
                     latexString += "\n" + tableEnd;
@@ -74,12 +85,20 @@ public class LatexCreator {
                 latexString += entry.getValue() + "}\n";
                 latexString += tableStart;
             }
+            else if(entry.getKey().contains("<imglink>"))
+            {
+                latexString += setup + entry.getKey().substring(9) + "} & ";
+                
+                nameArray = entry.getValue().trim().split("/");
+                name = nameArray[nameArray.length - 1];
+                latexString += "\\includegraphics[width=2cm,height=2cm,keepaspectratio]{" + name + "} \\\\ \n";
+            }
             else
             {
                 latexString += setup + entry.getKey() + "} & " + entry.getValue() + "\\\\" + "\n";
             }
             
-            i++;
+            first = false;
         }
                 
         latexString = latexString.substring(0, latexString.length() - 3);
@@ -90,7 +109,7 @@ public class LatexCreator {
     }
     
     
-    public static String writeLatex(String latexString){
+    public static List<String> writeLatex(String latexString){
         
         long num = System.currentTimeMillis();
                 
@@ -103,7 +122,10 @@ public class LatexCreator {
             System.err.println(e);
         }
         
-        return p.toString();
+        List<String> result = new ArrayList<String>();
+        result.add(p.toString());
+        result.add(num + ".pdf");
+        return result;
         
     }    
 }
