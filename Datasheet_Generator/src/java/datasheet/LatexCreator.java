@@ -27,7 +27,7 @@ public class LatexCreator {
         
     }
     
-    public static String makeLatex(Map<String,String> map){
+    public static String makeLatex(ArrayList<String> imageFilenames, Map<String,String> map){
         
         String latexString = "";
                 
@@ -68,6 +68,7 @@ public class LatexCreator {
         }
         
         boolean first = true;
+        int uploadCount = 0;
         
         for(Map.Entry<String, String> entry : map.entrySet()){
 //            System.out.println("Printing an entry");
@@ -93,6 +94,14 @@ public class LatexCreator {
                 name = nameArray[nameArray.length - 1];
                 latexString += "\\includegraphics[width=2cm,height=2cm,keepaspectratio]{" + name + "} \\\\ \n";
             }
+            else if(entry.getKey().contains("<imgupload>"))
+            {
+                latexString += setup + entry.getKey().substring(11) + "} & ";
+                
+                name = imageFilenames.get(uploadCount);
+                latexString += "\\includegraphics[width=2cm,height=2cm,keepaspectratio]{/Users/Zach/Documents/Owl/Test/" + name + "} \\\\ \n";
+                uploadCount++;
+            }
             else
             {
                 latexString += setup + entry.getKey() + "} & " + entry.getValue() + "\\\\" + "\n";
@@ -109,11 +118,9 @@ public class LatexCreator {
     }
     
     
-    public static List<String> writeLatex(String latexString){
-        
-        long num = System.currentTimeMillis();
-                
-        Path p = Paths.get("/Users/Zach/Documents/Owl/Test/" + num + ".tex");
+    public static List<String> writeLatex(String uniqueID, String latexString){
+                       
+        Path p = Paths.get("/Users/Zach/Documents/Owl/Test/" + uniqueID + ".tex");
         Charset charset = StandardCharsets.UTF_8;
         
         try{        
@@ -124,7 +131,7 @@ public class LatexCreator {
         
         List<String> result = new ArrayList<String>();
         result.add(p.toString());
-        result.add(num + ".pdf");
+        result.add(uniqueID + ".pdf");
         return result;
         
     }    

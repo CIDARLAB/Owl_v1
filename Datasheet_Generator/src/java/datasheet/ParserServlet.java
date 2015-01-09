@@ -6,7 +6,9 @@
 package datasheet;
 
 import static datasheet.XMLParser.getXML;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -15,9 +17,11 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.json.JSONException;
@@ -26,6 +30,7 @@ import org.json.JSONObject;
  *
  * @author jenhantao
  */
+@MultipartConfig(location="/Users/Zach/Documents/Owl/Test/")
 public class ParserServlet extends HttpServlet {
 //Server side communication code
 
@@ -38,24 +43,60 @@ public class ParserServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    
+    private static String getValue(Part part) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(part.getInputStream(), "UTF-8"));
+        StringBuilder value = new StringBuilder();
+        char[] buffer = new char[1024];
+        for (int length = 0; (length = reader.read(buffer)) > 0;) {
+            value.append(buffer, 0, length);
+        }
+        return value.toString();
+    }
+    
+       
     protected void processPostRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, JSONException {
+                
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");  
+        if (ipAddress == null)
+        {  
+	   ipAddress = request.getRemoteAddr();  
+        }
+        ipAddress = ipAddress.replaceAll("[^0-9]","");
         
-//        if(request.getParameter("latex")!=null)
-//        {
-//            System.out.println("Found that thing!");
-//        }
+        String ipAndTime = ipAddress + "_" + System.currentTimeMillis();
+                
+        String filename = ipAndTime + "_image";
+        String extension;
+        ArrayList<String> imageNames = new ArrayList<String>();
         
+        int i = 0;
+        Part image = null;
+        image = request.getPart("image" + i);
         
-        
+        while(image != null)
+        {
+            extension = image.getContentType();
+            extension = "." + extension.substring(extension.indexOf("/") + 1);
+                        
+            image.write(filename + i + extension);
+            imageNames.add(filename + i + extension);
+            
+            i++;
+            image = null;
+            image = request.getPart("image" + i);
+        }        
+               
         String mode;
-        mode = request.getParameter("mode");
+        mode = getValue(request.getPart("mode"));
         
         if(mode.equals(modes.makeLatex.toString()))
         {
-            String latexJSON = request.getParameter("latex");
+            String latexJSON = getValue(request.getPart("latex"));
             
-            File image = request.getParameter("file")
+            //File image = request.getParameter("file");
             
             Map<String,String> map = new LinkedHashMap<String,String>();
             ObjectMapper mapper = new ObjectMapper();
@@ -70,9 +111,9 @@ public class ParserServlet extends HttpServlet {
 		e.printStackTrace();
             }
             
-            String latexString = LatexCreator.makeLatex(map);
+            String latexString = LatexCreator.makeLatex(imageNames, map);
                 
-            List<String> fileInfo = LatexCreator.writeLatex(latexString);
+            List<String> fileInfo = LatexCreator.writeLatex(ipAndTime, latexString);
             System.out.println("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/Test/PDF_Docs " + fileInfo.get(0));
             Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/Test/PDF_Docs " + fileInfo.get(0));
             

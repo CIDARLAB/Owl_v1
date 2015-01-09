@@ -150,7 +150,7 @@
                                     "<input id=\"" + upperHeading.toLowerCase() + "\" style=\"display:inline;\" placeholder=\"Link\">" + 
                                     "<div style=\"font-weight:bold; font-size:15px; display:inline; padding-left:6px; padding-right:6px;\"> or <br></div>" +
                                     "<input type=\"file\" id=\"" + upperHeading.toLowerCase() + "Alt" + "\" name=\"" + upperHeading.toLowerCase() +
-                                    "\" accept=\"image/jpg, image/png, application/pdf\" style = \"display:inline; padding-top:12px;\"><p style = \"display:inline; padding-top:0px; padding-left:-70px;\">*Note: File must have extension .jpg, .png, or .pdf</p></div></div>" + "\n";
+                                    "\" accept=\"image/png, image/jpg, image/jpeg, application/pdf\" style = \"display:inline; padding-top:12px;\"><p style = \"display:inline; padding-top:0px; padding-left:-70px;\">*Note: File must have extension .jpg, .jpeg, .png, or .pdf</p></div></div>" + "\n";
                                 } else if (tag == "menu"){
                                     menuCount = field.match(/,/g);
                                     var item = field.split(";");
@@ -250,10 +250,17 @@
         <script>
             function makeDatasheet(){
 
+                    imgCount = 0;
                     var line, start, end, title, k, v;
                     var titleCount = 0;
                     var dataPairs = "{";
                     var idNames = idString.split("\n");
+
+                    var formData = new FormData();
+                    var xhr = new XMLHttpRequest();
+
+                    var d = new Date();
+                    var currentTime = d.getTime().toString();
 
                     for (var i = 0; i < idNames.length; i++) {
                         line = idNames[i];
@@ -328,6 +335,11 @@
 
                             if ((v == undefined || v == "") && document.getElementById(idValue + "Alt").value != "")
                             {
+        
+                                formData.append(/*currentTime + */"image" + imgCount.toString(), document.getElementById(idValue + "Alt").files[0]);
+                                imgCount++;
+                                //alert(formData);
+                                
                                 v = "";
                                 k = "<imgupload>" + k;
                             }
@@ -457,12 +469,26 @@
 
                     alert(dataPairs);
 
-                    $.post("ParserServlet", {"mode":"makeLatex","latex": dataPairs}, function(data) {
+                    // $.ajax({
+                    //     url: "ParserServlet",
+                    //     data: formData,
+                    //     contentType: false,
+                    //     processData: false,
+                    //     cache: false
+                    // });
 
-                            //use data to populate dynamic form after posting it to server for safe keeping
-                            //window.location.replace("dynamicForm.html");
-                            //page will redirect from server
-                        });
+                    formData.append('mode','makeLatex');
+                    formData.append('latex',dataPairs);
+
+                    xhr.open("POST", "ParserServlet", true);
+                    xhr.send(formData);
+
+                    // $.post("ParserServlet", {"mode":"makeLatex","latex": dataPairs}, function(data) {
+
+                    //         //use data to populate dynamic form after posting it to server for safe keeping
+                    //         //window.location.replace("dynamicForm.html");
+                    //         //page will redirect from server
+                    //     });
 
                     document.getElementById('wellTabs').innerHTML += "<li style=\"margin-top:10px\"><form method=\"link\" id=\"dataLink\" action=\"http://www.google.com\" style=\"margin-bottom:0px\">\n" +
                     "<input type=\"submit\" value =\"View Datasheet\" class =\"btn btn-success\" style=\"width:100%\"></form></li>"
