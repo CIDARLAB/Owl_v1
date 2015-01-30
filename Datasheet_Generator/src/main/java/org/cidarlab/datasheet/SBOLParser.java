@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.cidarlab.datasheet;
+package datasheet;
 
 import java.util.ArrayList;
 import org.json.JSONException;

@@ -4,6 +4,7 @@
  */
 package org.cidarlab.datasheet;
 
+import static datasheet.LatexGenerator.editLatex;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,6 +15,11 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -42,6 +48,8 @@ public class DataServlet extends HttpServlet {
                 holdingData = false;
             } else {
                 String data = request.getParameter("sending");
+                System.out.print("\n\nThis is the data: " + data); /////////////////////////
+                editLatex(data);
                 heldData = new JSONObject(data);
                 holdingData = true;
                 response.sendRedirect("output.html");
@@ -195,4 +203,38 @@ public class DataServlet extends HttpServlet {
             }
         }
     }
+
+//   public static void main() throws IOException {
+//       
+//       appendLatex(heldData);
+//       
+//   }
+    
+//    public static void appendLatex(JSONObject heldData) throws IOException {
+//        
+//        Path p1 = Paths.get("/Users/Zach/Documents/Owl/Test/Test.tex");
+//        Path p2 = Paths.get("/Users/Zach/Documents/Owl/Test/Blank.tex");
+//        Charset charset = StandardCharsets.UTF_8;
+//        System.out.print("\n\nThis is the data: " + heldData);
+//        
+//        try{
+//        String content = new String(Files.readAllBytes(p1), charset);
+//        
+////        content = content.replace("BBa\\_",partInfoStrArr[0]);
+////        content = content.replace("{Summary}\t\t&","{Summary}\t\t&" + " " + partInfoStrArr[1]);
+////        content = content.replace("{Part Type}\t\t&","{Part Type}\t\t&" + " " + partInfoStrArr[2]);
+////        content = content.replace("{Sequence}\t\t&","{Sequence}\t\t&" + " " + partInfoStrArr[5]);
+////        content = content.replace("{Author(s)}\t\t\t\t&","{Author(s)}\t\t\t\t&" + " " + partInfoStrArr[4]);
+////        content = content.replace("{Date}\t\t\t\t\t&","{Date}\t\t\t\t\t&" + " " + partInfoStrArr[3]);
+////        content = content.replace("_","\\_");
+//        
+//        Files.write(p2, content.getBytes(charset));
+//        }catch (IOException e) {
+//            System.err.println(e);
+//        }
+//
+//
+//        
+//        
+//    }
 }
