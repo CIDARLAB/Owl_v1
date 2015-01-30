@@ -101,6 +101,9 @@ public class ParserServlet extends HttpServlet {
             Map<String,String> map = new LinkedHashMap<String,String>();
             ObjectMapper mapper = new ObjectMapper();
             
+            
+            
+            
             try {
                 //System.out.println("Latex String : "+ latexJSON);
 		//convert JSON string to Map
@@ -111,25 +114,41 @@ public class ParserServlet extends HttpServlet {
 		e.printStackTrace();
             }
             
-            String latexString = LatexCreator.makeLatex(imageNames, map);
+            int wellKeys = 0;
+            int title = 1;
+            
+            Map<String, String> newMap = new LinkedHashMap<String,String>();
+            Map<String, String> imgMap = new LinkedHashMap<String,String>();
+            
+            boolean notImageBlock = false;
+            for(Map.Entry<String, String> entry : map.entrySet()){
+                if(entry.getKey().contains("<imglink>") || entry.getKey().contains("<imgupload>"))
+                {
+                    imgMap.put(entry.getKey(), entry.getValue());
+                }
+                else 
+                {
+                    if(entry.getKey().contains("title"))
+                    {
+                        newMap.putAll(imgMap);
+                        imgMap = new LinkedHashMap<String,String>();
+                    }
+                    newMap.put(entry.getKey(), entry.getValue());
+                }
+            }
+           
+            String latexString = LatexCreator.makeLatex(imageNames, newMap);
                 
             List<String> fileInfo = LatexCreator.writeLatex(ipAndTime, latexString);
-            System.out.println("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/Test/PDF_Docs " + fileInfo.get(0));
-            Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/Test/PDF_Docs " + fileInfo.get(0));
+            //System.out.println("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/ " + fileInfo.get(0));
+            Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/ " + fileInfo.get(0));
             
-            String PDFpath = "/Users/Zach/Documents/Owl/Test/PDF_Docs/" + fileInfo.get(1);
+            String PDFpath = "/../Datasheet_Generator/tmp/" + fileInfo.get(1);
             
-            System.out.println("PDFpath is: " + PDFpath);
+            //System.out.println("PDFpath is: " + PDFpath);
             
             JSONObject dataToSend = new JSONObject();
-            dataToSend.put("filename",PDFpath);
-            
-//            JSONObject partsInfoJSON = new JSONObject();
-//        JSONObject designInformation = new JSONObject();      
-//        JSONObject contactInformation = new JSONObject();
-//                
-//        //make JSONObject partsInfoJSON
-//        partsInfoJSON.put("name", partInfoStrArr[0]);        
+            dataToSend.put("filename",PDFpath);      
                     
             data = dataToSend;
             

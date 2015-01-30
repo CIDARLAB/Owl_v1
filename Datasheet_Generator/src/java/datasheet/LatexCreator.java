@@ -83,12 +83,12 @@ public class LatexCreator {
                 }
                        
                 latexString += tableSetup;
-                latexString += entry.getValue() + "}\n";
+                latexString += entry.getValue().replaceAll("_", "\\\\_") + "}\n";
                 latexString += tableStart;
             }
             else if(entry.getKey().contains("<imglink>"))
             {
-                latexString += setup + entry.getKey().substring(9) + "} & ";
+                latexString += setup + entry.getKey().substring(9).replaceAll("_", "\\\\_") + "} & ";
                 
                 nameArray = entry.getValue().trim().split("/");
                 name = nameArray[nameArray.length - 1];
@@ -96,7 +96,7 @@ public class LatexCreator {
             }
             else if(entry.getKey().contains("<imgupload>"))
             {
-                latexString += setup + entry.getKey().substring(11) + "} & ";
+                latexString += setup + entry.getKey().substring(11).replaceAll("_", "\\\\_") + "} & ";
                 
                 name = imageFilenames.get(uploadCount);
                 latexString += "\\includegraphics[width=2cm,height=2cm,keepaspectratio]{/Users/Zach/Documents/Owl/Test/" + name + "} \\\\ \n";
@@ -104,7 +104,9 @@ public class LatexCreator {
             }
             else
             {
-                latexString += setup + entry.getKey() + "} & " + entry.getValue() + "\\\\" + "\n";
+                if(!"".equals(entry.getValue())){
+                    latexString += setup + entry.getKey().replaceAll("_", "\\\\_") + "} & " + entry.getValue().replaceAll("_", "\\\\_") + "\\\\" + "\n";
+                }
             }
             
             first = false;
@@ -113,6 +115,40 @@ public class LatexCreator {
         latexString = latexString.substring(0, latexString.length() - 3);
         latexString += "\n" + tableEnd;
         latexString += "\\end{document}";
+        latexString = latexString.replaceAll("\\{4.98in\\n", "{4.98in}}\n");
+        
+        String[] line = latexString.split("\\n");
+        
+        List<Integer> linesToRemove = new ArrayList<Integer>();
+        
+        for(int i = 0; i < line.length; i++)
+        {
+            if(line[i].contains("\\begin{table}[h]"))
+            {
+                if(line[i + 5].contains("\\end{tabular}"))
+                {
+                    linesToRemove.add(i);
+                    linesToRemove.add(i+1);
+                    linesToRemove.add(i+2);
+                    linesToRemove.add(i+3);
+                    linesToRemove.add(i+4);
+                    linesToRemove.add(i+5);
+                    linesToRemove.add(i+6);
+                }
+            }
+        }
+        
+        StringBuilder newLatexString = new StringBuilder(8192);
+        
+        for(int i = 0; i < line.length; i++)
+        {
+            if(!linesToRemove.contains(i))
+            {
+                newLatexString.append(line[i]).append("\n");
+            }
+        }
+        
+        latexString = newLatexString.toString();
             
         return latexString;
     }
