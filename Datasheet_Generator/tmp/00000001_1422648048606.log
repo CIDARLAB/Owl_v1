@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  9 JAN 2015 20:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  30 JAN 2015 15:00
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
-**/Users/Zach/Documents/Owl/Test/00000001_1420852890419.tex
-(/Users/Zach/Documents/Owl/Test/00000001_1420852890419.tex
+**/Users/Zach/Documents/Owl/Test/00000001_1422648048606.tex
+(/Users/Zach/Documents/Owl/Test/00000001_1422648048606.tex
 LaTeX2e <2014/05/01>
 Babel <3.9k> and hyphenation patterns for 78 languages loaded.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/article.cls
@@ -98,8 +98,8 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \extratabsurround=\skip47
 \backup@length=\skip48
 )
-No file 00000001_1420852890419.aux.
-\openout1 = `00000001_1420852890419.aux'.
+No file 00000001_1422648048606.aux.
+\openout1 = `00000001_1422648048606.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
 LaTeX Font Info:    ... okay on input line 7.
@@ -204,37 +204,67 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 15.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 15.
+runsystem(curl -O http://upload.wikimedia.org/wikipedia/commons/b/bd/A_Smiley.j
+pg)...executed.
 
-Overfull \hbox (0.87303pt too wide) in paragraph at lines 15--23
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 16.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 16.
+
+<A_Smiley.jpg, id=1, 1265.72874pt x 1165.35374pt>
+File: A_Smiley.jpg Graphic file (type jpg)
+ <use A_Smiley.jpg>
+Package pdftex.def Info: A_Smiley.jpg used on input line 22.
+(pdftex.def)             Requested size: 56.89738pt x 52.3853pt.
+
+Underfull \hbox (badness 4479) in paragraph at lines 23--23
+[]|\OT1/cmr/bx/n/12 Plasmid Map
+ []
+
+
+</Users/Zach/Documents/Owl/Test/00000001_1422648048606_image0.jpeg, id=2, 381.4
+25pt x 250.9375pt>
+File: /Users/Zach/Documents/Owl/Test/00000001_1422648048606_image0.jpeg Graphic
+ file (type jpg)
+
+<use /Users/Zach/Documents/Owl/Test/00000001_1422648048606_image0.jpeg>
+Package pdftex.def Info: /Users/Zach/Documents/Owl/Test/00000001_1422648048606_
+image0.jpeg used on input line 23.
+(pdftex.def)             Requested size: 56.90282pt x 37.43605pt.
+
+Overfull \hbox (0.87303pt too wide) in paragraph at lines 16--25
+[][] 
+ []
+
+
+Overfull \hbox (0.87303pt too wide) in paragraph at lines 30--33
 [][] 
  []
 
 [1
 
-{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./A_Smi
+ley.jpg> </Users/Zach/Documents/Owl/Test/00000001_1422648048606_image0.jpeg>]
 (/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp//00000001_142
-0852890419.aux) ) 
+2648048606.aux) ) 
 Here is how much of TeX's memory you used:
- 2162 strings out of 493117
- 31731 string characters out of 6135433
+ 2175 strings out of 493117
+ 32149 string characters out of 6135433
  97955 words of memory out of 5000000
- 5627 multiletter control sequences out of 15000+600000
+ 5636 multiletter control sequences out of 15000+600000
  4544 words of font info for 17 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,10n,32p,319b,242s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,14n,32p,319b,307s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmr17.pfb>
 Output written on /Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/
-tmp//00000001_1420852890419.pdf (1 page, 32722 bytes).
+tmp//00000001_1422648048606.pdf (1 page, 975083 bytes).
 PDF statistics:
- 20 PDF objects out of 1000 (max. 8388607)
+ 22 PDF objects out of 1000 (max. 8388607)
  13 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

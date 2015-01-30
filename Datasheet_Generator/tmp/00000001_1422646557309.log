@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  9 JAN 2015 19:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  30 JAN 2015 14:35
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
-**/Users/Zach/Documents/Owl/Test/00000001_1420850481221.tex
-(/Users/Zach/Documents/Owl/Test/00000001_1420850481221.tex
+**/Users/Zach/Documents/Owl/Test/00000001_1422646557309.tex
+(/Users/Zach/Documents/Owl/Test/00000001_1422646557309.tex
 LaTeX2e <2014/05/01>
 Babel <3.9k> and hyphenation patterns for 78 languages loaded.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/article.cls
@@ -98,8 +98,8 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \extratabsurround=\skip47
 \backup@length=\skip48
 )
-No file 00000001_1420850481221.aux.
-\openout1 = `00000001_1420850481221.aux'.
+No file 00000001_1422646557309.aux.
+\openout1 = `00000001_1422646557309.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
 LaTeX Font Info:    ... okay on input line 7.
@@ -204,211 +204,90 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ô in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ù in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ô in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ô in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ô in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ô in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ù in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ô in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ô in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ù in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ô in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ô in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ô in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ô in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ù in font cmr17!
-Missing character: There is no ‚ in font cmr17!
-Missing character: There is no Ä in font cmr17!
-Missing character: There is no ô in font cmr17!
+runsystem(curl -O http://upload.wikimedia.org/wikipedia/commons/b/bd/A_Smiley.j
+pg)...executed.
+
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 15.
+(Font)              <7> on input line 16.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 15.
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ô in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ù in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ô in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ô in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ô in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ù in font cmbx12!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ô in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ô in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ô in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ô in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ú in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ò in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ô in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ô in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ô in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ù in font cmbx12!
+(Font)              <5> on input line 16.
 
-Underfull \hbox (badness 4479) in paragraph at lines 20--20
-[]|\OT1/cmr/bx/n/12 Plasmid Map
- []
-
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ô in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ô in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ù in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ù in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ô in font cmbx12!
-Missing character: There is no ‚ in font cmbx12!
-Missing character: There is no Ä in font cmbx12!
-Missing character: There is no ô in font cmbx12!
-
-Overfull \hbox (0.87303pt too wide) in paragraph at lines 15--24
-[][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 33--33
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
 []|\OT1/cmr/bx/n/12 Data Col-lec-
  []
 
 
-Overfull \hbox (0.87303pt too wide) in paragraph at lines 29--37
+Overfull \hbox (0.87303pt too wide) in paragraph at lines 16--22
+[][] 
+ []
+
+<A_Smiley.jpg, id=1, 1265.72874pt x 1165.35374pt>
+File: A_Smiley.jpg Graphic file (type jpg)
+ <use A_Smiley.jpg>
+Package pdftex.def Info: A_Smiley.jpg used on input line 33.
+(pdftex.def)             Requested size: 56.89738pt x 52.3853pt.
+
+Underfull \hbox (badness 4479) in paragraph at lines 34--34
+[]|\OT1/cmr/bx/n/12 Plasmid Map
+ []
+
+
+</Users/Zach/Documents/Owl/Test/00000001_1422646557309_image0.png, id=2, 803.0p
+t x 200.75pt>
+File: /Users/Zach/Documents/Owl/Test/00000001_1422646557309_image0.png Graphic 
+file (type png)
+
+<use /Users/Zach/Documents/Owl/Test/00000001_1422646557309_image0.png>
+Package pdftex.def Info: /Users/Zach/Documents/Owl/Test/00000001_1422646557309_
+image0.png used on input line 34.
+(pdftex.def)             Requested size: 56.90189pt x 14.22546pt.
+
+Overfull \hbox (0.87303pt too wide) in paragraph at lines 27--36
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 44--44
-[]|\OT1/cmr/bx/n/12 Design Com-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 46--46
-[]|\OT1/cmr/bx/n/12 Additional
- []
-
-
-Overfull \hbox (0.87303pt too wide) in paragraph at lines 42--48
-[][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 54--54
+Underfull \hbox (badness 10000) in paragraph at lines 42--42
 []|\OT1/cmr/bx/n/12 Assembly
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--55
+Underfull \hbox (badness 10000) in paragraph at lines 43--43
 []|\OT1/cmr/bx/n/12 Assembly
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 57--57
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
 []|\OT1/cmr/bx/n/12 Assembly
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 58--58
-[]|\OT1/cmr/bx/n/12 Assembly
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 58--58
-\OT1/cmr/bx/n/12 Graph Im-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 61--61
+Underfull \hbox (badness 10000) in paragraph at lines 48--48
 []|\OT1/cmr/bx/n/12 Supplemental
  []
 
 
-Overfull \hbox (0.87303pt too wide) in paragraph at lines 53--63
-[][] 
+Underfull \hbox (badness 10000) in paragraph at lines 49--49
+[]|\OT1/cmr/bx/n/12 Assembly
  []
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Underfull \hbox (badness 10000) in paragraph at lines 49--49
+\OT1/cmr/bx/n/12 Graph Im-
+ []
 
 
-Overfull \hbox (0.87303pt too wide) in paragraph at lines 68--71
+</Users/Zach/Documents/Owl/Test/00000001_1422646557309_image1.jpeg, id=3, 381.4
+25pt x 250.9375pt>
+File: /Users/Zach/Documents/Owl/Test/00000001_1422646557309_image1.jpeg Graphic
+ file (type jpg)
+
+<use /Users/Zach/Documents/Owl/Test/00000001_1422646557309_image1.jpeg>
+Package pdftex.def Info: /Users/Zach/Documents/Owl/Test/00000001_1422646557309_
+image1.jpeg used on input line 49.
+(pdftex.def)             Requested size: 56.90282pt x 37.43605pt.
+
+Overfull \hbox (0.87303pt too wide) in paragraph at lines 41--51
 [][] 
  []
 
@@ -417,27 +296,28 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [1
 
-{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2]
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./A_Smi
+ley.jpg> </Users/Zach/Documents/Owl/Test/00000001_1422646557309_image0.png>]
+[2 </Users/Zach/Documents/Owl/Test/00000001_1422646557309_image1.jpeg>]
 (/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp//00000001_142
-0850481221.aux) ) 
+2646557309.aux) ) 
 Here is how much of TeX's memory you used:
- 2162 strings out of 493117
- 31731 string characters out of 6135433
- 102955 words of memory out of 5000000
- 5627 multiletter control sequences out of 15000+600000
+ 2180 strings out of 493117
+ 32443 string characters out of 6135433
+ 101955 words of memory out of 5000000
+ 5639 multiletter control sequences out of 15000+600000
  4544 words of font info for 17 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,10n,32p,319b,242s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,14n,32p,319b,307s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmr17.pfb>
 Output written on /Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/
-tmp//00000001_1420850481221.pdf (2 pages, 37699 bytes).
+tmp//00000001_1422646557309.pdf (2 pages, 986367 bytes).
 PDF statistics:
- 23 PDF objects out of 1000 (max. 8388607)
+ 27 PDF objects out of 1000 (max. 8388607)
  15 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

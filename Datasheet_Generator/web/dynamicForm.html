@@ -77,6 +77,38 @@
                     if (evt.target.readyState == FileReader.DONE) {
                         $('#config').addClass("hidden");
                         var info = evt.target.result.trim();
+
+                        var line, headerStart, headerEnd, i;
+                        var configArray = info.split("\n");
+                        for (i = 0; i < configArray.length; i++) {
+                            line = configArray[i];
+
+                            if(line.indexOf("<header>") != -1){
+                                headerStart = i;                        
+                            }
+
+                            if(line.indexOf("</header>") != -1){
+                                headerEnd = i;
+                            }
+                        }
+
+                        var header = [""];
+
+                        for(i = headerStart; i < headerEnd + 1; i++)
+                        {
+                            header.push(configArray[i]);
+                        }
+
+                        for(i = 0; i < configArray.length; i++) {
+                            if(i < headerStart || i > headerEnd){
+                                header.push(configArray[i]);
+                            }
+                        }
+
+                        info = header.join("\n");
+                        info = info.replace(new RegExp("<header>","g"),"<well>");
+                        info = info.replace(new RegExp("</header>","g"),"</well>");
+
                         idString = info;
                         info = info.toLowerCase().replace(new RegExp("<well>","g"),"");
                         var count = info.match(/\/well/g);
