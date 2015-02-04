@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datasheet;
+package org.cidarlab.datasheet;
 
-import static datasheet.XMLParser.getXML;
+import static org.cidarlab.datasheet.XMLParser.getXML;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

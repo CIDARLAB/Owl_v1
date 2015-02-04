@@ -4,7 +4,7 @@
  */
 package org.cidarlab.datasheet;
 
-import static datasheet.LatexGenerator.editLatex;
+import static org.cidarlab.datasheet.LatexGenerator.editLatex;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
