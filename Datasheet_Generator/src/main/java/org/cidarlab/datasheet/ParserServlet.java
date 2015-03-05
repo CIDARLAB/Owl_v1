@@ -44,6 +44,16 @@ public class ParserServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
+    public static String getFilepath()
+    {        
+        String filepath;
+        
+        filepath = ParserServlet.class.getClassLoader().getResource(".").getPath();
+        System.out.println(filepath);
+        
+        //filepath = filepath.substring(0,filepath.indexOf("/target/"));
+        return filepath;
+    }
     
     private static String getValue(Part part) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(part.getInputStream(), "UTF-8"));
@@ -95,6 +105,7 @@ public class ParserServlet extends HttpServlet {
         if(mode.equals(modes.makeLatex.toString()))
         {
             String latexJSON = getValue(request.getPart("latex"));
+            System.out.println(latexJSON);
             
             //File image = request.getParameter("file");
             
@@ -138,12 +149,16 @@ public class ParserServlet extends HttpServlet {
             }
            
             String latexString = LatexCreator.makeLatex(imageNames, newMap);
-                
             List<String> fileInfo = LatexCreator.writeLatex(ipAndTime, latexString);
             //System.out.println("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/ " + fileInfo.get(0));
-            Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/ " + fileInfo.get(0));
+            Process p;
+            try{
+                p = Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/ " + fileInfo.get(0));
+                p.waitFor();
+            } catch (Exception e) {
+            }
             
-            String PDFpath = "/../Datasheet_Generator/tmp/" + fileInfo.get(1);
+            String PDFpath = "/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/" + fileInfo.get(1);
             
             //System.out.println("PDFpath is: " + PDFpath);
             
