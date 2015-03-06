@@ -7,7 +7,28 @@
         <link rel="shortcut icon" href="images/owl_noText.png">
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-       
+
+        <style>
+        #documentation-links a:link {
+            text-decoration: none;
+            color: #383838;
+        }
+
+        #documentation-links a:visited {
+            text-decoration: none;
+            color: #383838;
+        }
+
+        #documentation-links a:hover {
+            text-decoration: underline;
+            color: #383838;
+        }
+
+        #documentation-links a:active {
+            text-decoration: underline;
+            color: #383838;
+        }
+       </style>
     </head>
     
     <body class="container">
@@ -19,7 +40,7 @@
                     <ul class="nav">
                         <!--<li><a href="editExisting.html">Search Existing Parts</a></li>-->
                         <li><a href="dynamicForm.html">Create Datasheet</a></li>
-                        <li><a href="documentation.html">Documentation</a></li>
+                        <li class="active"><a href="documentation.html">Documentation</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul> 
                     <div id="loginArea" class="navbar-form pull-right">
@@ -33,39 +54,14 @@
         </div>
         
         <div class="page-header" style="margin-top:60px">
-            <h1><img style="width: 38px; margin-bottom:5px" src="images/owl_noText.png"> <small>Welcome!</small></h1>
+            <h1><img style="width: 38px; margin-bottom:5px" src="images/owl_noText.png"> <small>Learn More</small></h1>
         </div>
-            <div class="hero-unit" align="center">
-                <h2>Welcome to</h2>
-                <h1><strong>Owl Datasheet Generator </strong></h1>
-                <h2>Automatically build Datasheets.</h2>
-                <br>
-                <p> <a id="startLink" class="btn btn-primary btn-large" href="login.html"> Get Started</a> </p>
-                <!--<p> <button id="poojaButton" class="btn btn-primary btn-large btn-danger">Click here pooja</button> </p>-->
-            </div>
+        <div id="documentation-links">
+            <h4><a href="http://pubs.acs.org/doi/abs/10.1021/sb500053j" target="_blank" style="">ACS Synbio Publication</a></h4>
             <hr/>
-            <h2 class="text-center">Why automatic data sheets?</h2>
-            <h4 class="text-center muted">Here's a few ways automation will help you work faster</h4>
-            <div class="row-fluid">
-                <div class="span4">
-                    <h3>Standard Layout</h3>
-                    <p>
-                        Owl creates standard datasheets using LaTeX to typeset PDFs. While the data entered into particular sheets may differ, the design and general layout of each PDF will not. This allows users to generate a uniform look for their data.
-                    </p>
-                </div>
-                <div class="span4">
-                    <h3>Dynamic Content</h3>
-                    <p>
-                        Owl is easy to use with configuration files. Specify a configuration file to modify which elements appear in the PDF. If an element in the configuration file is given no value Owl will automatically and cleanly handle the result.
-                    </p>
-                </div>
-                <div class="span4">
-                    <h3>Leverage Existing Data</h3>
-                    <p>
-                        The user has the ability to auto-fill portions of the dynamic form by pulling information from existing parts in the Parts Registry. This can help limit erroneous inputs from the user and make datasheet generation even faster.
-                    </p>
-                </div>
-            </div>
+            <h4><a href="config.txt">Default Configuration File</a></h4>
+        </div>
+            
             <hr/>
             
 <!--        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 

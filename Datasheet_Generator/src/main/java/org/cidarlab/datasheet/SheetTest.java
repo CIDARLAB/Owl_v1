@@ -154,7 +154,7 @@ public class SheetTest {
             //System.out.println("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/ " + fileInfo.get(0));
             Process p1;
             try{
-                p1 =  Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=" + path + " " + fileInfo.get(0));
+                p1 =  Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=" + path + "PDFs/ " + fileInfo.get(0));
                 p1.waitFor();
             } catch (Exception e) {
             }
@@ -162,14 +162,6 @@ public class SheetTest {
             //String PDFpath = path + "PDFs/" + fileInfo.get(1);
             //System.out.println(PDFpath);
             
-        }
-        
-        Process p2;
-        try{
-            //p2 = Runtime.getRuntime().exec("mv " + getFilepath() + "/*.png /tmp/");
-            p2 = Runtime.getRuntime().exec("rm /Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/*.png");
-            p2.waitFor();
-        } catch (Exception e) {
         }
         
     }

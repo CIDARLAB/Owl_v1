@@ -1,0 +1,40 @@
+<header>
+<title>Basic Information</title>
+<text>Part's Name</text>
+<text>Sequence</text>
+<menu>Part Type; Basic Part, Composite Part</menu>
+<img>Pigeon Image</img>
+<img>Plasmid Map Image</img>
+<box>Part Summary</box>
+<box>Related Parts</box>
+</header>
+
+<well>
+<title>Designer Information</title>
+<text>Author(s)</text>
+<text>Date</text>
+<text>Team</text>
+<text>Data Collectors</text>
+<text>Affiliation</text>
+<text>Contact</text>
+</well>
+
+<well>
+<title>Design Details</title>
+<text>Type</text>
+<box>Design Components</box>
+<text>Vector</text>
+<box>Additional Comments</box>
+</well>
+
+<well>
+<title>Assembly Information</title>
+<text>Assembly Method(s)</text>
+<text>Assembly RFC</text>
+<text>Scars</text>
+<box>Assembly Components</box>
+<img>Assembly Graph Image</img>
+<text>Chassis</text>
+<text>Strain</text>
+<box>Supplemental Comments</box>
+</well>
