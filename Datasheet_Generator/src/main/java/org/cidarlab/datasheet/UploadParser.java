@@ -6,6 +6,7 @@ package org.cidarlab.datasheet;
 
 import java.io.*;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,7 @@ public class UploadParser {
         List<String> partDoc;
         try {
             Path p1 = Paths.get(URI.create("file:///Users/Zach/Desktop/B0035.rtf"));
-            partDoc = Files.readAllLines(p1);
+            partDoc = Files.readAllLines(p1, StandardCharsets.US_ASCII);
             return partDoc;
         } catch (IOException e) {
             e.printStackTrace();

@@ -17,7 +17,7 @@ import org.junit.runners.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AuthenticationTester {
 
-	private static final String USER_DB_NAME = "CIDAR";
+	private static final String USER_DB_NAME = "OWL";
 	private static Authenticator auth;
 	
 	@BeforeClass
