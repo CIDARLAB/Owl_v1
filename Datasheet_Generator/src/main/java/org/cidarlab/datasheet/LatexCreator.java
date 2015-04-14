@@ -35,6 +35,7 @@ public class LatexCreator {
             + "\\documentclass{article}\n"
             + "\\pagestyle{myheadings}\n"
             + "\\markright{" + map.get("title1").trim().replaceAll("_", "\\\\_") + "}\n"
+            + "\\usepackage[xcolor]{mdframed} %Top header has banner!\n"
             + "\\usepackage{hyphenat} %Column titles are not to have hyphenation\n"
             + "\\usepackage{seqsplit} %Manages long DNA sequence line breaks\n"
             + "\\usepackage{ccaption} %Formatting table titles\n"
@@ -48,8 +49,8 @@ public class LatexCreator {
                 
         String tableSetup = "\\begin{table}[htbp]\n"
             + "\\setlength{\\belowcaptionskip}{4pt}\n"
-            + "\\setlength{\\extrarowheight}{8pt}\n"
-            + "\\legend{\\LARGE ";
+            + "\\setlength{\\extrarowheight}{8pt}\n";
+            //+ "\\legend{\\LARGE ";
              
         String tableStart = "\\begin{tabular}{m{1.2in}m{4.98in}}\n";
                 
@@ -84,14 +85,18 @@ public class LatexCreator {
                 {
                     latexString = latexString.substring(0, latexString.length() - 3);
                     latexString += "\n" + tableEnd;
-                    latexString += tableSetup;
-                    latexString += entry.getValue().replaceAll("_", "\\\\_") + "}\n";
+                    latexString += tableSetup
+                                + "\\begin{mdframed}[backgroundcolor=gray!32,topline=false,rightline=false,leftline=false,bottomline=false] \\legend{\\LARGE ";
+                    latexString += entry.getValue().replaceAll("_", "\\\\_") + "}\\end{mdframed}\n";
                     latexString += tableStart;
                 }
                 else{
                     latexString += tableSetup;
-                    latexString = latexString.replace("LARGE", "Huge");
-                    latexString += "\\underline{" + entry.getValue().replaceAll("_", "\\\\_") + "}} \\hfill \\break \n";
+                    //latexString = latexString.replace("LARGE", "Huge");
+                    //latexString += "\\underline{" + entry.getValue().replaceAll("_", "\\\\_") + "}} \\hfill \\break \n";
+                    latexString += "\\begin{mdframed}[backgroundcolor=gray!32,topline=false,rightline=false,leftline=false,bottomline=false] \\legend{\\Huge \\underline{"
+                            + entry.getValue().replaceAll("_", "\\\\_")
+                            + "}} \\end{mdframed} \\hfill \\break\n";
                     latexString += tableStart;
                 }
                        
