@@ -5,7 +5,7 @@
  */
 package org.cidarlab.datasheet;
 
-import static org.cidarlab.datasheet.XMLParser.getXML;
+//import static org.cidarlab.datasheet.XMLParser.getXML;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,7 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 /**
  *
- * @author jenhantao
+ * @author zach_chapasko
  */
 @MultipartConfig(location="/Users/Zach/Documents/Owl/Test/")
 public class ParserServlet extends HttpServlet {
@@ -102,7 +102,7 @@ public class ParserServlet extends HttpServlet {
         String mode;
         mode = getValue(request.getPart("mode"));
         
-        if(mode.equals(modes.makeLatex.toString()))
+        if(mode.equals("makeLatex"))
         {
             String latexJSON = getValue(request.getPart("latex"));
             System.out.println(latexJSON);
@@ -147,6 +147,11 @@ public class ParserServlet extends HttpServlet {
                     newMap.put(entry.getKey(), entry.getValue());
                 }
             }
+            
+            if(!imgMap.isEmpty())
+            {
+                newMap.putAll(imgMap);
+            }
            
             String latexString = LatexCreator.makeLatex(imageNames, newMap);
             List<String> fileInfo = LatexCreator.writeLatex(ipAndTime, latexString);
@@ -172,14 +177,10 @@ public class ParserServlet extends HttpServlet {
             out.write(data.toString());
                       
         }
-        else if(mode.equals(modes.search.toString()))
-        {
-            
-        }
-        else
-        {
-            
-        }
+
+/*     
+        
+        OLD CODE for XMLParser methods
         
         String part = request.getParameter("file");
 
@@ -221,10 +222,10 @@ public class ParserServlet extends HttpServlet {
         partXMLs.add(part);
         
         //Parse through XML pages for relevant info
-        String[] parsedString = UploadParser.parseXML(partXMLs);
+        //String[] parsedString = UploadParser.parseXML(partXMLs);
 
         //Write relevant info to JSON Object for client
-        JSONObject partInfo = UploadParser.writeJSONObject(parsedString);
+        JSONObject partInfo = null; // = UploadParser.writeJSONObject(parsedString);
         //save the data for use after redirect
         
         //appendLatex(parsedString); /////////////////////////////////////////
@@ -239,7 +240,7 @@ public class ParserServlet extends HttpServlet {
         response.sendRedirect("dynamicForm.html");  
             
         }
-
+*/
     }
 
     protected void processGetRequest(HttpServletRequest request, HttpServletResponse response)
