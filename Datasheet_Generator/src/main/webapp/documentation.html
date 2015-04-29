@@ -61,8 +61,8 @@
                         
                         <p>
                             Owl is a tool for automatically generating stylized datasheets [1]. 
-                            Owl uses configuration files and LaTeX style files to create automatically typeset datasheets (see <a href="#guide">Guides</a> for example Owl files). 
-                            Data for datasheets can either be entered manually in the Owl user interface or Owl can use a configuration file to search existing data sources.
+                            Owl uses configuration files to create automatically typeset datasheets (see <a href="#guide">Guides</a> for example Owl files). 
+                            Data for datasheets can either be entered manually in the Owl user interface or Owl can use a mapping file to search existing data sources.
                         </p>
                         <p>
                             This version of Owl is open-source and the source code for the assembly algorithms is available on <a href="http://www.github.com/CIDARLAB">github</a>.
@@ -81,7 +81,7 @@
                             Based upon the uploaded configuration, fields are generated for data entry in the user interface.
                         </p>
                         <p>
-                            Once all data is entered, Owl uses runs LaTeX to produce typeset datasheets. Optional .sty files may also be used to further stylize the sheets.
+                            Once all data is entered, Owl uses runs LaTeX to produce typeset datasheets.
                         </p>
                         <p>
                             Additional cloning methods are not currently supported, however, Owl's core algorithm is highly generalizable and new methods can be added with relative ease. 
@@ -93,7 +93,7 @@
                         <h3>Import Existing Data</h3>
                         <!--<hr/>-->
                         <p>
-                            Owl configuration files can also be used to search existing data sources. Owl will search existing sources for all fields in the input configuration file.
+                            Owl mapping files can also be used to search existing data sources. Owl will search existing sources for all fields in the input configuration file.
                             If these fields are not found or do not comply with the expected data type, they are left empty.
                         </p>
                         <p>
@@ -130,7 +130,7 @@
                     <div class="well" id="guide">
                         <h3>Guides</h3>
                         <!--<hr/>-->
-                        <p>This section contains documentation about specific Owl features. More examples are coming soon. In the meanwhile, please contact us at <a href="mailto:owlcadhelp@gmail.com">owlcadhelp@gmail.com</a> if you have further questions.</p>
+                        <p>This section contains documentation about specific Owl features. More examples are coming soon. In the meantime, please contact us at <a href="mailto:owlcadhelp@gmail.com">owlcadhelp@gmail.com</a> if you have further questions.</p>
                         <div class="accordion" id="guideAccordion">
                             
                             <div class="accordion-group">
@@ -144,7 +144,8 @@
                                 <div id="exampleFiles" class="accordion-body collapse out">
                                     <div class="accordion-inner">
                                         <p>Click the link below to download an example Owl configuration file</p>
-                                        <a href="config.txt" target="_blank">Default Configuration File</a>
+                                        <a href="config.txt" target="_blank">Default Configuration File</a> - to generate a default layout<br>
+                                        <a href="literal.txt" target="_blank">Literal Configuration File</a> - for a terse, literal configuration file explanation (not for PDF generation)
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +160,18 @@
                                 </div>
                                 <div id="detailedInput" class="accordion-body collapse out">
                                     <div class="accordion-inner">
-                                        <p>This is the full specification for the Owl input file.</p>                                        
+                                        <p>The configuration file sets up the wells and information both on the Owl site and the PDF. The configuration file must be a plain text file. It is similar to an XML file as it makes use of various tags. The tags appear within angle brackets; opening tags are plain but closing tags must begin with a forward slash. All tags are case sensitive and must be typed in all lowercase with no spelling errors. Except for "header," "well," and "title" the tags enclose the title of the specified element. A field may be specified as required by adding a * anywhere between an opening and closing tag. Any field that is required cannot be left blank during data entry. The tags are discussed in order of appearance in the example configuration file:<br><br>
+                                        <b>header:</b> This tag can enclose any well and will guarantee that the well enclosed will appear first in the PDF. This tag must be used once and only once to enclose a single well.<br><br>
+                                        <b>title:</b> This tag immediately follows each header or well opening tag and specifies the title of the well. This tag is the only tag that is required of every well. In the example configuration file the first title is [PART NAME HERE]. The brackets and enclosed text should be replaced with the part name that you wish to generate a datasheet for.<br><br>
+                                        <b>box:</b> This tag generates a large text box which is ideal for typing a lot of information. For typing little information, consider using the "text" tag which only generates a single-line text box. Note that both tags will have the same affect on the resulting PDF (they are functionally interchangeable).<br><br>
+                                        <b>menu:</b> This tag generates a drop-down menu in which the user must choose exactly one option. The first option is originally selected by default. The text enclosed within menu tags follows a specific syntax. The first text entered is the title of the menu, followed by a semicolon. Options are separated by commas; the left-most option will be the default selection.<br><br>
+                                        <b>img:</b> This tag allows you to upload an image from your computer or from the web to include in the PDF. Note that during PDF generation the images in each well will appear at the bottom of the well (their order will be preserved). This is an important stylistic element.<br><br>
+                                        <b>well:</b> This tag is the counterpart to the header tag. You must enclose the other wells with this tag to ensure proper breaking of the wells.<br><br>
+                                        <b>text:</b> This tag is the counterpart to the box tag. It generates a smaller text box than the box tag.<br><br>
+                                        <b>button:</b> Not shown in the example configuration file, this tag generates a field of radio buttons. Zero or one button may be selected in a field of buttons. The syntax is exactly the same as the menu tag. The text enclosed within button tags follows a specific syntax. The first text entered is the title of the button field, followed by a semicolon. Options are separated by commas; there is no default selection for radio buttons. See the literal configuration file for more information.<br><br>
+                                        <b>check:</b> Not shown in the example configuration file, this tag generates a field of checkboxes. Zero, one, or multiple boxes may be checked in a field of checkboxes. The syntax is exactly the same as the menu or button tag. The text enclosed within check tags follows a specific syntax. The first text entered is the title of the checkbox field, followed by a semicolon. Options are separated by commas; there is no default selection for checkboxes. See the literal configuration file for more information.
+
+                                        </p>                                        
                                     </div>
                                 </div>
                             </div>
