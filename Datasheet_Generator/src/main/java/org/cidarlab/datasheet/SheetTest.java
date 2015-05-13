@@ -6,39 +6,25 @@
 
 package org.cidarlab.datasheet;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import org.apache.commons.io.FilenameUtils;
-import static org.cidarlab.datasheet.XMLParser.getXML;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.Test;
 import java.io.FileReader;
+//import static org.cidarlab.datasheet.XMLParser.getXML;
 
 /**
  *
- * @author Zach
+ * @author zach_chapasko
  */
 public class SheetTest {
     
@@ -98,8 +84,18 @@ public class SheetTest {
         String path = getFilepath() + "/tmp/";
         
         ArrayList<String> fileNames = new ArrayList<String>();
-        fileNames.add(path + "test1.txt");
-        fileNames.add(path + "test2.txt");
+//        fileNames.add(path + "test1.txt");
+//        fileNames.add(path + "test2.txt");
+        fileNames.add(path + "BBa_K678001.txt");
+        fileNames.add(path + "BBa_K783067.txt");
+        fileNames.add(path + "BBa_K1179002.txt");
+        fileNames.add(path + "CoxRG_AF.txt");
+        fileNames.add(path + "BBa_J23100.txt");
+        fileNames.add(path + "BBa_K1114107.txt");
+        fileNames.add(path + "BBa_K1114211.txt");
+        fileNames.add(path + "BBa_B0015.txt");
+        fileNames.add(path + "BBa_K1114400.txt");
+        fileNames.add(path + "BBa_pSB1K3.txt");
         
         String latexName;
         
@@ -143,6 +139,11 @@ public class SheetTest {
                     }
                     newMap.put(entry.getKey(), entry.getValue());
                 }
+            }
+            
+            if(!imgMap.isEmpty())
+            {
+                newMap.putAll(imgMap);
             }
             
             String latexString = LatexCreator.makeLatex(imageNames, newMap);

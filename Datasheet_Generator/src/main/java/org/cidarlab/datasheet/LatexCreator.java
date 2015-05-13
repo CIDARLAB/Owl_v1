@@ -19,7 +19,7 @@ import java.util.Map;
 
 /**
  *
- * @author Zach
+ * @author zach_chapasko
  */
 public class LatexCreator {
     
@@ -33,23 +33,28 @@ public class LatexCreator {
                 
         String header = "%This is a test file to determine the layout of the Owl Datasheet\n"
             + "\\documentclass{article}\n"
+            + "\\pagestyle{myheadings}\n"
+            + "\\markright{" + map.get("title1").trim().replaceAll("_", "\\\\_") + "}\n"
+            + "\\usepackage[xcolor]{mdframed} %Top header has banner!\n"
+            + "\\usepackage{hyphenat} %Column titles are not to have hyphenation\n"
+            + "\\usepackage{seqsplit} %Manages long DNA sequence line breaks\n"
             + "\\usepackage{ccaption} %Formatting table titles\n"
             + "\\usepackage[margin=1in]{geometry} %Setting document margins\n"
             + "\\usepackage{graphicx} %Using images\n"
             + "\\usepackage{array} %Formatting table size and behavior\n"
             + "\\begin{document}\n"
-            + "\\renewcommand{\\topfraction}{0.85} %Helps with keeping whitespace to a minimum\n"
-            + "\\renewcommand{\\textfraction}{0.1}\n"
-            + "\\renewcommand{\\floatpagefraction}{0.85}\n";
+            + "\\renewcommand{\\topfraction}{0.99} %Helps with keeping whitespace to a minimum\n"
+            + "\\renewcommand{\\textfraction}{0.99}\n"
+            + "\\renewcommand{\\floatpagefraction}{0.99}\n";
                 
-        String tableSetup = "\\begin{table}[h]\n"
+        String tableSetup = "\\begin{table}[htbp]\n"
             + "\\setlength{\\belowcaptionskip}{4pt}\n"
-            + "\\setlength{\\extrarowheight}{8pt}\n"
-            + "\\legend{\\LARGE ";
+            + "\\setlength{\\extrarowheight}{8pt}\n";
+            //+ "\\legend{\\LARGE ";
              
         String tableStart = "\\begin{tabular}{m{1.2in}m{4.98in}}\n";
                 
-        String setup = "\\large \\textbf{";
+        String setup = "\\large \\textbf{\\nohyphens{";
                 
         String tableEnd = "\\end{tabular}\n"
             + "\\end{table}\n";
@@ -80,32 +85,50 @@ public class LatexCreator {
                 {
                     latexString = latexString.substring(0, latexString.length() - 3);
                     latexString += "\n" + tableEnd;
+                    latexString += tableSetup
+                                + "\\begin{mdframed}[backgroundcolor=gray!32,topline=false,rightline=false,leftline=false,bottomline=false] \\legend{\\LARGE ";
+                    latexString += entry.getValue().replaceAll("_", "\\\\_") + "}\\end{mdframed}\n";
+                    latexString += tableStart;
+                }
+                else{
+                    latexString += tableSetup;
+                    //latexString = latexString.replace("LARGE", "Huge");
+                    //latexString += "\\underline{" + entry.getValue().replaceAll("_", "\\\\_") + "}} \\hfill \\break \n";
+                    latexString += "\\begin{mdframed}[backgroundcolor=gray!32,topline=false,rightline=false,leftline=false,bottomline=false] \\legend{\\Huge \\underline{"
+                            + entry.getValue().replaceAll("_", "\\\\_")
+                            + "}} \\end{mdframed} \\hfill \\break\n";
+                    latexString += tableStart;
                 }
                        
-                latexString += tableSetup;
-                latexString += entry.getValue().replaceAll("_", "\\\\_") + "}\n";
-                latexString += tableStart;
+                
             }
             else if(entry.getKey().contains("<imglink>"))
             {
-                latexString += setup + entry.getKey().substring(9).replaceAll("_", "\\\\_") + "} & ";
+                latexString += setup + entry.getKey().substring(9).replaceAll("_", "\\\\_") + "}} & ";
                 
                 nameArray = entry.getValue().trim().split("/");
                 name = nameArray[nameArray.length - 1];
-                latexString += "\\includegraphics[width=2cm,height=2cm,keepaspectratio]{" + name + "} \\\\ \n";
+                latexString += "\\hfill \\break \\includegraphics[width=10cm,height=10cm,keepaspectratio]{" + name + "} \\\\ \n";
             }
             else if(entry.getKey().contains("<imgupload>"))
             {
-                latexString += setup + entry.getKey().substring(11).replaceAll("_", "\\\\_") + "} & ";
+                latexString += setup + entry.getKey().substring(11).replaceAll("_", "\\\\_") + "}} & ";
                 
                 name = imageFilenames.get(uploadCount);
-                latexString += "\\includegraphics[width=2cm,height=2cm,keepaspectratio]{/Users/Zach/Documents/Owl/Test/" + name + "} \\\\ \n";
+                latexString += "\\hfill \\break \\includegraphics[width=10cm,height=10cm,keepaspectratio]{/Users/Zach/Documents/Owl/Test/" + name + "} \\\\ \n";
                 uploadCount++;
             }
             else
             {
                 if(!"".equals(entry.getValue())){
-                    latexString += setup + entry.getKey().replaceAll("_", "\\\\_") + "} & " + entry.getValue().replaceAll("_", "\\\\_") + "\\\\" + "\n";
+                    latexString += setup + entry.getKey().replaceAll("_", "\\\\_") + "}} & ";
+                    if(entry.getValue().trim().contains(" ")){
+                        latexString += entry.getValue().trim().replaceAll("_", "\\\\_") + "\\\\" + "\n";
+                    }
+                    else {
+                        latexString += "\\seqsplit{" + entry.getValue().trim().replaceAll("_","\\\\_") + "}\\\\" + "\n";
+                    }
+                    //+ entry.getValue().replaceAll("_", "\\\\_") + "\\\\" + "\n";
                 }
             }
             
@@ -123,7 +146,7 @@ public class LatexCreator {
         
         for(int i = 0; i < line.length; i++)
         {
-            if(line[i].contains("\\begin{table}[h]"))
+            if(line[i].contains("\\begin{table}[htbp]"))
             {
                 if(line[i + 5].contains("\\end{tabular}"))
                 {

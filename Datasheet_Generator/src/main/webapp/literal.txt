@@ -1,0 +1,15 @@
+<header>
+<title>First Well Title</title>
+<text>Small Text Box</text>
+<box>Large Text Box</box>
+<menu>Menu Title; Default option, Second option, Third option</menu>
+<img>Image Upload or Image Link</img>
+</header>
+
+<well>
+<title>Second Well Title</title>
+<text>Required Text (Note the Asterisk)*</text>
+<button>Button Group Title; First button, Second button, Third button</button>
+<check>Checkbox Group Title; First checkbox, Second checkbox, Third checkbox</check>
+<check>*Now; this, checkbox, group, is, required</check>
+</well>

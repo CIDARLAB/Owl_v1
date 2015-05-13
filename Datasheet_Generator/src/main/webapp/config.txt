@@ -1,40 +1,53 @@
 <header>
-<title>Basic Information</title>
-<text>Part's Name</text>
-<text>Sequence</text>
-<menu>Part Type; Basic Part, Composite Part</menu>
-<img>Pigeon Image</img>
-<img>Plasmid Map Image</img>
+<title>[PART NAME HERE]</title>
 <box>Part Summary</box>
+<box>Sequence</box>
+<menu>Part Type; Basic Part, Composite Part</menu>
 <box>Related Parts</box>
+<img>Pigeon Image</img>
+<img>Plasmid Map</img>
 </header>
 
 <well>
 <title>Designer Information</title>
 <text>Author(s)</text>
-<text>Date</text>
-<text>Team</text>
 <text>Data Collectors</text>
+<text>Date</text>
 <text>Affiliation</text>
+<text>Team</text>
 <text>Contact</text>
 </well>
 
 <well>
 <title>Design Details</title>
 <text>Type</text>
-<box>Design Components</box>
 <text>Vector</text>
+<box>Design Components</box>
 <box>Additional Comments</box>
 </well>
 
 <well>
 <title>Assembly Information</title>
 <text>Assembly Method(s)</text>
-<text>Assembly RFC</text>
-<text>Scars</text>
-<box>Assembly Components</box>
-<img>Assembly Graph Image</img>
 <text>Chassis</text>
+<text>Assembly RFC</text>
 <text>Strain</text>
-<box>Supplemental Comments</box>
+<text>Scars</text>
+<text>Supplemental Comments</text>
+<box>Assembly Components</box>
+<img>Assembly Graph</img>
+</well>
+
+<well>
+<title>Flow Cytometry Experiment</title>
+<text>Purpose</text>
+<text>Type</text>
+<text>Location</text>
+<text>FCS Format</text>
+<text>Machine Name</text>
+<box>Protocol Details</box>
+<box>Laser (filters)</box>
+<box>Transfer Curve Caption</box>
+<img>Transfer Curve Graph</img>
+<img>Time Series Graph</img>
 </well>
