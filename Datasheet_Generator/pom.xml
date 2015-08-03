@@ -47,7 +47,7 @@
             <artifactId>jsoup</artifactId>
             <version>1.7.2</version>
         </dependency>
-<!--        <dependency>
+        <dependency>
             <groupId>com.springsource.org.codehaus.jackson.mapper</groupId>
             <artifactId>mapper-bundle</artifactId>
             <version>1.4.2</version>
@@ -56,7 +56,7 @@
             <groupId>com.springsource.org.codehaus.jackson</groupId>
             <artifactId>jackson-bundle</artifactId>
             <version>1.4.2</version>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -98,7 +98,7 @@
         </dependency>
         
         <!-- Local -->
-        <dependency>
+<!--        <dependency>
             <groupId>com.springsource.org.codehaus.jackson.mapper</groupId>
             <artifactId>mapper-bundle</artifactId>
             <version>1.4.2</version>
@@ -111,7 +111,7 @@
             <version>1.4.2</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/dependencies/com.springsource.org.codehaus.jackson-1.4.2.jar</systemPath>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>

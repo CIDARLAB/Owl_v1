@@ -1,0 +1,60 @@
+%This is a test file to determine the layout of the Owl Datasheet
+\documentclass{article}
+\pagestyle{myheadings}
+\markright{CoxRG\_AF}
+\usepackage[xcolor]{mdframed} %Top header has banner!
+\usepackage{hyphenat} %Column titles are not to have hyphenation
+\usepackage{seqsplit} %Manages long DNA sequence line breaks
+\usepackage{ccaption} %Formatting table titles
+\usepackage[margin=1in]{geometry} %Setting document margins
+\usepackage{graphicx} %Using images
+\usepackage{array} %Formatting table size and behavior
+\begin{document}
+\renewcommand{\topfraction}{0.99} %Helps with keeping whitespace to a minimum
+\renewcommand{\textfraction}{0.99}
+\renewcommand{\floatpagefraction}{0.99}
+\begin{table}[htbp]
+\setlength{\belowcaptionskip}{4pt}
+\setlength{\extrarowheight}{8pt}
+\begin{mdframed}[backgroundcolor=gray!32,topline=false,rightline=false,leftline=false,bottomline=false] \legend{\Huge \underline{CoxRG\_AF}} \end{mdframed} \hfill \break
+\begin{tabular}{m{1.2in}m{4.98in}}
+\large \textbf{\nohyphens{Part Summary}} & \seqsplit{Coexpression}\\
+\large \textbf{\nohyphens{Sequence}} & \seqsplit{GGAGttgacagctagctcagtcctaggtattgtgctagcTACTgggcccaagttcacttaaaaaggagatcaacaatgaaagcaattttcgtactgaaacatcttaatcatgctaaggaggttttctAATGatggcttcctccgaggatgttatcaaagagttcatgcgtttcaaagttcgtatggaaggttccgttaacggtcacgagttcgaaatcgaaggtgaaggtgaaggtcgtccgtacgaaggtacccagaccgctaaactgaaagttaccaaaggtggtccgctgccgttcgcttgggacatcctgtccccgcagttccagtacggttccaaagcttacgttaaacacccggctgacatcccggactacctgaaactgtccttcccggaaggtttcaaatgggaacgtgttatgaacttcgaagatggtggtgttgttaccgttacccaggactcctccctgcaagacggtgagttcatctacaaagttaaactgcgtggtaccaacttcccgtccgacggtccggttatgcagaaaaaaaccatgggttgggaagcttccaccgaacgtatgtacccggaggatggtgctctgaaaggtgaaatcaaaatgcgtctgaaactgaaagacggtggtcactacgacgctgaagttaaaaccacctacatggctaaaaaaccggttcagctgccgggtgcttacaaaaccgacatcaaactggacatcacctcccacaacgaggactacaccatcgttgaacagtacgaacgtgctgaaggtcgtcactccaccggtgcttaataaAGGTccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttataGCTTttgacagctagctcagtcctaggtattgtgctagcTACTgggcccaagttcacttaaaaaggagatcaacaatgaaagcaattttcgtactgaaacatcttaatcatgctaaggaggttttctAATGatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagatcacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataaAGGTccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttataCGCT}\\
+\large \textbf{\nohyphens{Part Type}} & Basic Part\\
+\large \textbf{\nohyphens{Pigeon Image}} & \hfill \break \includegraphics[width=10cm,height=10cm,keepaspectratio]{/Users/Zach/Documents/Owl/Test/1438613968092CoxRG_AF_pigeon.png} \
+\end{tabular}
+\end{table}
+\begin{table}[htbp]
+\setlength{\belowcaptionskip}{4pt}
+\setlength{\extrarowheight}{8pt}
+\begin{mdframed}[backgroundcolor=gray!32,topline=false,rightline=false,leftline=false,bottomline=false] \legend{\LARGE Designer Information}\end{mdframed}
+\begin{tabular}{m{1.2in}m{4.98in}}
+\large \textbf{\nohyphens{Author(s)}} & devina desai\\
+\large \textbf{\nohyphens{Date}} & \seqsplit{4/05/14}\\
+\large \textbf{\nohyphens{Affiliation}} & bu cosbi\\
+\large \textbf{\nohyphens{Team}} & bu 2013\\
+\large \textbf{\nohyphens{Contact}} & \seqsplit{thaddock@bu.edu}
+\end{tabular}
+\end{table}
+\begin{table}[htbp]
+\setlength{\belowcaptionskip}{4pt}
+\setlength{\extrarowheight}{8pt}
+\begin{mdframed}[backgroundcolor=gray!32,topline=false,rightline=false,leftline=false,bottomline=false] \legend{\LARGE Design Details}\end{mdframed}
+\begin{tabular}{m{1.2in}m{4.98in}}
+\large \textbf{\nohyphens{Type}} & \seqsplit{coexpression}\\
+\large \textbf{\nohyphens{Vector}} & \seqsplit{dvl2\_af}
+\end{tabular}
+\end{table}
+\begin{table}[htbp]
+\setlength{\belowcaptionskip}{4pt}
+\setlength{\extrarowheight}{8pt}
+\begin{mdframed}[backgroundcolor=gray!32,topline=false,rightline=false,leftline=false,bottomline=false] \legend{\LARGE Assembly Information}\end{mdframed}
+\begin{tabular}{m{1.2in}m{4.98in}}
+\large \textbf{\nohyphens{Assembly Method(s)}} & moclo level 2\\
+\large \textbf{\nohyphens{Chassis}} & e. coli\\
+\large \textbf{\nohyphens{Assembly RFC}} & \seqsplit{94}\\
+\large \textbf{\nohyphens{Strain}} & \seqsplit{Bioline-Gold}\\
+\large \textbf{\nohyphens{Scars}} & \seqsplit{y}
+\end{tabular}
+\end{table}
+\end{document}

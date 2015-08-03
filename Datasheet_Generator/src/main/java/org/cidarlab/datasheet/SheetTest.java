@@ -33,7 +33,9 @@ public class SheetTest {
         String filepath;
         
         filepath = SheetTest.class.getClassLoader().getResource(".").getPath();
-        filepath = filepath.substring(0,filepath.indexOf("/target/"));
+        filepath = filepath.substring(0,filepath.indexOf("target/"));
+        filepath += "src/main/webapp/tmp/";
+        //System.out.println("\nFILEPATH: " + filepath);
         return filepath;
     }
     
@@ -50,7 +52,7 @@ public class SheetTest {
         String newName = System.currentTimeMillis() + oldName;
         
         try{
-        ImageIO.write(bImage, ext, new File("/Users/Zach/Documents/Owl/Test/" + newName));
+            ImageIO.write(bImage, ext, new File(getFilepath() + newName));
         } catch (IOException e){
         }
         
@@ -81,21 +83,21 @@ public class SheetTest {
     public static void main(String[] args) throws IOException, InterruptedException {
         
         //getFilepath(): /Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator
-        String path = getFilepath() + "/tmp/";
+        String path = getFilepath();
         
         ArrayList<String> fileNames = new ArrayList<String>();
 //        fileNames.add(path + "test1.txt");
 //        fileNames.add(path + "test2.txt");
         fileNames.add(path + "BBa_K678001.txt");
-        fileNames.add(path + "BBa_K783067.txt");
-        fileNames.add(path + "BBa_K1179002.txt");
-        fileNames.add(path + "CoxRG_AF.txt");
-        fileNames.add(path + "BBa_J23100.txt");
-        fileNames.add(path + "BBa_K1114107.txt");
-        fileNames.add(path + "BBa_K1114211.txt");
-        fileNames.add(path + "BBa_B0015.txt");
-        fileNames.add(path + "BBa_K1114400.txt");
-        fileNames.add(path + "BBa_pSB1K3.txt");
+//        fileNames.add(path + "BBa_K783067.txt");
+//        fileNames.add(path + "BBa_K1179002.txt");
+//        fileNames.add(path + "CoxRG_AF.txt");
+//        fileNames.add(path + "BBa_J23100.txt");
+//        fileNames.add(path + "BBa_K1114107.txt");
+//        fileNames.add(path + "BBa_K1114211.txt");
+//        fileNames.add(path + "BBa_B0015.txt");
+//        fileNames.add(path + "BBa_K1114400.txt");
+//        fileNames.add(path + "BBa_pSB1K3.txt");
         
         String latexName;
         
@@ -147,6 +149,7 @@ public class SheetTest {
             }
             
             String latexString = LatexCreator.makeLatex(imageNames, newMap);
+            System.out.println(latexString);
             //System.out.println(latexString);
             latexName = System.currentTimeMillis() + "_" + String.valueOf(i);
             
@@ -155,7 +158,7 @@ public class SheetTest {
             //System.out.println("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/ " + fileInfo.get(0));
             Process p1;
             try{
-                p1 =  Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=" + path + "PDFs/ " + fileInfo.get(0));
+                p1 =  Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=" + path + "PDFs/ " + fileInfo.get(0)); //IMPORTANT, MUST CHANGE THIS LINE
                 p1.waitFor();
             } catch (Exception e) {
             }
