@@ -35,12 +35,12 @@ public class LatexCreator {
         filepath = filepath.substring(0,filepath.indexOf("target/"));
         filepath += "src/main/webapp/tmp/";
         //System.out.println("\nFILEPATH: " + filepath);
-        System.out.println(System.getProperty("os.name").substring(0, 7));
+        //System.out.println(System.getProperty("os.name").substring(0, 7));
         if(System.getProperty("os.name").substring(0, 7).equals("Windows")){
             filepath = "/c" + filepath.substring(3);
         }
         
-        System.out.println("\nFILEPATH: " + filepath);
+        //System.out.println("\nFILEPATH: " + filepath);
 
         return filepath;
     }
