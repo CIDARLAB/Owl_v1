@@ -7,8 +7,13 @@ package org.cidarlab.datasheet;
 
 //import static org.cidarlab.datasheet.XMLParser.getXML;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -30,7 +35,7 @@ import org.json.JSONObject;
  *
  * @author zach_chapasko
  */
-@MultipartConfig(location="/Users/Zach/Documents/Owl/Test/")
+@MultipartConfig
 public class ParserServlet extends HttpServlet {
 //Server side communication code
 
@@ -48,10 +53,10 @@ public class ParserServlet extends HttpServlet {
     {        
         String filepath;
         
-        filepath = ParserServlet.class.getClassLoader().getResource(".").getPath();
-        System.out.println(filepath);
-        
-        //filepath = filepath.substring(0,filepath.indexOf("/target/"));
+        filepath = LatexCreator.class.getClassLoader().getResource(".").getPath();
+        filepath = filepath.substring(0,filepath.indexOf("WEB-INF/"));
+        filepath += "tmp/";        
+        System.out.println("\nFILEPATH : " + filepath);
         return filepath;
     }
     
@@ -63,6 +68,29 @@ public class ParserServlet extends HttpServlet {
             value.append(buffer, 0, length);
         }
         return value.toString();
+    }
+    
+    public File partConverter(Part part, String fileName) throws IOException {
+        String pathAndName = getFilepath() + fileName;
+        
+        OutputStream out = null;
+        InputStream filecontent = null;
+        
+        try {
+            out = new FileOutputStream(new File(pathAndName));
+            filecontent = part.getInputStream();
+
+            int read;
+            final byte[] bytes = new byte[1024];
+
+            while ((read = filecontent.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+        } catch (FileNotFoundException fne) {
+            Logger.getLogger(ParserServlet.class.getName()).log(Level.SEVERE, null, fne);
+        }
+        
+        return new File(pathAndName);
     }
     
        
@@ -91,7 +119,7 @@ public class ParserServlet extends HttpServlet {
             extension = image.getContentType();
             extension = "." + extension.substring(extension.indexOf("/") + 1);
                         
-            image.write(filename + i + extension);
+            partConverter(image, filename + i + extension);
             imageNames.add(filename + i + extension);
             
             i++;
@@ -111,10 +139,7 @@ public class ParserServlet extends HttpServlet {
             
             Map<String,String> map = new LinkedHashMap<String,String>();
             ObjectMapper mapper = new ObjectMapper();
-            
-            
-            
-            
+
             try {
                 //System.out.println("Latex String : "+ latexJSON);
 		//convert JSON string to Map
@@ -125,13 +150,14 @@ public class ParserServlet extends HttpServlet {
 		e.printStackTrace();
             }
             
-            int wellKeys = 0;
-            int title = 1;
+//            int wellKeys = 0;
+//            int title = 1;
             
             Map<String, String> newMap = new LinkedHashMap<String,String>();
             Map<String, String> imgMap = new LinkedHashMap<String,String>();
             
-            boolean notImageBlock = false;
+//            boolean notImageBlock = false;
+            
             for(Map.Entry<String, String> entry : map.entrySet()){
                 if(entry.getKey().contains("<imglink>") || entry.getKey().contains("<imgupload>"))
                 {
@@ -153,17 +179,18 @@ public class ParserServlet extends HttpServlet {
                 newMap.putAll(imgMap);
             }
            
-            String latexString = LatexCreator.makeLatex(imageNames, newMap);
-            List<String> fileInfo = LatexCreator.writeLatex(ipAndTime, latexString);
+            String latexString = LatexCreator.makeLatex(imageNames, newMap, "ParserServlet");
+            List<String> fileInfo = LatexCreator.writeLatex(ipAndTime, latexString, "ParserServlet");
             //System.out.println("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/ " + fileInfo.get(0));
             Process p;
+            String path = getFilepath();
             try{
-                p = Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/ " + fileInfo.get(0));
+                p = Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=" + path + "PDFs/ " + fileInfo.get(0)); //IMPORTANT, MUST CHANGE THIS LINE
                 p.waitFor();
             } catch (Exception e) {
             }
             
-            String PDFpath = "/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/" + fileInfo.get(1);
+            String PDFpath = path + "PDFs/" + fileInfo.get(1);
             
             //System.out.println("PDFpath is: " + PDFpath);
             

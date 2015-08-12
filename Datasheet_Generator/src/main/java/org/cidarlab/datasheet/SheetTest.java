@@ -148,12 +148,12 @@ public class SheetTest {
                 newMap.putAll(imgMap);
             }
             
-            String latexString = LatexCreator.makeLatex(imageNames, newMap);
-            System.out.println(latexString);
+            String latexString = LatexCreator.makeLatex(imageNames, newMap, "SheetTest");
+            //System.out.println(latexString);
             //System.out.println(latexString);
             latexName = System.currentTimeMillis() + "_" + String.valueOf(i);
             
-            List<String> fileInfo = LatexCreator.writeLatex(latexName, latexString);
+            List<String> fileInfo = LatexCreator.writeLatex(latexName, latexString, "SheetTest");
             //System.out.println(fileInfo.get(0));
             //System.out.println("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/ " + fileInfo.get(0));
             Process p1;
