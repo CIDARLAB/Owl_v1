@@ -190,7 +190,7 @@ public class ParserServlet extends HttpServlet {
             } catch (Exception e) {
             }
             
-            String PDFpath = path + "PDFs/" + fileInfo.get(1);
+            String PDFpath = "tmp/PDFs/" + fileInfo.get(1);
             
             //System.out.println("PDFpath is: " + PDFpath);
             
