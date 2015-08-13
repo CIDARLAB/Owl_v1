@@ -34,7 +34,7 @@ public class LatexCreator {
         //System.out.println("\nFILEPATH: " + filepath);
         //System.out.println(System.getProperty("os.name").substring(0, 7));
 
-        if(classCaller.equals("SheetTest")){
+        if(classCaller.equals("Owl")){
             filepath = filepath.substring(0,filepath.indexOf("target/"));
             filepath += "src/main/webapp/tmp/";
             if(System.getProperty("os.name").substring(0, 7).equals("Windows")){

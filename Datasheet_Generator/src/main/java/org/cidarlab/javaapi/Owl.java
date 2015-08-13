@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package org.cidarlab.datasheet;
+package org.cidarlab.javaapi;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -16,33 +16,34 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.imageio.ImageIO;
-import org.apache.commons.io.FilenameUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import java.io.FileReader;
+import org.cidarlab.datasheet.LatexCreator;
 //import static org.cidarlab.datasheet.XMLParser.getXML;
 
 /**
  *
  * @author zach_chapasko
  */
-public class SheetTest {
+public class Owl {
     
-    public static String getFilepath()
+    protected static String getFilepath()
     {        
         String filepath;
         
-        filepath = SheetTest.class.getClassLoader().getResource(".").getPath();
+        filepath = Owl.class.getClassLoader().getResource(".").getPath();
         filepath = filepath.substring(0,filepath.indexOf("target/"));
         filepath += "src/main/webapp/tmp/";
         //System.out.println("\nFILEPATH: " + filepath);
         return filepath;
     }
     
-    public static String writeImage(String path, String oldName){
+    protected static String writeImage(File image, String oldName){
         BufferedImage bImage = null;
-        File image = new File(path + oldName);
-        String ext = FilenameUtils.getExtension(path + oldName);
+        String ext = oldName.substring(oldName.lastIndexOf(".")); //check for off-by-one errors //this should include the . in the extension
+        
+        System.out.println("\nEXTENSION: " + ext + "\n");
         
         try {
             bImage = ImageIO.read(image);
@@ -55,14 +56,12 @@ public class SheetTest {
             ImageIO.write(bImage, ext, new File(getFilepath() + newName));
         } catch (IOException e){
         }
-        
         return newName;
     }
     
-    
-    public static String reader(String filename) throws FileNotFoundException, IOException{
+    protected static String reader(File latexMap) throws FileNotFoundException, IOException{
         String everything = "";
-        BufferedReader br = new BufferedReader(new FileReader(filename));
+        BufferedReader br = new BufferedReader(new FileReader(latexMap));
         try {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
@@ -80,33 +79,16 @@ public class SheetTest {
         return everything;
     }
     
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static ArrayList<File> stringsToPDF(ArrayList<String> latexMapStrings, ArrayList<File> images) throws IOException, InterruptedException {
         
-        //getFilepath(): /Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator
         String path = getFilepath();
-        
-        ArrayList<String> fileNames = new ArrayList<String>();
-//        fileNames.add(path + "test1.txt");
-//        fileNames.add(path + "test2.txt");
-        fileNames.add(path + "BBa_K678001.txt");
-//        fileNames.add(path + "BBa_K783067.txt");
-//        fileNames.add(path + "BBa_K1179002.txt");
-//        fileNames.add(path + "CoxRG_AF.txt");
-//        fileNames.add(path + "BBa_J23100.txt");
-//        fileNames.add(path + "BBa_K1114107.txt");
-//        fileNames.add(path + "BBa_K1114211.txt");
-//        fileNames.add(path + "BBa_B0015.txt");
-//        fileNames.add(path + "BBa_K1114400.txt");
-//        fileNames.add(path + "BBa_pSB1K3.txt");
-        
+        int i = 0;
         String latexName;
+        ArrayList<File> outputPDFs = new ArrayList<>();
+        ArrayList<String> imageNames = new ArrayList<>();
         
-        int i;
-        String latexJSON = "";
-        for(i = 0; i < fileNames.size(); i++){
-            ArrayList<String> imageNames = new ArrayList<String>();
-            
-            latexJSON = reader(fileNames.get(i));
+        for(String latexJSON : latexMapStrings){
+            imageNames.clear();
             Map<String,String> map = new LinkedHashMap<>();
             ObjectMapper mapper = new ObjectMapper();
             
@@ -115,7 +97,7 @@ public class SheetTest {
 		new TypeReference<LinkedHashMap<String,String>>(){});               
  
             } catch (IOException e) {
-		e.printStackTrace();
+//		e.printStackTrace();
             }
             
             Map<String, String> newMap = new LinkedHashMap<>();
@@ -128,8 +110,13 @@ public class SheetTest {
                         imgMap.put(entry.getKey(), entry.getValue());
                     }
                     else{
-                        imageNames.add(writeImage(path, entry.getValue()));
-                        imgMap.put(entry.getKey(), "");
+                        for(File tempImage : images){
+                            if(entry.getValue().equals(tempImage.getName())){
+                                imageNames.add(writeImage(tempImage, entry.getValue()));
+                                imgMap.put(entry.getKey(), "");
+                                images.remove(tempImage);
+                            }
+                        }
                     }
                 }
                 else 
@@ -148,26 +135,62 @@ public class SheetTest {
                 newMap.putAll(imgMap);
             }
             
-            String latexString = LatexCreator.makeLatex(imageNames, newMap, "SheetTest");
-            //System.out.println(latexString);
+            String latexString = LatexCreator.makeLatex(imageNames, newMap, "Owl");
             //System.out.println(latexString);
             latexName = System.currentTimeMillis() + "_" + String.valueOf(i);
+            i++;
             
-            List<String> fileInfo = LatexCreator.writeLatex(latexName, latexString, "SheetTest");
+            List<String> fileInfo = LatexCreator.writeLatex(latexName, latexString, "Owl");
             //System.out.println(fileInfo.get(0));
             //System.out.println("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/ " + fileInfo.get(0));
             Process p1;
             try{
                 p1 =  Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=" + path + "PDFs/ " + fileInfo.get(0)); //IMPORTANT, MUST CHANGE THIS LINE
                 p1.waitFor();
-            } catch (Exception e) {
+            } catch (IOException | InterruptedException e) {
             }
             
             //String PDFpath = path + "PDFs/" + fileInfo.get(1);
             //System.out.println(PDFpath);
             
+            outputPDFs.add(new File(path + "PDFs/" + fileInfo.get(1)));
         }
-        
+        return outputPDFs;
     }
     
+    public static ArrayList<File> filesToPDF(ArrayList<File> inputFiles, ArrayList<File> images) throws IOException, InterruptedException {
+        ArrayList<String> latexMapStrings = new ArrayList<>();
+        for(File tempFile : inputFiles){
+            latexMapStrings.add(reader(tempFile));
+        }
+        return stringsToPDF(latexMapStrings, images);
+    }
 }
+
+//    public static void writeImages(ArrayList<File> images) throws IOException {
+//        String pathAndName;
+//        OutputStream out;
+//        InputStream fileContent;
+//        
+//        for(File temp : images){
+//            pathAndName = getFilepath() + temp.getName();
+//            System.out.println("\nPATH AND NAME: " + pathAndName + "\n");
+//            
+//            try{
+//                out = new FileOutputStream(new File(pathAndName));
+//                fileContent = new FileInputStream(temp);
+//                
+//                int read;
+//                final byte[] bytes = new byte[1024];
+//                
+//                while ((read = fileContent.read(bytes)) != 1) {
+//                    out.write(bytes, 0, read);
+//                }
+//                
+//                out.close();
+//                
+//            } catch (FileNotFoundException fne) {
+//                Logger.getLogger(SheetTest.class.getName()).log(Level.SEVERE, null, fne);
+//            }
+//        }
+//    }
