@@ -70,10 +70,10 @@ public class CoreTest {
                 fileContent = new FileInputStream(temp);
                 
                 int read;
-                final byte[] bytes = new byte[1024];
+                //final byte[] bytes = new byte[1024];
                 
-                while ((read = fileContent.read(bytes)) != 1) {
-                    out.write(bytes, 0, read);
+                while ((read = fileContent.read(/*bytes*/)) != 1) {
+                    out.write(/*bytes, 0, */read);
                 }
                 
                 out.close();
