@@ -8,13 +8,10 @@ package org.cidarlab.api.test;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,43 +46,16 @@ public class CoreTest {
     public void tearDown() {
     }
     
+    // Helper method for getting filepath independent of system
     protected String getFilepath() {
         String filepath;
         filepath = Owl.class.getClassLoader().getResource(".").getPath();
         filepath = filepath.substring(0,filepath.indexOf("/target/"));
-        //System.out.println("\nFILEPATH: " + filepath);
+        //System.out.println("\nFILEPATH: " + filepath + "\n");
         return filepath;
     }
     
-//    protected void writePDFs(ArrayList<File> PDFs) throws IOException {
-//        String path = getFilepath() + "/src/main/resources/OwlTestFiles/PDFs/";
-//        String pathAndName;
-//        OutputStream out;
-//        InputStream fileContent;
-//        
-//        for(File temp : PDFs){
-//            pathAndName = path + temp.getName();
-//            System.out.println("\nPATH AND NAME: " + pathAndName + "\n");
-//            
-//            try{
-//                out = new FileOutputStream(new File(pathAndName));
-//                fileContent = new FileInputStream(temp);
-//                
-//                int read;
-//                //final byte[] bytes = new byte[1024];
-//                
-//                while ((read = fileContent.read(/*bytes*/)) != 1) {
-//                    out.write(/*bytes, 0, */read);
-//                }
-//                
-//                out.close();
-//                
-//            } catch (FileNotFoundException fne) {
-//                Logger.getLogger(CoreTest.class.getName()).log(Level.SEVERE, null, fne);
-//            }
-//        }
-//    }
-    
+    // Helper method for writing File objects to local filesystem
     protected void writePDFs(ArrayList<File> PDFs) {
         String path = getFilepath() + "/src/main/resources/OwlTestFiles/PDFs/";
         byte[] bytes;
@@ -102,6 +72,7 @@ public class CoreTest {
         }
     }
     
+    // Helper method to obtain strings from a text file
     protected String reader(File latexMap) throws FileNotFoundException, IOException{
         String everything = "";
         BufferedReader br = new BufferedReader(new FileReader(latexMap));
@@ -182,7 +153,7 @@ public class CoreTest {
         writePDFs(PDFs);
     }
     
-    //@Test
+    @Test
     public void stringAPITest() throws IOException, InterruptedException {
         String path = getFilepath() + "/src/main/resources/OwlTestFiles/";
         

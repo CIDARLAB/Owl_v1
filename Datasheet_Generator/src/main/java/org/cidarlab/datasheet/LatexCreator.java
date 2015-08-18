@@ -24,15 +24,14 @@ import java.util.Map;
 public class LatexCreator {
     
     public static void main(){
-        
     }
     
     public static String getFilepath(String classCaller)
     {        
         String filepath;
         filepath = LatexCreator.class.getClassLoader().getResource(".").getPath();
-        //System.out.println("\nFILEPATH: " + filepath);
-        //System.out.println(System.getProperty("os.name").substring(0, 7));
+        //System.out.println("\nFILEPATH: " + filepath + "\n");
+        //System.out.println("\nOPERATING SYSTEM: " + System.getProperty("os.name").substring(0, 7) + "\n");
 
         if(classCaller.equals("Owl")){
             filepath = filepath.substring(0,filepath.indexOf("target/"));
@@ -45,7 +44,7 @@ public class LatexCreator {
             filepath += "tmp/";   
         }
         
-        //System.out.println("\nFILEPATH: " + filepath);
+        //System.out.println("\nFILEPATH: " + filepath + "\n");
 
         return filepath;
     }
@@ -99,8 +98,8 @@ public class LatexCreator {
         int uploadCount = 0;
         
         for(Map.Entry<String, String> entry : map.entrySet()){
-//            System.out.println("Printing an entry");
-//            System.out.println(entry.getKey() + ":" +entry.getValue());                              
+            //System.out.println("\nPrinting an entry");
+            //System.out.println(entry.getKey() + ":" + entry.getValue() + "\n");                              
                     
             if(entry.getKey().contains("title"))
             {
@@ -165,7 +164,7 @@ public class LatexCreator {
         
         String[] line = latexString.split("\\n");
         
-        List<Integer> linesToRemove = new ArrayList<Integer>();
+        List<Integer> linesToRemove = new ArrayList<>();
         
         for(int i = 0; i < line.length; i++)
         {
@@ -213,10 +212,9 @@ public class LatexCreator {
             System.err.println(e);
         }
         
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         result.add(p.toString());
         result.add(uniqueID + ".pdf");
         return result;
-        
     }    
 }
