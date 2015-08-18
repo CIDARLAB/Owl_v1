@@ -139,9 +139,6 @@ public class Owl {
                                 
                                 // Add the image to the image map (value is not needed as it is now stored in imageNames above)
                                 imgMap.put(entry.getKey(), "");
-                                
-                                // Remove the image from the passed image file ArrayList (for optimization)
-                                //images.remove(tempImage);
                             }
                         }
                     }
