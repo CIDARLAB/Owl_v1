@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package java.org.cidarlab.web.test;
+package org.cidarlab.web.test;
 
 import org.junit.After;
 import org.junit.AfterClass;

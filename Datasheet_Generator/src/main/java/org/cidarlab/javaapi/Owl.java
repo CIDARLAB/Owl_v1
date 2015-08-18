@@ -143,7 +143,7 @@ public class Owl {
                                 imgMap.put(entry.getKey(), "");
                                 
                                 // Remove the image from the passed image file ArrayList (for optimization)
-                                images.remove(tempImage);
+                                //images.remove(tempImage);
                             }
                         }
                     }
@@ -175,16 +175,19 @@ public class Owl {
             // Unique filename for each .tex file
             latexName = System.currentTimeMillis() + "_" + String.valueOf(i);
             i++;
-            
+                        
             // Write the latex file to the local filesystem
             fileInfo = LatexCreator.writeLatex(latexName, latexString, "Owl");
-            //System.out.println(fileInfo.get(0));            
+            //System.out.println(fileInfo.get(0));
             
             // Typeset the PDF
             Process p1;
             try{
                 p1 =  Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=" + path + "PDFs/ " + fileInfo.get(0)); //IMPORTANT, MAY NEED TO CHANGE THIS LINE
+                System.out.println("/usr/texbin/pdflatex --shell-escape -output-directory=" + path + "PDFs/ " + fileInfo.get(0));
+                //System.out.println("LINE 187 OF Owl.java");
                 p1.waitFor();
+                System.out.println("LINE 189 OF Owl.java");
             } catch (IOException | InterruptedException e) {
             }
             

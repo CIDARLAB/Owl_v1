@@ -25,7 +25,7 @@ public class AuthenticationTester {
 		auth = new Authenticator(USER_DB_NAME);
 	}
 	
-	@Test
+	//@Test
 	public void testRegister() {
 
 		String exception = null;
@@ -39,7 +39,7 @@ public class AuthenticationTester {
 		assertEquals(exception, null);
 	}
 	
-	@Test
+	//@Test
 	public void testDoubleRegister() {
 		try {
 			auth.register("double", "s3cr3t");
@@ -49,7 +49,7 @@ public class AuthenticationTester {
 		}
 	}
 	
-	@Test
+	//@Test
 	public static void testConvertFileToSecureAuthentication() 
 			throws Exception {
                 initialize();
@@ -70,7 +70,7 @@ public class AuthenticationTester {
 		sc.close();
 	}
 
-	@Test
+	//@Test
 	public void testValidLogin() {
 		try {
 			assertTrue(
@@ -80,7 +80,7 @@ public class AuthenticationTester {
 		}		
 	}
 
-	@Test
+	//@Test
 	public void testInvalidLogin() {
 		try {
 			auth.login("me not", "regIster3d");

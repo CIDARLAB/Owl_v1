@@ -164,7 +164,7 @@ public class CoreTest {
         writePDFs(PDFs);
     }
     
-    @Test
+    //@Test
     public void stringAPITest() throws IOException, InterruptedException {
         String path = getFilepath() + "/src/main/resources/OwlTestFiles/";
         
