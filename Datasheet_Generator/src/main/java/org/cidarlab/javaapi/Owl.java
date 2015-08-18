@@ -6,19 +6,25 @@
 
 package org.cidarlab.javaapi;
 
-import java.awt.image.BufferedImage;
+//import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import javax.imageio.ImageIO;
+//import javax.imageio.ImageIO;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.cidarlab.datasheet.LatexCreator;
 //import static org.cidarlab.datasheet.XMLParser.getXML;
 
@@ -40,28 +46,57 @@ public class Owl {
     }
     
     // Helper method for writing File object to local filesystem
-    protected static String writeImage(File image, String oldName){
-        BufferedImage bImage = null;
-        
-        // Get image extension
-        String ext = oldName.substring(oldName.lastIndexOf(".")); //check for off-by-one errors //this should include the . in the extension
-        
-        System.out.println("\nEXTENSION: " + ext + "\n");
-        
-        // Read File object into BufferedImage object
-        try {
-            bImage = ImageIO.read(image);
-        } catch (IOException e) {
-        }
-        
-        // Rename the file to a unique name (incorporate timestamp)
+//    protected static String writeImage(File image, String oldName){
+//        BufferedImage bImage = null;
+//        
+//        // Get image extension
+//        String ext = oldName.substring(oldName.lastIndexOf(".")); //check for off-by-one errors //this should include the . in the extension
+//        
+//        System.out.println("\nEXTENSION: " + ext + "\n");
+//        
+//        // Read File object into BufferedImage object
+//        try {
+//            bImage = ImageIO.read(image);
+//        } catch (IOException e) {
+//        }
+//        
+//        // Rename the file to a unique name (incorporate timestamp)
+//        String newName = System.currentTimeMillis() + oldName;
+//        
+//        // Try to write the image to the local filesystem
+//        try{
+//            ImageIO.write(bImage, ext, new File(getFilepath() + newName));
+//        } catch (IOException e){
+//        }
+//        return newName;
+//    }
+    
+    // Helper method for writing File object to local filesystem
+    protected static String writeImage(File image, String oldName) throws IOException {
         String newName = System.currentTimeMillis() + oldName;
+        String pathAndName = getFilepath() + newName;
+        OutputStream out;
+        InputStream fileContent;
         
-        // Try to write the image to the local filesystem
+        System.out.println("\nPATH AND NAME: " + pathAndName + "\n");
+
         try{
-            ImageIO.write(bImage, ext, new File(getFilepath() + newName));
-        } catch (IOException e){
+            out = new FileOutputStream(new File(pathAndName));
+            fileContent = new FileInputStream(image);
+
+            int read;
+            final byte[] bytes = new byte[1024];
+
+            while ((read = fileContent.read(bytes)) != 1) {
+                out.write(bytes, 0, read);
+            }
+
+            out.close();
+
+        } catch (FileNotFoundException fne) {
+            Logger.getLogger(Owl.class.getName()).log(Level.SEVERE, null, fne);
         }
+        
         return newName;
     }
     
