@@ -18,6 +18,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -55,31 +57,47 @@ public class CoreTest {
         return filepath;
     }
     
-    protected void writePDFs(ArrayList<File> PDFs) throws IOException {
+//    protected void writePDFs(ArrayList<File> PDFs) throws IOException {
+//        String path = getFilepath() + "/src/main/resources/OwlTestFiles/PDFs/";
+//        String pathAndName;
+//        OutputStream out;
+//        InputStream fileContent;
+//        
+//        for(File temp : PDFs){
+//            pathAndName = path + temp.getName();
+//            System.out.println("\nPATH AND NAME: " + pathAndName + "\n");
+//            
+//            try{
+//                out = new FileOutputStream(new File(pathAndName));
+//                fileContent = new FileInputStream(temp);
+//                
+//                int read;
+//                //final byte[] bytes = new byte[1024];
+//                
+//                while ((read = fileContent.read(/*bytes*/)) != 1) {
+//                    out.write(/*bytes, 0, */read);
+//                }
+//                
+//                out.close();
+//                
+//            } catch (FileNotFoundException fne) {
+//                Logger.getLogger(CoreTest.class.getName()).log(Level.SEVERE, null, fne);
+//            }
+//        }
+//    }
+    
+    protected void writePDFs(ArrayList<File> PDFs) {
         String path = getFilepath() + "/src/main/resources/OwlTestFiles/PDFs/";
-        String pathAndName;
-        OutputStream out;
-        InputStream fileContent;
+        byte[] bytes;
+        FileOutputStream out;
         
-        for(File temp : PDFs){
-            pathAndName = path + temp.getName();
-            System.out.println("\nPATH AND NAME: " + pathAndName + "\n");
-            
-            try{
-                out = new FileOutputStream(new File(pathAndName));
-                fileContent = new FileInputStream(temp);
-                
-                int read;
-                //final byte[] bytes = new byte[1024];
-                
-                while ((read = fileContent.read(/*bytes*/)) != 1) {
-                    out.write(/*bytes, 0, */read);
-                }
-                
-                out.close();
-                
-            } catch (FileNotFoundException fne) {
-                Logger.getLogger(CoreTest.class.getName()).log(Level.SEVERE, null, fne);
+        for (File temp : PDFs){
+            try {
+                bytes = FileUtils.readFileToByteArray(temp);
+                out = new FileOutputStream(new File(path + temp.getName()));
+                IOUtils.write(bytes, out);
+            } catch (IOException ex) {
+                Logger.getLogger(CoreTest.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
