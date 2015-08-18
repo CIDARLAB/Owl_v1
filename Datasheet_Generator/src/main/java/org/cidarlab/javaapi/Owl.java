@@ -86,7 +86,7 @@ public class Owl {
         return everything;
     }
     
-    // API method for converting latex strings and image files to PDF File objects
+    // API method for converting JSON strings and image files to PDF File objects
     public static ArrayList<File> stringsToPDF(ArrayList<String> latexMapStrings, ArrayList<File> images) throws IOException, InterruptedException {
         
         // Variable declaration/initialization in order of first appearance
@@ -172,7 +172,7 @@ public class Owl {
             latexString = LatexCreator.makeLatex(imageNames, newMap, "Owl");
             //System.out.println(latexString);
             
-            // Unique filename for each PDF
+            // Unique filename for each .tex file
             latexName = System.currentTimeMillis() + "_" + String.valueOf(i);
             i++;
             
@@ -194,7 +194,7 @@ public class Owl {
         return outputPDFs;
     }
     
-    // API method for converting latex text files and image files to PDF File objects
+    // API method for converting JSON text files and image files to PDF File objects
     public static ArrayList<File> filesToPDF(ArrayList<File> inputFiles, ArrayList<File> images) throws IOException, InterruptedException {
         
         ArrayList<String> latexMapStrings = new ArrayList<>();

@@ -37,9 +37,9 @@ public class LatexCreator {
         if(classCaller.equals("Owl")){
             filepath = filepath.substring(0,filepath.indexOf("target/"));
             filepath += "src/main/webapp/tmp/";
-            if(System.getProperty("os.name").substring(0, 7).equals("Windows")){
-                filepath = "/c" + filepath.substring(3);
-            }
+//            if(System.getProperty("os.name").substring(0, 7).equals("Windows")){
+//                filepath = "/c" + filepath.substring(3);
+//            }
         } else if (classCaller.equals("ParserServlet")){
             filepath = filepath.substring(0,filepath.indexOf("WEB-INF/"));
             filepath += "tmp/";   
