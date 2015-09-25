@@ -4,7 +4,7 @@
     
     <head>
         <title>Owl</title>
-        <link rel="shortcut icon" href="images/logo-Owl-Color_cropped.ico">
+        <link rel="shortcut icon" href="images/owl_noText.png">
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
        
@@ -17,8 +17,9 @@
                 <div class="container">
                     <a class="brand" href="index.html">Owl</a>
                     <ul class="nav">
-                        <li><a href="editExisting.html">Search Existing Parts</a></li>
+                        <!--<li><a href="editExisting.html">Search Existing Parts</a></li>-->
                         <li><a href="dynamicForm.html">Create Datasheet</a></li>
+                        <li><a href="documentation.html">Documentation</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul> 
                     <div id="loginArea" class="navbar-form pull-right">
@@ -32,10 +33,9 @@
         </div>
         
         <div class="page-header" style="margin-top:60px">
-            <h1><img style="width: 48px; height: 40px; margin-bottom:5px" src="images/logo-Owl-Color_cropped.png"> <small> Build your Datasheet here</small></h1>
+            <h1><img style="width: 38px; margin-bottom:5px" src="images/owl_noText.png"> <small>A tool for creating datasheets</small></h1>
         </div>
             <div class="hero-unit" align="center">
-                <h2>Welcome to</h2>
                 <h1><strong>Owl Datasheet Generator </strong></h1>
                 <h2>Automatically build Datasheets.</h2>
                 <br>
@@ -47,21 +47,21 @@
             <h4 class="text-center muted">Here's a few ways automation will help you work faster</h4>
             <div class="row-fluid">
                 <div class="span4">
-                    <h3>Save Time and Money</h3>
-                    <p>
-                        Owl datasheets format data into a consistent model and presentation for machine readability and improved human readability. These datasheets have required data sections to facilitate standardization as well as optional sections. 
-                    </p>
-                </div>
-                <div class="span4">
                     <h3>Standard Layout</h3>
                     <p>
-                        The Owl datasheet app is free and easy to use. The user fills out a form instead of having to write HTML code.
+                        Owl creates standard datasheets using LaTeX to typeset PDFs. While the data entered into particular sheets may differ, the design and general layout of each PDF will not. This allows users to generate a uniform look for their data.
                     </p>
                 </div>
                 <div class="span4">
-                    <h3>Leverage existing data</h3>
+                    <h3>Dynamic Content</h3>
                     <p>
-                        The user has the ability to auto-fill portions of the form by pulling information from existing parts in the Parts Registry.
+                        Owl is easy to use with configuration files. Specify a configuration file to modify which elements appear in the PDF. If an element in the configuration file is given no value Owl will automatically and cleanly handle the result.
+                    </p>
+                </div>
+                <div class="span4">
+                    <h3>Leverage Existing Data</h3>
+                    <p>
+                        The user has the ability to auto-fill portions of the dynamic form by pulling information from existing parts in the Parts Registry. This can help limit erroneous inputs from the user and make datasheet generation even faster.
                     </p>
                 </div>
             </div>
@@ -90,6 +90,7 @@
             <div class="container" align="center">
                 <p>Designed and built by <a href="http://2013.igem.org/Team:BostonU">BU iGEM Team</a> at <a href="http://cidarlab.org">CIDAR</a></p>
                 <p>Code licensed under <a href="license.html">LICENSE</a></p>
+                <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0;margin-bottom:14px" src="https://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png" /></a>
             </div>
         </footer>
     </body>

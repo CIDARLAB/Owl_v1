@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Random;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -163,7 +164,10 @@ public class XMLParser {
     public static void appendLatex(String[] partInfoStrArr) throws IOException{
     
         Path p1 = Paths.get("/Users/Zach/Documents/Owl/Test/Test.tex");
-        Path p2 = Paths.get("/Users/Zach/Documents/Owl/Test/Blank.tex");
+        
+        long num = System.currentTimeMillis();
+                
+        Path p2 = Paths.get("/Users/Zach/Documents/Owl/Test/" + num + ".tex");
         Charset charset = StandardCharsets.UTF_8;
 
         try{
@@ -181,32 +185,7 @@ public class XMLParser {
         }catch (IOException e) {
             System.err.println(e);
         }
-       
-        
-//        String docpath = "/Users/Zach/Documents/Owl/Test/Test.tex";
-//        String line;
-//        BufferedReader br;
-//        BufferedWriter out = null;
-//        try{
-//            br = new BufferedReader(new FileReader(docpath));
-//            out = new BufferedWriter(new FileWriter(docpath, true));
-//            while((line = br.readLine()) != null){
-//                if(line.contains("BBa\\_")){
-//                    int start = line.indexOf("BBa\\_");
-//                    int end = line.indexOf("BBa\\_") + 5;
-//                    line = line.substring(0,start) + line.substring(start,end).replace("BBa\\_",partInfoStrArr[0]) + line.substring(end,line.indexOf("Name") + 4);
-//                    line = line.replace("_","\\_");
-//                    System.out.println("This is the line: " + line + "\n");
-//                    out.write(line);
-//                }    
-//            }
-//            out.flush();
-//        }catch (IOException e) {
-//            System.err.println(e);
-//        }finally{
-//            if(out != null){
-//            out.close();
-//            }
+
     }      
         
 }

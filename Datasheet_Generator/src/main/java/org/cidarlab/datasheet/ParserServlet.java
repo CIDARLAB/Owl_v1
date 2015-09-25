@@ -5,26 +5,37 @@
  */
 package org.cidarlab.datasheet;
 
-import static org.cidarlab.datasheet.XMLParser.getXML;
-import static org.cidarlab.datasheet.XMLParser.parseXML;
-import static org.cidarlab.datasheet.XMLParser.writeJSONObject;
-import static org.cidarlab.datasheet.XMLParser.appendLatex;
+//import static org.cidarlab.datasheet.XMLParser.getXML;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 /**
  *
- * @author jenhantao
+ * @author zach_chapasko
  */
+@MultipartConfig
 public class ParserServlet extends HttpServlet {
 //Server side communication code
 
@@ -37,10 +48,172 @@ public class ParserServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    public static String getFilepath()
+    {        
+        String filepath;
+        
+        filepath = LatexCreator.class.getClassLoader().getResource(".").getPath();
+        filepath = filepath.substring(0,filepath.indexOf("WEB-INF/"));
+        filepath += "tmp/";        
+        System.out.println("\nFILEPATH : " + filepath);
+        return filepath;
+    }
+    
+    private static String getValue(Part part) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(part.getInputStream(), "UTF-8"));
+        StringBuilder value = new StringBuilder();
+        char[] buffer = new char[1024];
+        for (int length = 0; (length = reader.read(buffer)) > 0;) {
+            value.append(buffer, 0, length);
+        }
+        return value.toString();
+    }
+    
+    public File partConverter(Part part, String fileName) throws IOException {
+        String pathAndName = getFilepath() + fileName;
+        
+        OutputStream out = null;
+        InputStream filecontent = null;
+        
+        try {
+            out = new FileOutputStream(new File(pathAndName));
+            filecontent = part.getInputStream();
+
+            int read;
+            final byte[] bytes = new byte[1024];
+
+            while ((read = filecontent.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+        } catch (FileNotFoundException fne) {
+            Logger.getLogger(ParserServlet.class.getName()).log(Level.SEVERE, null, fne);
+        }
+        
+        return new File(pathAndName);
+    }
+    
+       
     protected void processPostRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, JSONException {
+                
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");  
+        if (ipAddress == null)
+        {  
+	   ipAddress = request.getRemoteAddr();  
+        }
+        ipAddress = ipAddress.replaceAll("[^0-9]","");
+        
+        String ipAndTime = ipAddress + "_" + System.currentTimeMillis();
+                
+        String filename = ipAndTime + "_image";
+        String extension;
+        ArrayList<String> imageNames = new ArrayList<String>();
+        
+        int i = 0;
+        Part image = null;
+        image = request.getPart("image" + i);
+        
+        while(image != null)
+        {
+            extension = image.getContentType();
+            extension = "." + extension.substring(extension.indexOf("/") + 1);
+                        
+            partConverter(image, filename + i + extension);
+            imageNames.add(filename + i + extension);
+            
+            i++;
+            image = null;
+            image = request.getPart("image" + i);
+        }        
+               
+        String mode;
+        mode = getValue(request.getPart("mode"));
+        
+        if(mode.equals("makeLatex"))
+        {
+            String latexJSON = getValue(request.getPart("latex"));
+            System.out.println(latexJSON);
+            
+            //File image = request.getParameter("file");
+            
+            Map<String,String> map = new LinkedHashMap<String,String>();
+            ObjectMapper mapper = new ObjectMapper();
+
+            try {
+                //System.out.println("Latex String : "+ latexJSON);
+		//convert JSON string to Map
+		map = mapper.readValue(latexJSON, 
+		    new TypeReference<LinkedHashMap<String,String>>(){});               
+ 
+            } catch (IOException e) {
+		e.printStackTrace();
+            }
+            
+//            int wellKeys = 0;
+//            int title = 1;
+            
+            Map<String, String> newMap = new LinkedHashMap<String,String>();
+            Map<String, String> imgMap = new LinkedHashMap<String,String>();
+            
+//            boolean notImageBlock = false;
+            
+            for(Map.Entry<String, String> entry : map.entrySet()){
+                if(entry.getKey().contains("<imglink>") || entry.getKey().contains("<imgupload>"))
+                {
+                    imgMap.put(entry.getKey(), entry.getValue());
+                }
+                else 
+                {
+                    if(entry.getKey().contains("title"))
+                    {
+                        newMap.putAll(imgMap);
+                        imgMap = new LinkedHashMap<String,String>();
+                    }
+                    newMap.put(entry.getKey(), entry.getValue());
+                }
+            }
+            
+            if(!imgMap.isEmpty())
+            {
+                newMap.putAll(imgMap);
+            }
+           
+            String latexString = LatexCreator.makeLatex(imageNames, newMap, "ParserServlet");
+            List<String> fileInfo = LatexCreator.writeLatex(ipAndTime, latexString, "ParserServlet");
+            //System.out.println("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/ " + fileInfo.get(0));
+            Process p;
+            String path = getFilepath();
+            try{
+                p = Runtime.getRuntime().exec("/usr/texbin/pdflatex --shell-escape -output-directory=" + path + "PDFs/ " + fileInfo.get(0)); //IMPORTANT, MUST CHANGE THIS LINE
+                p.waitFor();
+            } catch (Exception e) {
+            }
+            
+            String PDFpath = "tmp/PDFs/" + fileInfo.get(1);
+            
+            //System.out.println("PDFpath is: " + PDFpath);
+            
+            JSONObject dataToSend = new JSONObject();
+            dataToSend.put("filename",PDFpath);      
+                    
+            data = dataToSend;
+            
+            holdingData = true;
+            PrintWriter out = response.getWriter();
+            out.write(data.toString());
+                      
+        }
+
+/*     
+        
+        OLD CODE for XMLParser methods
+        
+        String part = request.getParameter("file");
 
         String name = request.getParameter("name");
+        
+        if(null != name){
         //There will be an arraylist of actual part names
         ArrayList<String> partNames = new ArrayList<String>();
 //        partNames.add("K1114000");
@@ -50,13 +223,13 @@ public class ParserServlet extends HttpServlet {
         ArrayList<String> partXMLs = getXML(partNames);
 
         //Parse through XML pages for relevant info
-        String[] parsedString = parseXML(partXMLs);
+        String[] parsedString = XMLParser.parseXML(partXMLs);
 
         //Write relevant info to JSON Object for client
-        JSONObject partInfo = writeJSONObject(parsedString);
+        JSONObject partInfo = XMLParser.writeJSONObject(parsedString);
         //save the data for use after redirect
         
-        appendLatex(parsedString); /////////////////////////////////////////
+        //appendLatex(parsedString); /////////////////////////////////////////
         
         data = partInfo;
         
@@ -66,7 +239,35 @@ public class ParserServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
             out.write(data.toString());
         response.sendRedirect("dynamicForm.html");
+        
+        }
+        
+        if(null != part){
+            
+        ArrayList<String> partXMLs = new ArrayList<String>();
+      
+        partXMLs.add(part);
+        
+        //Parse through XML pages for relevant info
+        //String[] parsedString = UploadParser.parseXML(partXMLs);
 
+        //Write relevant info to JSON Object for client
+        JSONObject partInfo = null; // = UploadParser.writeJSONObject(parsedString);
+        //save the data for use after redirect
+        
+        //appendLatex(parsedString); /////////////////////////////////////////
+        
+        data = partInfo;
+        
+        System.out.println("partInfo" + partInfo);
+        
+        holdingData = true;
+        PrintWriter out = response.getWriter();
+            out.write(data.toString());
+        response.sendRedirect("dynamicForm.html");  
+            
+        }
+*/
     }
 
     protected void processGetRequest(HttpServletRequest request, HttpServletResponse response)

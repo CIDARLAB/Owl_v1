@@ -74,7 +74,7 @@ public class AuthenticationTesterTest {
     /**
      * Test of testConvertFileToSecureAuthentication method, of class AuthenticationTester.
      */
-    @Test
+    //@Test
     public void testTestConvertFileToSecureAuthentication() throws Exception {
         System.out.println("testConvertFileToSecureAuthentication");
         AuthenticationTester.testConvertFileToSecureAuthentication();
