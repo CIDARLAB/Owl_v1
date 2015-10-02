@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.cidarlab.datasheet.LatexCreator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -213,7 +214,7 @@ public class CoreTest {
         }
 
         // API call
-        ArrayList<File> PDFs = Owl.stringsToPDF(latexMapStrings, images);
+        ArrayList<File> PDFs = Owl.jsonStringsToPDF(latexMapStrings, images,path);
         
         // Write resulting files to local system
         writePDFs(PDFs);

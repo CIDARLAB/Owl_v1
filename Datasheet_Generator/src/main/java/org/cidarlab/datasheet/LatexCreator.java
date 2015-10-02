@@ -26,30 +26,18 @@ public class LatexCreator {
     public static void main(){
     }
     
-    public static String getFilepath(String classCaller)
+    public static String getWebFilepath()
     {        
         String filepath;
         filepath = LatexCreator.class.getClassLoader().getResource(".").getPath();
-        //System.out.println("\nFILEPATH: " + filepath + "\n");
-        //System.out.println("\nOPERATING SYSTEM: " + System.getProperty("os.name").substring(0, 7) + "\n");
-
-        if(classCaller.equals("Owl")){
-            filepath = filepath.substring(0,filepath.indexOf("target/"));
-            filepath += "src/main/webapp/tmp/";
-//            if(System.getProperty("os.name").substring(0, 7).equals("Windows")){
-//                filepath = "/c" + filepath.substring(3);
-//            }
-        } else if (classCaller.equals("ParserServlet")){
-            filepath = filepath.substring(0,filepath.indexOf("WEB-INF/"));
-            filepath += "tmp/";   
-        }
         
-        //System.out.println("\nFILEPATH: " + filepath + "\n");
-
+        filepath = filepath.substring(0,filepath.indexOf("WEB-INF/"));
+            filepath += "tmp/";   
+        
         return filepath;
     }
     
-    public static String makeLatex(ArrayList<String> imageFilenames, Map<String,String> map, String classCaller){
+    public static String makeLatex(ArrayList<String> imageFilenames, Map<String,String> map, String filepath){
         
         String latexString = "";
                 
@@ -137,7 +125,7 @@ public class LatexCreator {
                 latexString += setup + entry.getKey().substring(11).replaceAll("_", "\\\\_") + "}} & ";
                 
                 name = imageFilenames.get(uploadCount);
-                latexString += "\\hfill \\break \\includegraphics[width=10cm,height=10cm,keepaspectratio]{" + getFilepath(classCaller) + name + "} \\\\ \n";
+                latexString += "\\hfill \\break \\includegraphics[width=10cm,height=10cm,keepaspectratio]{" + filepath + name + "} \\\\ \n";
                 uploadCount++;
             }
             else
@@ -199,9 +187,9 @@ public class LatexCreator {
     }
     
     
-    public static List<String> writeLatex(String uniqueID, String latexString, String classCaller){
+    public static List<String> writeLatex(String uniqueID, String latexString, String filepath){
                        
-        Path p = Paths.get(getFilepath(classCaller) + uniqueID + ".tex");
+        Path p = Paths.get(filepath + uniqueID + ".tex");
 //        int pathCount = p.getNameCount();
 //        p = p.subpath(1, pathCount - 1);
         Charset charset = StandardCharsets.UTF_8;

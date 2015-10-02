@@ -1,0 +1,40 @@
+<header>
+<title>Basic Information</title>
+<text>Name</text>
+<box>Sequence</box>
+<img>Pigeon Image</img>
+</header>
+
+<well>
+<title>Module Information</title>
+<text>Module Name</text>
+<text>Module Type</text>
+<text>Short Name</text>
+<text>SBML Equation</text>
+</well>
+
+<well>
+<title>Assembly Information</title> 
+<text>Assembly Method(s)</text> 
+<text>Chassis</text> 
+<text>Assembly RFC</text>
+<text>Strain</text>
+<text>Scars</text>
+<text>Supplemental Comments</text>
+<box>Assembly Components</box>
+<img>Assembly Graph</img>
+</well>
+
+<well>
+<title>Testing Data</title>
+<text>Purpose</text>
+<text>Type</text>
+<text>Location</text>
+<text>FCS Format</text>
+<text>Machine Name</text>
+<box>Protocol Details</box>
+<box>Laser (filters)</box>
+<box>Transfer Curve Caption</box>
+<img>Transfer Curve Graph</img>
+<img>Time Series Graph</img>
+</well>

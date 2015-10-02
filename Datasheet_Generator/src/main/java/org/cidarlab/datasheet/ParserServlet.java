@@ -179,8 +179,8 @@ public class ParserServlet extends HttpServlet {
                 newMap.putAll(imgMap);
             }
            
-            String latexString = LatexCreator.makeLatex(imageNames, newMap, "ParserServlet");
-            List<String> fileInfo = LatexCreator.writeLatex(ipAndTime, latexString, "ParserServlet");
+            String latexString = LatexCreator.makeLatex(imageNames, newMap, LatexCreator.getWebFilepath());
+            List<String> fileInfo = LatexCreator.writeLatex(ipAndTime, latexString, LatexCreator.getWebFilepath());
             //System.out.println("/usr/texbin/pdflatex --shell-escape -output-directory=/Users/Zach/Documents/Owl/igem-datasheet/Datasheet_Generator/tmp/ " + fileInfo.get(0));
             Process p;
             String path = getFilepath();

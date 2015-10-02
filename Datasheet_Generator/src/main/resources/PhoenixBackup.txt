@@ -1,0 +1,41 @@
+<header>
+<title>Basic Information</title>
+<text>Name</text>
+<box>Sequence</box>
+<img>Pigeon Image</img>
+<img>Plasmid Map</img> //Commented out for now.
+</header>
+
+<well>
+<title>Module Information</title>
+<text>Module Name</text>
+<text>Module Type</text>
+<text>Short Name</text>
+<text>SBML Equation</text>
+</well>
+
+<well>
+<title>Assembly Information</title>
+<text>Assembly Method(s)</text> //MoClo
+<text>Chassis</text> //E.Coli
+<text>Assembly RFC</text> // BBa RFC 94
+<text>Strain</text> // DH5 alpha
+<text>Scars</text> //From Raven
+<text>Supplemental Comments</text> //From Raven
+<box>Assembly Components</box> //From Raven
+<img>Assembly Graph</img> //From Raven
+</well>
+
+<well>
+<title>Testing Data</title>
+<text>Purpose</text>
+<text>Type</text>
+<text>Location</text>
+<text>FCS Format</text>
+<text>Machine Name</text>
+<box>Protocol Details</box>
+<box>Laser (filters)</box>
+<box>Transfer Curve Caption</box>
+<img>Transfer Curve Graph</img>
+<img>Time Series Graph</img>
+</well>
